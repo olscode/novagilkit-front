@@ -1,0 +1,327 @@
+{
+  "app": {
+    "title": "Nova Tools",
+    "subtitle": "Plataforma de Herramientas Innovadoras para Metodologías Ágiles",
+    "description": "Una plataforma que ofrece un conjunto de herramientas innovadoras para facilitar la implementación de metodologías ágiles en equipos de desarrollo. Nuestro objetivo es proporcionar soluciones modernas e intuitivas que mejoren la colaboración y la eficiencia en los procesos ágiles."
+  },
+  "menu": {
+    "home": "Inicio",
+    "pokerPlanning": "Poker Planning",
+    "createRoom": "Crear Sala",
+    "joinRoom": "Unirse a Sala",
+    "back": "Volver"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "success": "¡Éxito!",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "submit": "Enviar",
+    "copy": "Copiar",
+    "close": "Cerrar",
+    "settings": "Ajustes",
+    "key": "Clave",
+    "closeErrorMessage": "Cerrar mensaje de error"
+  },
+  "languages": {
+    "en": "Inglés",
+    "es": "Español",
+    "nl": "Neerlandés",
+    "pl": "Polaco",
+    "selectLanguage": "Seleccionar idioma"
+  },
+  "pokerPlanning": {
+    "title": "Poker Planning",
+    "subtitle": "Estima tus tareas de forma ágil y colaborativa",
+    "createRoom": {
+      "title": "Crear Nueva Sala",
+      "description": "Configura una sala de Poker Planning para estimar tareas con tu equipo",
+      "username": "Tu nombre de usuario",
+      "usernameLabel": "Ingresa tu nombre de usuario",
+      "createButton": "Crear Sala"
+    },
+    "joinRoom": {
+      "title": "Unirse a una Sala",
+      "description": "Ingresa el código de la sala y tu nombre de usuario para unirte a una sesión de Poker Planning existente",
+      "roomCode": "Código de la sala",
+      "roomCodeLabel": "Ingresa el código de la sala",
+      "roomCodeHelp": "El código es compartido por el creador de la sala",
+      "username": "Tu nombre de usuario",
+      "usernameLabel": "Ingresa tu nombre para identificarte",
+      "joinButton": "Unirse a la Sala",
+      "errors": {
+        "usernameRequired": "Por favor ingresa tu nombre de usuario",
+        "roomCodeRequired": "Por favor ingresa el código de la sala"
+      }
+    },
+    "room": {
+      "title": "Sala",
+      "welcomeModal": {
+        "title": "Bienvenido a la Sala",
+        "description": "Para participar en esta sesión de Poker Planning, necesitas identificarte con un nombre de usuario",
+        "usernameLabel": "Ingresa tu nombre de usuario",
+        "joinButton": "Unirse a la Sala",
+        "continueButton": "Ingresa un nombre para continuar"
+      },
+      "sidebar": {
+        "title": "Detalles de la Sala",
+        "roomId": "ID",
+        "participants": "Participantes",
+        "tasks": "Tareas",
+        "admin": "Admin",
+        "open": "Abrir",
+        "close": "Cerrar",
+        "copySuccess": "¡ID de la sala copiado al portapapeles!",
+        "noUsers": "Aún no hay participantes",
+        "noTasks": "Aún no hay tareas añadidas"
+      },
+      "currentTask": "Votación actual",
+      "startNewVote": "Iniciar Nueva Votación",
+      "startVoting": "Iniciar Votación",
+      "nextTask": "Siguiente Tarea",
+      "finishVoting": "Finalizar Votación",
+      "revealVotes": "Revelar Votos",
+      "statistics": "Estadísticas",
+      "average": "Promedio",
+      "median": "Mediana",
+      "min": "Mínimo",
+      "max": "Máximo",
+      "tooltips": {
+        "average": "La media aritmética de todos los votos. Se calcula sumando todos los valores de votos y dividiendo por el número de votos.",
+        "median": "El valor del medio cuando todos los votos se ordenan. Se ve menos afectado por valores extremos que el promedio.",
+        "min": "El valor de voto más bajo enviado por cualquier miembro del equipo.",
+        "max": "El valor de voto más alto enviado por cualquier miembro del equipo."
+      },
+      "alreadyVoted": "Ya has votado en esta tarea",
+      "votingComplete": "¡Votación completa!",
+      "usersVoted": "usuarios han votado",
+      "waitingForVoting": "Esperando que comience la votación",
+      "noUsers": "Aún no se ha unido ningún usuario",
+      "userStatus": {
+        "voted": "Votó",
+        "pending": "Pendiente"
+      },
+      "notifications": {
+        "userJoined": "{{username}} se ha unido a la sala",
+        "userLeft": "{{username}} ha abandonado la sala",
+        "roomCreated": "La sala {{roomId}} ha sido creada con éxito",
+        "newVoting": "Se ha iniciado una nueva ronda de votación",
+        "votingStarted": "¡La votación ha comenzado!",
+        "votesRevealed": "¡Los votos han sido revelados!",
+        "votesReset": "Los votos han sido reiniciados",
+        "userVoted": "{{username}} ha votado",
+        "allVotesIn": "¡Ya han votado todos! Revisa las estadísticas.",
+        "taskChanged": "Se ha cambiado a la siguiente tarea",
+        "taskChangedByCreator": "El administrador ha cambiado la tarea actual",
+        "lastTask": "Esta es la última tarea de la lista",
+        "connectionError": "Error de conexión. No se puede unir a la sala."
+      },
+      "you": "Tú"
+    },
+    "fibonacci": {
+      "chooseScore": "Elige tu puntuación",
+      "youVoted": "Has votado",
+      "votePoints": "Votar {{points}} puntos"
+    },
+    "tasks": {
+      "title": "Tareas",
+      "description": "Añade las tareas que quieres estimar con tu equipo:",
+      "addTask": "Añadir Tarea",
+      "deleteTask": "Eliminar esta tarea",
+      "taskPlaceholder": "Describe la tarea aquí...",
+      "taskLabel": "Tarea",
+      "noTasks": "Aún no hay tareas añadidas"
+    }
+  },
+  "upcomingTools": {
+    "sprintAnalytics": "Sprint Analytics",
+    "backlogManager": "Product Backlog Manager",
+    "retrospectiveBoard": "Retrospective Board"
+  },
+  "mainMenu": {
+    "title": "Bienvenido a la Plataforma",
+    "subtitle": "Descubre herramientas para mejorar tu productividad y colaboración en equipo.",
+    "startButton": "Comenzar"
+  },
+  "appSelection": {
+    "title": "Selecciona una Aplicación",
+    "subtitle": "Elige la aplicación que deseas utilizar.",
+    "pokerPlanning": {
+      "title": "Poker Planning",
+      "description": "Estima tareas de forma colaborativa con el equipo."
+    },
+    "quiz": {
+      "title": "Quiz Interactivo",
+      "description": "Participa en divertidos quizzes y aprende."
+    }
+  },
+  "roomNotFound": {
+    "title": "Sala no encontrada",
+    "description": "La sala con ID <1>{{roomId}}</1> no existe o ya no está disponible.",
+    "backButton": "Volver al inicio",
+    "gifAlt": "Lupa animada buscando una sala"
+  },
+  "settings": {
+    "language": "Idioma",
+    "appearance": "Apariencia",
+    "darkMode": "Modo oscuro",
+    "lightMode": "Modo claro"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "subtitle": "Lo sentimos, la página que buscas no existe.",
+    "description": "La URL que has introducido no corresponde a ninguna página válida. Puede que hayas escrito mal la dirección o que la página haya sido movida.",
+    "goHome": "Ir al inicio",
+    "goBack": "Volver atrás"
+  },
+  "connectionStatus": {
+    "serviceUnavailable": "Servicio no disponible",
+    "retryingConnection": "Reintentando conexión..."
+  },
+  "protectedRoute": {
+    "connectionRequired": "Se requiere conexión al servicio para acceder a esta funcionalidad. Por favor espera mientras intentamos reconectar."
+  },
+  "connectionHelper": {
+    "troubleshooting": "Solución de Problemas",
+    "checkServer": "Verifica que el servidor esté corriendo en {{url}}",
+    "verifyPort": "Asegúrate de que el puerto 3000 esté disponible",
+    "refreshPage": "Recarga la página para intentar reconectar",
+    "checkHealth": "Verificar Servidor",
+    "refresh": "Recargar Página"
+  },
+  "resumeVotes": {
+    "title": "Resumen de Votación",
+    "subtitle": "Análisis completo de {{totalTasks}} tareas con {{totalVotes}} votos",
+    "viewModes": {
+      "grid": "Cuadrícula",
+      "list": "Lista"
+    },
+    "statsModes": {
+      "general": "General",
+      "individual": "Por Tarea"
+    },
+    "generalStats": {
+      "tasksCompleted": "Tareas Completadas",
+      "participation": "Participación",
+      "avgConsensus": "Consenso Promedio",
+      "avgEffort": "Esfuerzo Promedio"
+    },
+    "taskStats": {
+      "average": "Promedio",
+      "median": "Mediana",
+      "range": "Rango",
+      "votes": "Votos",
+      "consensus": "consenso",
+      "votesByUser": "Votos por usuario:",
+      "unknownUser": "Usuario desconocido",
+      "points": "puntos"
+    },
+    "consensus": {
+      "high": "Alto",
+      "medium": "Medio",
+      "low": "Bajo"
+    },
+    "actions": {
+      "exportToJira": "Exportar a Jira"
+    },
+    "loading": {
+      "title": "Cargando resumen de votación...",
+      "description": "Estamos recuperando los datos de tu sesión de votación."
+    },
+    "error": {
+      "title": "Error al cargar los datos",
+      "description": "No pudimos cargar la información de la sesión de votación.",
+      "retry": "Reintentar"
+    },
+    "emptyState": {
+      "title": "No hay datos de votación disponibles",
+      "description": "Para ver el resumen de votación, necesitas completar una sesión de Poker Planning con tu equipo.",
+      "suggestions": {
+        "participants": "Asegúrate de que haya participantes en la sala",
+        "tasks": "Añade tareas para estimar",
+        "votes": "Completa al menos una ronda de votación"
+      },
+      "actions": {
+        "goBack": "Volver",
+        "goHome": "Ir al inicio"
+      }
+    }
+  },
+  "jiraExport": {
+    "title": "Exportar a Jira",
+    "auth": {
+      "title": "Conectar con Jira",
+      "description": "Autoriza la conexión con tu cuenta de Jira para exportar las tareas estimadas.",
+      "login": "Iniciar sesión con Jira",
+      "authenticating": "Autenticando...",
+      "whyConnectTitle": "¿Por qué conectar con Jira?",
+      "automaticallyExportTasks": "Exporta automáticamente las tareas estimadas",
+      "maintainEstimationTraceability": "Mantiene la trazabilidad de las estimaciones",
+      "integrateWithExistingWorkflow": "Se integra con tu flujo de trabajo existente",
+      "verifyManually": "Verificar manualmente",
+      "completeAuthMessage": "Completa la autenticación en la ventana que se abrió. Se detectará automáticamente cuando termine.",
+      "popupBlockedMessage": "No se pudo abrir la ventana de autenticación. Verifica que los popups no estén bloqueados.",
+      "authError": "Error durante la autenticación",
+      "benefits": {
+        "integration": "Integración completa con Jira",
+        "automation": "Automatización del flujo de trabajo",
+        "traceability": "Trazabilidad de las estimaciones"
+      }
+    },
+    "select": {
+      "title": "Seleccionar Destino",
+      "description": "Elige el proyecto y la épica donde se crearán las tareas.",
+      "project": "Proyecto",
+      "selectProject": "Seleccionar proyecto...",
+      "epic": "Épica",
+      "selectEpic": "Seleccionar épica...",
+      "existingEpic": "Usar épica existente",
+      "createNewEpic": "Crear nueva épica"
+    },
+    "createEpic": {
+      "title": "Crear Nueva Épica",
+      "description": "Define los detalles de la nueva épica que contendrá las tareas.",
+      "summary": "Título de la épica",
+      "summaryPlaceholder": "Ej: Sprint Q1 2024 - Funcionalidades principales",
+      "descriptionLabel": "Descripción (opcional)",
+      "descriptionPlaceholder": "Describe el objetivo y alcance de esta épica...",
+      "create": "Crear Épica",
+      "creating": "Creando épica..."
+    },
+    "preview": {
+      "title": "Vista Previa",
+      "description": "Revisa los detalles antes de crear las tareas en Jira.",
+      "project": "Proyecto",
+      "epic": "Épica",
+      "newEpic": "Nueva",
+      "tasksCount": "Tareas a crear",
+      "tasksToCreate": "Tareas que se crearán:",
+      "points": "pts",
+      "votes": "votos",
+      "consensus": "consenso",
+      "createTasks": "Crear Tareas",
+      "creating": "Creando tareas..."
+    },
+    "creating": {
+      "title": "Creando Tareas",
+      "description": "Estamos creando las tareas en Jira. Este proceso puede tomar unos momentos.",
+      "progress": "Creando tareas en Jira..."
+    },
+    "results": {
+      "title": "Exportación Completa",
+      "description": "Resultados de la exportación a Jira.",
+      "successful": "exitosas",
+      "failed": "fallidas",
+      "openInJira": "Abrir en Jira"
+    },
+    "actions": {
+      "back": "Atrás",
+      "continue": "Continuar",
+      "close": "Cerrar"
+    }
+  }
+}

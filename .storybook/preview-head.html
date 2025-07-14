@@ -1,0 +1,25 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    }
+
+    /* Asegurar que el cuerpo use las variables del tema */
+    body {
+      background: var(--background-color, #f0f2f5) !important;
+      color: var(--text-color, #333333) !important;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+    }
+
+    /* Contenedor de Storybook */
+    #storybook-root {
+      background: var(--background-color, #f0f2f5);
+      color: var(--text-color, #333333);
+      min-height: 100vh;
+    }
+  </style>
+</head>

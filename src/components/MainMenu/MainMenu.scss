@@ -1,0 +1,213 @@
+.main-menu {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  height: 100vh;
+  overflow: hidden; // Evitar scrollbars por animaciones que se salgan
+  position: relative; // Para posicionar elementos hijos absolutamente
+  background: var(--primary-bg); // Uso de variable CSS
+}
+
+.main-menu__container {
+  position: relative; // Para que los paneles y la superposición se posicionen correctamente
+  display: flex; // Usamos flex para los paneles divididos
+  width: 100%;
+  height: 100%;
+}
+
+.main-menu__split-panel {
+  width: 50%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); // Transición suave para la animación
+  position: relative; // Para elementos internos si es necesario
+}
+
+.main-menu__split-panel--left {
+  background: var(--secondary-bg-left); // Gradiente de izquierda a derecha
+  // Animación de entrada (ejemplo)
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.main-menu__split-panel--right {
+  background: var(
+    --secondary-bg-right
+  ); // Gradiente de derecha a izquierda (complementario)
+  // Animación de entrada (ejemplo)
+  animation: slideInRight 1s ease-out forwards;
+}
+
+// Capa para animaciones decorativas (opcional, pero añade dinamismo)
+.main-menu__decorative-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // Para que no interfiera con los clics
+  z-index: 1; // Detrás del contenido pero encima de los paneles base
+}
+
+.main-menu__shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background-color: var(--shape-color); // Color usando variable CSS
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.main-menu__shape--1 {
+  width: 150px;
+  height: 150px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.main-menu__shape--2 {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.main-menu__shape--3 {
+  width: 75px;
+  height: 75px;
+  bottom: 10%;
+  left: 30%;
+  animation-delay: 4s;
+}
+
+// Superposición de contenido central
+.main-menu__content-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; // Encima de todo
+  text-align: center;
+  color: var(--text-color); // Texto usando variable CSS
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--tertiary-bg); // Fondo semitransparente usando variable
+  animation: fadeInContent 1.5s ease-out 0.5s forwards; // Aparece después de los paneles
+  opacity: 0; // Comienza invisible
+}
+
+.main-menu__title {
+  font-size: 3.5rem; // Tamaño grande para el título
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px var(--shadow-color);
+  background: var(--header-text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.main-menu__subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.5em;
+  line-height: 1.6;
+}
+
+.main-menu__start-button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background: var(
+    --primary-button-bg
+  ); // Color de botón primario usando variable
+  border: none;
+  border-radius: 25px; // Bordes redondeados
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+
+  &:hover {
+    background: var(
+      --primary-button-hover
+    ); // Color más oscuro al pasar el ratón
+    transform: translateY(-2px); // Ligero efecto de elevación
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.main-menu__footer {
+  background: var(
+    --overlay-bg
+  ); // Fondo oscuro semitransparente usando variable
+  color: var(--footer-text); // Color de texto del footer usando variable
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  z-index: 3; // Asegurar que esté visible si algo se superpone
+}
+
+// Animaciones
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%); // Sube un poco al aparecer
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+// Media queries para responsividad (ejemplo básico)
+@media (max-width: 768px) {
+  .main-menu__title {
+    font-size: 2.5rem;
+  }
+
+  .main-menu__subtitle {
+    font-size: 1rem;
+  }
+
+  .main-menu__start-button {
+    padding: 10px 25px;
+    font-size: 1rem;
+  }
+}

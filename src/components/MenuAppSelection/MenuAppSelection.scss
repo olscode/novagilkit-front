@@ -1,0 +1,115 @@
+.menu-app-selection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 60px 20px 40px;
+  background: var(--background-color);
+  color: var(--text-color);
+  overflow-y: auto;
+}
+
+.menu-app-selection__container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.menu-app-selection__title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: var(--header-text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 3px var(--shadow-color);
+}
+
+.menu-app-selection__subtitle {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.menu-app-selection__apps {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menu-app-selection__app-button {
+  width: 400px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  background-color: #ffffff;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+  }
+
+  &:hover .menu-app-selection__app-image {
+    filter: blur(3px) brightness(0.7);
+  }
+
+  &:hover .menu-app-selection__app-info {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-app-selection__app-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.4s ease;
+}
+
+.menu-app-selection__app-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}

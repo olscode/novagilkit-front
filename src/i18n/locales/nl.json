@@ -1,0 +1,324 @@
+{
+  "app": {
+    "title": "Nova Tools",
+    "subtitle": "Innovatief Platform voor Agile Methodologieën",
+    "description": "Een platform dat een reeks innovatieve tools biedt om de implementatie van agile methodologieën in ontwikkelingsteams te vergemakkelijken. Ons doel is het bieden van moderne en intuïtieve oplossingen die samenwerking en efficiëntie in agile processen verbeteren."
+  },
+  "menu": {
+    "home": "Start",
+    "pokerPlanning": "Poker Planning",
+    "createRoom": "Maak Kamer",
+    "joinRoom": "Doe Mee",
+    "back": "Terug"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Er is een fout opgetreden",
+    "success": "Succes!",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "create": "Aanmaken",
+    "submit": "Versturen",
+    "copy": "Kopiëren",
+    "close": "Sluiten",
+    "settings": "Instellingen",
+    "key": "Sleutel",
+    "closeErrorMessage": "Foutmelding sluiten"
+  },
+  "languages": {
+    "en": "Engels",
+    "es": "Spaans",
+    "nl": "Nederlands",
+    "pl": "Pools",
+    "selectLanguage": "Selecteer taal"
+  },
+  "pokerPlanning": {
+    "title": "Poker Planning",
+    "subtitle": "Schat je taken gezamenlijk in met je team",
+    "createRoom": {
+      "title": "Nieuwe Kamer Aanmaken",
+      "description": "Stel een Poker Planning kamer in om taken met je team te schatten",
+      "username": "Je gebruikersnaam",
+      "usernameLabel": "Voer je gebruikersnaam in",
+      "createButton": "Kamer Aanmaken"
+    },
+    "joinRoom": {
+      "title": "Doe Mee met een Kamer",
+      "description": "Voer de kamercode en je gebruikersnaam in om deel te nemen aan een bestaande Poker Planning sessie",
+      "roomCode": "Kamercode",
+      "roomCodeLabel": "Voer de kamercode in",
+      "roomCodeHelp": "De code wordt gedeeld door de kamermaker",
+      "username": "Je gebruikersnaam",
+      "usernameLabel": "Voer je naam in om jezelf te identificeren",
+      "joinButton": "Deelnemen",
+      "errors": {
+        "usernameRequired": "Voer je gebruikersnaam in",
+        "roomCodeRequired": "Voer de kamercode in"
+      }
+    },
+    "room": {
+      "title": "Kamer",
+      "welcomeModal": {
+        "title": "Welkom in de Kamer",
+        "description": "Om deel te nemen aan deze Poker Planning sessie, moet je jezelf identificeren met een gebruikersnaam",
+        "usernameLabel": "Voer je gebruikersnaam in",
+        "joinButton": "Deelnemen aan Kamer",
+        "continueButton": "Voer een naam in om door te gaan"
+      },
+      "sidebar": {
+        "title": "Kamerdetails",
+        "roomId": "ID",
+        "participants": "Deelnemers",
+        "tasks": "Taken",
+        "admin": "Beheerder",
+        "open": "Openen",
+        "close": "Sluiten",
+        "copySuccess": "Kamer-ID gekopieerd naar klembord!",
+        "noUsers": "Nog geen deelnemers",
+        "noTasks": "Nog geen taken toegevoegd"
+      },
+      "currentTask": "Huidige stemming",
+      "startNewVote": "Start Nieuwe Stemming",
+      "startVoting": "Begin Stemming",
+      "nextTask": "Volgende Taak",
+      "finishVoting": "Stemming Beëindigen",
+      "revealVotes": "Stemmen Tonen",
+      "statistics": "Statistieken",
+      "average": "Gemiddelde",
+      "median": "Mediaan",
+      "min": "Minimum",
+      "max": "Maximum",
+      "tooltips": {
+        "average": "Het rekenkundig gemiddelde van alle stemmen. Berekend door alle stemwaarden op te tellen en te delen door het aantal stemmen.",
+        "median": "De middelste waarde wanneer alle stemmen in volgorde worden gezet. Minder beïnvloed door uitschieters dan het gemiddelde.",
+        "min": "De laagste stemwaarde ingediend door een teamlid.",
+        "max": "De hoogste stemwaarde ingediend door een teamlid."
+      },
+      "alreadyVoted": "Je hebt al gestemd voor deze taak",
+      "votingComplete": "Stemming voltooid!",
+      "usersVoted": "gebruikers gestemd",
+      "waitingForVoting": "Wachten tot de stemming begint",
+      "noUsers": "Er zijn nog geen gebruikers toegetreden",
+      "userStatus": {
+        "voted": "Gestemd",
+        "pending": "Wachtend"
+      },
+      "notifications": {
+        "userJoined": "{{username}} heeft zich bij de kamer gevoegd",
+        "userLeft": "{{username}} heeft de kamer verlaten",
+        "roomCreated": "Kamer {{roomId}} is succesvol aangemaakt",
+        "newVoting": "Er is een nieuwe stemronde gestart",
+        "votingStarted": "De stemming is begonnen!",
+        "votesRevealed": "De stemmen zijn onthuld!",
+        "votesReset": "De stemmen zijn gereset",
+        "userVoted": "{{username}} heeft gestemd",
+        "allVotesIn": "Alle stemmen zijn binnen! Bekijk de statistieken.",
+        "connectionError": "Verbindingsfout. Kan niet deelnemen aan de kamer."
+      },
+      "you": "Jij"
+    },
+    "fibonacci": {
+      "chooseScore": "Kies je score",
+      "youVoted": "Je hebt gestemd",
+      "votePoints": "Stem {{points}} punten"
+    },
+    "tasks": {
+      "title": "Taken",
+      "description": "Voeg de taken toe die je met je team wilt schatten:",
+      "addTask": "Taak Toevoegen",
+      "deleteTask": "Deze taak verwijderen",
+      "taskPlaceholder": "Beschrijf de taak hier...",
+      "taskLabel": "Taak",
+      "noTasks": "Nog geen taken toegevoegd"
+    }
+  },
+  "upcomingTools": {
+    "sprintAnalytics": "Sprint Analyse",
+    "backlogManager": "Product Backlog Beheer",
+    "retrospectiveBoard": "Retrospectief Bord"
+  },
+  "mainMenu": {
+    "title": "Welkom op het Platform",
+    "subtitle": "Ontdek tools om je productiviteit en teamwerk te verbeteren.",
+    "startButton": "Beginnen"
+  },
+  "appSelection": {
+    "title": "Kies een Toepassing",
+    "subtitle": "Kies de toepassing die je wilt gebruiken.",
+    "pokerPlanning": {
+      "title": "Poker Planning",
+      "description": "Schat taken samen met je team in."
+    },
+    "quiz": {
+      "title": "Interactieve Quiz",
+      "description": "Doe mee aan leuke quizzen en leer."
+    }
+  },
+  "roomNotFound": {
+    "title": "Kamer niet gevonden",
+    "description": "De kamer met ID <1>{{roomId}}</1> bestaat niet of is niet meer beschikbaar.",
+    "backButton": "Terug naar startpagina",
+    "gifAlt": "Geanimeerd vergrootglas op zoek naar een kamer"
+  },
+  "settings": {
+    "language": "Taal",
+    "appearance": "Uiterlijk",
+    "darkMode": "Donkere Modus",
+    "lightMode": "Lichte Modus"
+  },
+  "notFound": {
+    "title": "Pagina niet gevonden",
+    "subtitle": "Sorry, de pagina die je zoekt bestaat niet.",
+    "description": "De URL die je hebt ingevoerd komt niet overeen met een geldige pagina. Mogelijk heb je het adres verkeerd getypt of is de pagina verplaatst.",
+    "goHome": "Naar startpagina",
+    "goBack": "Ga terug"
+  },
+  "connectionStatus": {
+    "serviceUnavailable": "Service niet beschikbaar",
+    "retryingConnection": "Verbinding opnieuw proberen..."
+  },
+  "protectedRoute": {
+    "connectionRequired": "Een verbinding met de service is vereist om toegang te krijgen tot deze functionaliteit. Wacht terwijl we proberen opnieuw verbinding te maken."
+  },
+  "connectionHelper": {
+    "troubleshooting": "Probleemoplossing",
+    "checkServer": "Controleer of de server draait op {{url}}",
+    "verifyPort": "Zorg ervoor dat poort 3000 beschikbaar is",
+    "refreshPage": "Ververs de pagina om opnieuw te proberen verbinding te maken",
+    "checkHealth": "Controleer Server",
+    "refresh": "Pagina Verversen"
+  },
+  "resumeVotes": {
+    "title": "Stemoverzicht",
+    "subtitle": "Volledige analyse van {{totalTasks}} taken met {{totalVotes}} stemmen",
+    "viewModes": {
+      "grid": "Raster",
+      "list": "Lijst"
+    },
+    "statsModes": {
+      "general": "Algemeen",
+      "individual": "Per Taak"
+    },
+    "generalStats": {
+      "tasksCompleted": "Voltooide Taken",
+      "participation": "Deelname",
+      "avgConsensus": "Gemiddelde Consensus",
+      "avgEffort": "Gemiddelde Inspanning"
+    },
+    "taskStats": {
+      "average": "Gemiddelde",
+      "median": "Mediaan",
+      "range": "Bereik",
+      "votes": "Stemmen",
+      "consensus": "consensus",
+      "votesByUser": "Stemmen per gebruiker:",
+      "unknownUser": "Onbekende gebruiker",
+      "points": "punten"
+    },
+    "consensus": {
+      "high": "Hoog",
+      "medium": "Gemiddeld",
+      "low": "Laag"
+    },
+    "actions": {
+      "exportToJira": "Exporteren naar Jira"
+    },
+    "loading": {
+      "title": "Stemoverzicht laden...",
+      "description": "We halen je stemgegevens op."
+    },
+    "error": {
+      "title": "Fout bij laden van gegevens",
+      "description": "We konden de stemsessie-informatie niet laden.",
+      "retry": "Opnieuw proberen"
+    },
+    "emptyState": {
+      "title": "Geen stemgegevens beschikbaar",
+      "description": "Om het stemoverzicht te bekijken, moet je een Poker Planning sessie voltooien met je team.",
+      "suggestions": {
+        "participants": "Zorg ervoor dat er deelnemers in de kamer zijn",
+        "tasks": "Voeg taken toe om te schatten",
+        "votes": "Voltooi ten minste één stemronde"
+      },
+      "actions": {
+        "goBack": "Ga terug",
+        "goHome": "Ga naar home"
+      }
+    }
+  },
+  "jiraExport": {
+    "title": "Exporteren naar Jira",
+    "auth": {
+      "title": "Verbinden met Jira",
+      "description": "Autoriseer de verbinding met je Jira-account om geschatte taken te exporteren.",
+      "login": "Inloggen met Jira",
+      "authenticating": "Authenticeren...",
+      "whyConnectTitle": "Waarom verbinden met Jira?",
+      "automaticallyExportTasks": "Exporteer automatisch geschatte taken",
+      "maintainEstimationTraceability": "Behoud schattingstraceerbaarheid",
+      "integrateWithExistingWorkflow": "Integreer met je bestaande workflow",
+      "verifyManually": "Handmatig verifiëren",
+      "completeAuthMessage": "Voltooi de authenticatie in het venster dat is geopend. Het wordt automatisch gedetecteerd wanneer het klaar is.",
+      "popupBlockedMessage": "Kon het authenticatievenster niet openen. Controleer of pop-ups niet zijn geblokkeerd.",
+      "authError": "Fout tijdens authenticatie",
+      "benefits": {
+        "integration": "Volledige Jira-integratie",
+        "automation": "Workflow automatisering",
+        "traceability": "Schattingstraceerbaarheid"
+      }
+    },
+    "select": {
+      "title": "Bestemming selecteren",
+      "description": "Kies het project en epic waar taken worden aangemaakt.",
+      "project": "Project",
+      "selectProject": "Selecteer project...",
+      "epic": "Epic",
+      "selectEpic": "Selecteer epic...",
+      "existingEpic": "Gebruik bestaande epic",
+      "createNewEpic": "Maak nieuwe epic aan"
+    },
+    "createEpic": {
+      "title": "Nieuwe Epic aanmaken",
+      "description": "Definieer de details van de nieuwe epic die de taken zal bevatten.",
+      "summary": "Epic titel",
+      "summaryPlaceholder": "bijv.: Q1 2024 Sprint - Hoofdfuncties",
+      "descriptionLabel": "Beschrijving (optioneel)",
+      "descriptionPlaceholder": "Beschrijf het doel en de scope van deze epic...",
+      "create": "Epic aanmaken",
+      "creating": "Epic aanmaken..."
+    },
+    "preview": {
+      "title": "Voorvertoning",
+      "description": "Controleer de details voordat je taken aanmaakt in Jira.",
+      "project": "Project",
+      "epic": "Epic",
+      "newEpic": "Nieuw",
+      "tasksCount": "Aan te maken taken",
+      "tasksToCreate": "Taken die worden aangemaakt:",
+      "points": "ptn",
+      "votes": "stemmen",
+      "consensus": "consensus",
+      "createTasks": "Taken aanmaken",
+      "creating": "Taken aanmaken..."
+    },
+    "creating": {
+      "title": "Taken aanmaken",
+      "description": "We maken taken aan in Jira. Dit proces kan enkele momenten duren.",
+      "progress": "Taken aanmaken in Jira..."
+    },
+    "results": {
+      "title": "Export voltooid",
+      "description": "Jira export resultaten.",
+      "successful": "succesvol",
+      "failed": "mislukt",
+      "openInJira": "Openen in Jira"
+    },
+    "actions": {
+      "back": "Terug",
+      "continue": "Doorgaan",
+      "close": "Sluiten"
+    }
+  }
+}

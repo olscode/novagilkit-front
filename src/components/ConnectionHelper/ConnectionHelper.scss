@@ -1,0 +1,132 @@
+.connection-helper {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &__content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  &__steps {
+    margin-bottom: 2rem;
+  }
+
+  &__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--tertiary-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  &__step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  &__step-text {
+    color: var(--text-color);
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+
+    &--primary {
+      background: var(--primary-button-bg);
+      color: white;
+
+      &:hover {
+        background: var(--primary-button-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+      }
+    }
+
+    &--secondary {
+      background: var(--secondary-button-bg);
+      color: var(--secondary-button-text);
+      border: 1px solid var(--secondary-button-border);
+
+      &:hover {
+        background: var(--secondary-button-hover-bg);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+
+    &__title {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    &__step {
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    &__step-number {
+      width: 1.8rem;
+      height: 1.8rem;
+      font-size: 0.8rem;
+    }
+
+    &__step-text {
+      font-size: 0.9rem;
+    }
+
+    &__actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__button {
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+}

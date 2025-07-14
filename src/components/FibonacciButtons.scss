@@ -1,0 +1,124 @@
+.fibonacci-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.fibonacci-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 1rem 0 2rem;
+  width: 100%;
+  max-width: 600px;
+
+  button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fibonacci-button-text);
+    background: var(--fibonacci-button-bg);
+    border: 2px solid var(--fibonacci-button-border);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    // Forzar el color del texto con máxima especificidad
+    &,
+    &:link,
+    &:visited {
+      color: var(--fibonacci-button-text);
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      background: var(--fibonacci-button-hover-bg);
+      border: 2px solid var(--highlight-color);
+      color: var(--fibonacci-button-text);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+    &.selected {
+      background: var(--fibonacci-selected-bg);
+      color: var(--fibonacci-selected-text);
+      border: 2px solid var(--border-color);
+      box-shadow: 0 0 15px var(--primary-shadow);
+      transform: scale(1.05);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+      box-shadow: none;
+
+      &:hover {
+        transform: none;
+        background: var(--fibonacci-button-bg);
+        border: 2px solid var(--fibonacci-button-border);
+      }
+
+      &.selected {
+        background: var(--fibonacci-selected-bg);
+        color: var(--fibonacci-selected-text);
+        opacity: 0.7;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.fibonacci-section.disabled {
+  opacity: 0.8;
+
+  .fibonacci-title {
+    color: var(--text-secondary);
+  }
+}
+
+.vote-message {
+  background: rgba(46, 204, 113, 0.2);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--success-color);
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .fibonacci-buttons {
+    gap: 0.6rem;
+
+    button {
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+    }
+  }
+}

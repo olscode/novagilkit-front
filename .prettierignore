@@ -1,0 +1,4 @@
+# The following files and directories are ignored by Prettier and will not be formatted.
+/dist
+/node_modules
+/coverage

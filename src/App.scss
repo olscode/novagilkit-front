@@ -1,0 +1,362 @@
+.app-layout {
+  position: relative;
+}
+
+// Sistema de temas moderno y compatible
+// Base: Respeta las preferencias del sistema automáticamente
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: linear-gradient(145deg, #1a1a2e 0%, #262a56 100%);
+    --text-color: #e0e0e0;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --highlight-color: #3498db;
+    --button-bg: linear-gradient(135deg, #3498db, #2980b9);
+    --button-hover-bg: linear-gradient(135deg, #2980b9, #2c3e50);
+    --modal-bg: rgba(40, 44, 52, 0.95);
+    --header-text-gradient: linear-gradient(90deg, #c9d6ff, #e2e2e2);
+
+    // Variables adicionales para componentes
+    --primary-bg: #1a1a2e;
+    --secondary-bg: linear-gradient(45deg, #16222a, #3a6073);
+    --secondary-bg-alt: linear-gradient(45deg, #16222a, #3a6073);
+    --secondary-bg-left: linear-gradient(90deg, #16222a, #3a6073);
+    --secondary-bg-right: linear-gradient(270deg, #16222a, #3a6073);
+    --tertiary-bg: rgba(0, 0, 0, 0.3);
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --shape-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --primary-button-bg: #007bff;
+    --primary-button-hover: #0056b3;
+    --footer-text: #ccc;
+
+    // Variables específicas para Toast en modo oscuro
+    --toast-bg: rgba(40, 44, 52, 0.95);
+    --toast-text: #e0e0e0;
+    --toast-border: rgba(255, 255, 255, 0.1);
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+
+    // Variables para tarjetas
+    --card-title-color: #ffffff;
+    --card-description-color: #b0b0b0;
+    --card-icon-color: #007bff;
+    --card-hover-bg: rgba(255, 255, 255, 0.1);
+
+    // Variables para formularios e inputs
+    --text-secondary: #b0b0b0;
+    --input-bg: rgba(255, 255, 255, 0.08);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-text: #ffffff;
+    --input-focus-bg: rgba(255, 255, 255, 0.12);
+    --input-placeholder: #8e8e8e;
+    --primary-color: #007bff;
+    --primary-hover: #0069d9;
+    --primary-shadow: rgba(0, 123, 255, 0.4);
+
+    // Variables para tareas
+    --task-item-bg: rgba(255, 255, 255, 0.04);
+    --task-item-border: rgba(255, 255, 255, 0.07);
+    --task-item-hover-bg: rgba(255, 255, 255, 0.08);
+
+    // Variables para botones secundarios
+    --secondary-button-bg: rgba(255, 255, 255, 0.1);
+    --secondary-button-text: #e0e0e0;
+    --secondary-button-border: rgba(255, 255, 255, 0.2);
+    --secondary-button-hover-bg: rgba(255, 255, 255, 0.15);
+
+    // Variables específicas para Fibonacci buttons
+    --fibonacci-button-bg: rgba(255, 255, 255, 0.15);
+    --fibonacci-button-border: rgba(255, 255, 255, 0.3);
+    --fibonacci-button-text: #ffffff;
+    --fibonacci-button-hover-bg: rgba(255, 255, 255, 0.25);
+    --fibonacci-selected-bg: #007bff;
+    --fibonacci-selected-text: #ffffff;
+
+    // Variables para UserCard
+    --usercard-icon-color: #ffffff;
+    --usercard-pending-icon: rgba(255, 255, 255, 0.8);
+
+    // Variables específicas para Settings modal
+    --settings-title-color: #ffffff;
+    --settings-text-color: #e0e0e0;
+    --settings-close-color: #e0e0e0;
+
+    // Variables específicas para modal
+    --modal-title-color: #ffffff;
+    --modal-text-color: #e0e0e0;
+    --modal-close-color: #e0e0e0;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: linear-gradient(145deg, #f0f2f5 0%, #e2e6ea 100%);
+    --text-color: #333333;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --highlight-color: #2471a3;
+    --button-bg: linear-gradient(135deg, #3498db, #2471a3);
+    --button-hover-bg: linear-gradient(135deg, #2471a3, #1a5276);
+    --modal-bg: rgba(240, 242, 245, 0.98);
+    --header-text-gradient: linear-gradient(90deg, #2980b9, #3498db);
+
+    // Variables adicionales para componentes
+    --primary-bg: #f0f2f5;
+    --secondary-bg: linear-gradient(45deg, #d4dee7, #c8d2db);
+    --secondary-bg-alt: linear-gradient(45deg, #d4dee7, #c8d2db);
+    --secondary-bg-left: linear-gradient(90deg, #d4dee7, #c8d2db);
+    --secondary-bg-right: linear-gradient(270deg, #d4dee7, #c8d2db);
+    --tertiary-bg: rgba(255, 255, 255, 0.8);
+    --overlay-bg: rgba(0, 0, 0, 0.1);
+    --shape-color: #2471a3;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --primary-button-bg: #3498db;
+    --primary-button-hover: #2471a3;
+    --footer-text: #666;
+
+    // Variables específicas para Toast en modo claro
+    --toast-bg: rgba(255, 255, 255, 0.95);
+    --toast-text: #333333;
+    --toast-border: rgba(0, 0, 0, 0.1);
+    --success-color: #198754;
+    --error-color: #dc3545;
+    --warning-color: #fd7e14;
+    --info-color: #0dcaf0;
+
+    // Variables para tarjetas
+    --card-title-color: #2c3e50;
+    --card-description-color: #5a6c7d;
+    --card-icon-color: #3498db;
+    --card-hover-bg: rgba(52, 152, 219, 0.1);
+
+    // Variables para formularios e inputs
+    --text-secondary: #5a6c7d;
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-border: rgba(0, 0, 0, 0.15);
+    --input-text: #333333;
+    --input-focus-bg: rgba(255, 255, 255, 0.95);
+    --input-placeholder: #6c757d;
+    --primary-color: #3498db;
+    --primary-hover: #2471a3;
+    --primary-shadow: rgba(52, 152, 219, 0.4);
+
+    // Variables para tareas
+    --task-item-bg: rgba(255, 255, 255, 0.6);
+    --task-item-border: rgba(0, 0, 0, 0.1);
+    --task-item-hover-bg: rgba(255, 255, 255, 0.8);
+
+    // Variables para botones secundarios
+    --secondary-button-bg: rgba(0, 0, 0, 0.05);
+    --secondary-button-text: #333333;
+    --secondary-button-border: rgba(0, 0, 0, 0.1);
+    --secondary-button-hover-bg: rgba(0, 0, 0, 0.1);
+
+    // Variables específicas para Fibonacci buttons
+    --fibonacci-button-bg: #ffffff;
+    --fibonacci-button-border: rgba(52, 152, 219, 0.8);
+    --fibonacci-button-text: #000000;
+    --fibonacci-button-hover-bg: rgba(52, 152, 219, 0.15);
+    --fibonacci-selected-bg: #3498db;
+    --fibonacci-selected-text: #ffffff;
+
+    // Variables para UserCard
+    --usercard-icon-color: #1a202c;
+    --usercard-pending-icon: rgba(26, 32, 44, 0.9);
+
+    // Variables específicas para Settings modal
+    --settings-title-color: #1a202c;
+    --settings-text-color: #2d3748;
+    --settings-close-color: #4a5568;
+
+    // Variables específicas para modal
+    --modal-title-color: #1a202c;
+    --modal-text-color: #2d3748;
+    --modal-close-color: #4a5568;
+  }
+}
+
+// Override manual: Permite al usuario cambiar el tema manualmente
+// Estas reglas tienen mayor especificidad y sobrescriben las @media queries
+[data-theme='dark'] {
+  --background-color: linear-gradient(145deg, #1a1a2e 0%, #262a56 100%);
+  --text-color: #e0e0e0;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --highlight-color: #3498db;
+  --button-bg: linear-gradient(135deg, #3498db, #2980b9);
+  --button-hover-bg: linear-gradient(135deg, #2980b9, #2c3e50);
+  --modal-bg: rgba(40, 44, 52, 0.95);
+  --header-text-gradient: linear-gradient(90deg, #c9d6ff, #e2e2e2);
+
+  // Variables adicionales para componentes
+  --primary-bg: #1a1a2e;
+  --secondary-bg: linear-gradient(45deg, #16222a, #3a6073);
+  --secondary-bg-alt: linear-gradient(45deg, #16222a, #3a6073);
+  --secondary-bg-left: linear-gradient(90deg, #16222a, #3a6073);
+  --secondary-bg-right: linear-gradient(270deg, #16222a, #3a6073);
+  --tertiary-bg: rgba(0, 0, 0, 0.3);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --shape-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --primary-button-bg: #007bff;
+  --primary-button-hover: #0056b3;
+  --footer-text: #ccc;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+
+  // Variables específicas para Toast en modo oscuro
+  --toast-bg: rgba(40, 44, 52, 0.95);
+  --toast-text: #e0e0e0;
+  --toast-border: rgba(255, 255, 255, 0.1);
+
+  // Variables para tarjetas
+  --card-title-color: #ffffff;
+  --card-description-color: #b0b0b0;
+  --card-icon-color: #007bff;
+  --card-hover-bg: rgba(255, 255, 255, 0.1);
+
+  // Variables para formularios e inputs
+  --text-secondary: #b0b0b0;
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-text: #ffffff;
+  --input-focus-bg: rgba(255, 255, 255, 0.12);
+  --input-placeholder: #8e8e8e;
+  --primary-color: #007bff;
+  --primary-hover: #0069d9;
+  --primary-shadow: rgba(0, 123, 255, 0.4);
+
+  // Variables para tareas
+  --task-item-bg: rgba(255, 255, 255, 0.04);
+  --task-item-border: rgba(255, 255, 255, 0.07);
+  --task-item-hover-bg: rgba(255, 255, 255, 0.08);
+
+  // Variables para botones secundarios
+  --secondary-button-bg: rgba(255, 255, 255, 0.1);
+  --secondary-button-text: #e0e0e0;
+  --secondary-button-border: rgba(255, 255, 255, 0.2);
+  --secondary-button-hover-bg: rgba(255, 255, 255, 0.15);
+
+  // Variables específicas para Fibonacci buttons
+  --fibonacci-button-bg: rgba(255, 255, 255, 0.15);
+  --fibonacci-button-border: rgba(255, 255, 255, 0.3);
+  --fibonacci-button-text: #ffffff;
+  --fibonacci-button-hover-bg: rgba(255, 255, 255, 0.25);
+  --fibonacci-selected-bg: #007bff;
+  --fibonacci-selected-text: #ffffff;
+
+  // Variables para UserCard
+  --usercard-icon-color: #ffffff;
+  --usercard-pending-icon: rgba(255, 255, 255, 0.8);
+
+  // Variables específicas para Settings modal
+  --settings-title-color: #ffffff;
+  --settings-text-color: #e0e0e0;
+  --settings-close-color: #e0e0e0;
+
+  // Variables específicas para modal
+  --modal-title-color: #ffffff;
+  --modal-text-color: #e0e0e0;
+  --modal-close-color: #e0e0e0;
+}
+
+[data-theme='light'] {
+  --background-color: linear-gradient(145deg, #f0f2f5 0%, #e2e6ea 100%);
+  --text-color: #333333;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --highlight-color: #2471a3;
+  --button-bg: linear-gradient(135deg, #3498db, #2471a3);
+  --button-hover-bg: linear-gradient(135deg, #2471a3, #1a5276);
+  --modal-bg: rgba(240, 242, 245, 0.98);
+  --header-text-gradient: linear-gradient(90deg, #2980b9, #3498db);
+
+  // Variables adicionales para componentes
+  --primary-bg: #f0f2f5;
+  --secondary-bg: linear-gradient(45deg, #d4dee7, #c8d2db);
+  --secondary-bg-alt: linear-gradient(45deg, #d4dee7, #c8d2db);
+  --secondary-bg-left: linear-gradient(90deg, #d4dee7, #c8d2db);
+  --secondary-bg-right: linear-gradient(270deg, #d4dee7, #c8d2db);
+  --tertiary-bg: rgba(255, 255, 255, 0.8);
+  --overlay-bg: rgba(0, 0, 0, 0.1);
+  --shape-color: #2471a3;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --primary-button-bg: #3498db;
+  --primary-button-hover: #2471a3;
+  --footer-text: #666;
+
+  // Variables específicas para Toast en modo claro
+  --toast-bg: rgba(255, 255, 255, 0.95);
+  --toast-text: #333333;
+  --toast-border: rgba(0, 0, 0, 0.1);
+  --success-color: #198754;
+  --error-color: #dc3545;
+  --warning-color: #fd7e14;
+  --info-color: #0dcaf0;
+
+  // Variables para tarjetas
+  --card-title-color: #2c3e50;
+  --card-description-color: #5a6c7d;
+  --card-icon-color: #3498db;
+  --card-hover-bg: rgba(52, 152, 219, 0.1);
+
+  // Variables para formularios e inputs
+  --text-secondary: #5a6c7d;
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --input-border: rgba(0, 0, 0, 0.15);
+  --input-text: #333333;
+  --input-focus-bg: rgba(255, 255, 255, 0.95);
+  --input-placeholder: #6c757d;
+  --primary-color: #3498db;
+  --primary-hover: #2471a3;
+  --primary-shadow: rgba(52, 152, 219, 0.4);
+
+  // Variables para tareas
+  --task-item-bg: rgba(255, 255, 255, 0.6);
+  --task-item-border: rgba(0, 0, 0, 0.1);
+  --task-item-hover-bg: rgba(255, 255, 255, 0.8);
+
+  // Variables para botones secundarios
+  --secondary-button-bg: rgba(0, 0, 0, 0.05);
+  --secondary-button-text: #333333;
+  --secondary-button-border: rgba(0, 0, 0, 0.1);
+  --secondary-button-hover-bg: rgba(0, 0, 0, 0.1);
+
+  // Variables específicas para Fibonacci buttons
+  --fibonacci-button-bg: #ffffff;
+  --fibonacci-button-border: rgba(52, 152, 219, 0.8);
+  --fibonacci-button-text: #000000;
+  --fibonacci-button-hover-bg: rgba(52, 152, 219, 0.15);
+  --fibonacci-selected-bg: #3498db;
+  --fibonacci-selected-text: #ffffff;
+
+  // Variables para UserCard
+  --usercard-icon-color: #1a202c;
+  --usercard-pending-icon: rgba(26, 32, 44, 0.9);
+
+  // Variables específicas para Settings modal
+  --settings-title-color: #1a202c;
+  --settings-text-color: #2d3748;
+  --settings-close-color: #4a5568;
+
+  // Variables específicas para modal
+  --modal-title-color: #1a202c;
+  --modal-text-color: #2d3748;
+  --modal-close-color: #4a5568;
+}
+
+// Aplicar el tema al body con transiciones suaves
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+// Ocultamos el selector global cuando estamos en la vista de Room

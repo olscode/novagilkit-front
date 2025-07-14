@@ -1,0 +1,287 @@
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Se adapta al contenedor en móviles */
+  max-width: 12.5rem; /* 200px - Limita el ancho máximo en desktop */
+  height: 17.875rem; /* 286px - Altura fija para todas las tarjetas */
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px; /* px para precisión visual */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* px para efectos precisos */
+  backdrop-filter: blur(10px); /* px para efectos precisos */
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* px para precisión visual */
+  transition: all 0.3s ease;
+  position: relative;
+  justify-content: space-between; /* Distribuye el espacio uniformemente */
+
+  // Responsive optimizations para móviles
+  @media (max-width: 768px) {
+    max-width: none; /* Elimina restricción para que se adapte al grid */
+    height: 16.25rem; /* 260px */
+    padding: 1.2rem;
+    border-radius: 12px; /* px para precisión visual */
+  }
+
+  @media (max-width: 600px) {
+    height: 15rem; /* 240px */
+    padding: 1rem;
+    border-radius: 10px; /* px para precisión visual */
+  }
+
+  @media (max-width: 500px) {
+    height: 13.75rem; /* 220px */
+    padding: 0.8rem;
+    border-radius: 8px; /* px para precisión visual */
+  }
+
+  @media (max-width: 400px) {
+    height: 12.5rem; /* 200px */
+    padding: 0.6rem;
+    border-radius: 8px; /* px para precisión visual */
+  }
+
+  &:hover {
+    transform: translateY(-5px); /* px para transformaciones precisas */
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25); /* px para efectos precisos */
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  // Estilos para usuario actual
+  &.current-user {
+    border: 2px solid rgba(52, 152, 219, 0.7); /* px para precisión visual */
+    background: rgba(52, 152, 219, 0.15);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -5px; /* px para posicionamiento preciso */
+      right: -5px; /* px para posicionamiento preciso */
+      width: 1.25rem; /* 20px */
+      height: 1.25rem; /* 20px */
+      background: var(--highlight-color);
+      border-radius: 50%;
+      border: 3px solid var(--text-color); /* px para precisión visual */
+      box-shadow: 0 2px 8px var(--shadow-color); /* px para efectos precisos */
+    }
+  } // Estados de votación
+  &.voted .vote-number {
+    background: var(--button-bg);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
+    animation:
+      reveal-vote 0.5s ease-in-out forwards,
+      pulse 2s infinite;
+  }
+
+  &.pending .vote-number {
+    background: var(--card-bg);
+    opacity: 0.6;
+    color: var(--usercard-pending-icon);
+    &::after {
+      content: '?';
+      color: var(--usercard-pending-icon);
+      opacity: 1;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+
+  @keyframes reveal-vote {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  & .vote-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem; /* 80px */
+    height: 5rem; /* 80px */
+    border-radius: 50%;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--usercard-icon-color);
+    box-shadow: 0 4px 15px var(--shadow-color); /* px para efectos precisos */
+    position: relative;
+    overflow: hidden;
+    margin: 1rem 0;
+    transition: all 0.3s ease-in-out;
+
+    // Responsive optimizations
+    @media (max-width: 768px) {
+      width: 4.375rem; /* 70px */
+      height: 4.375rem; /* 70px */
+      font-size: 1.6rem;
+      margin: 0.8rem 0;
+    }
+
+    @media (max-width: 600px) {
+      width: 3.75rem; /* 60px */
+      height: 3.75rem; /* 60px */
+      font-size: 1.4rem;
+      margin: 0.6rem 0;
+    }
+
+    @media (max-width: 500px) {
+      width: 3.4375rem; /* 55px */
+      height: 3.4375rem; /* 55px */
+      font-size: 1.3rem;
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 400px) {
+      width: 3.125rem; /* 50px */
+      height: 3.125rem; /* 50px */
+      font-size: 1.2rem;
+      margin: 0.4rem 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px; /* px para posicionamiento preciso */
+      left: -10px; /* px para posicionamiento preciso */
+      right: -10px; /* px para posicionamiento preciso */
+      bottom: -10px; /* px para posicionamiento preciso */
+      background: inherit;
+      filter: blur(10px); /* px para efectos precisos */
+      opacity: 0.7;
+      z-index: -1;
+    }
+  }
+  & .username {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 0 2px 4px var(--shadow-color); /* px para efectos precisos */
+    letter-spacing: 0.03125rem; /* 0.5px */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 4.375rem; /* 70px */
+    justify-content: center;
+    margin-bottom: 0.3125rem; /* 5px */
+    width: 100%; /* Usa todo el ancho disponible */
+    box-sizing: border-box;
+
+    // Responsive optimizations
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+      letter-spacing: 0.01875rem; /* 0.3px */
+    }
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+      letter-spacing: 0.0125rem; /* 0.2px */
+    }
+
+    @media (max-width: 500px) {
+      font-size: 0.9rem;
+      letter-spacing: 0.00625rem; /* 0.1px */
+    }
+
+    @media (max-width: 400px) {
+      font-size: 0.85rem;
+      letter-spacing: 0;
+    }
+
+    .username-text {
+      width: 100%;
+      max-width: 100%; /* Usa todo el ancho disponible del contenedor padre */
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden; /* Necesario para que funcione ellipsis */
+      white-space: nowrap; /* Previene el wrap del texto */
+      margin-bottom: 0.25rem; /* 4px - Pequeño margen cuando hay badge */
+      box-sizing: border-box;
+
+      // Responsive optimizations - Solo ajustamos en casos muy extremos
+      @media (max-width: 350px) {
+        max-width: 95%; /* Solo en pantallas muy pequeñas */
+      }
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 2.5rem; /* 40px */
+      height: 0.1875rem; /* 3px */
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+      );
+      margin: 0.5rem auto 0; /* 8px */
+      border-radius: 3px; /* px para precisión visual */
+    }
+    .current-user-badge {
+      font-size: 0.7rem;
+      background: rgba(52, 152, 219, 0.8);
+      color: white;
+      padding: 0.125rem 0.625rem; /* 2px 10px */
+      border-radius: 10px; /* px para precisión visual */
+      margin-top: 0.5rem; /* 8px */
+      font-weight: normal;
+      text-transform: uppercase;
+      position: relative;
+      letter-spacing: 0.0625rem; /* 1px */
+      display: inline-block;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* px para efectos precisos */
+      border: 1px solid rgba(255, 255, 255, 0.1); /* px para precisión visual */
+      z-index: 2;
+    }
+  }
+  & .vote-status {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 0.25rem 0.75rem; /* 4px 12px */
+    border-radius: 12px; /* px para precisión visual */
+    background: rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.03125rem; /* 0.5px */
+    width: fit-content;
+    align-self: center;
+    position: relative;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+@keyframes breath {
+  0% {
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+    transform: scale(0.98);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+    transform: scale(0.98);
+  }
+}

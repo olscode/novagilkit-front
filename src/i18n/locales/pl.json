@@ -1,0 +1,324 @@
+{
+  "app": {
+    "title": "Nova Tools",
+    "subtitle": "Innowacyjna Platforma Narzędzi dla Metodologii Agile",
+    "description": "Platforma oferująca zestaw innowacyjnych narzędzi ułatwiających wdrażanie metodologii agile w zespołach programistycznych. Naszym celem jest dostarczanie nowoczesnych i intuicyjnych rozwiązań, które poprawiają współpracę i efektywność w procesach agile."
+  },
+  "menu": {
+    "home": "Strona główna",
+    "pokerPlanning": "Poker Planning",
+    "createRoom": "Utwórz pokój",
+    "joinRoom": "Dołącz do pokoju",
+    "back": "Wróć"
+  },
+  "common": {
+    "loading": "Ładowanie...",
+    "error": "Wystąpił błąd",
+    "success": "Sukces!",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "create": "Utwórz",
+    "submit": "Wyślij",
+    "copy": "Kopiuj",
+    "close": "Zamknij",
+    "settings": "Ustawienia",
+    "key": "Klucz",
+    "closeErrorMessage": "Zamknij komunikat o błędzie"
+  },
+  "languages": {
+    "en": "Angielski",
+    "es": "Hiszpański",
+    "nl": "Holenderski",
+    "pl": "Polski",
+    "selectLanguage": "Wybierz język"
+  },
+  "pokerPlanning": {
+    "title": "Poker Planning",
+    "subtitle": "Szacuj zadania wspólnie ze swoim zespołem",
+    "createRoom": {
+      "title": "Utwórz nowy pokój",
+      "description": "Skonfiguruj pokój Poker Planning do szacowania zadań z zespołem",
+      "username": "Twoja nazwa użytkownika",
+      "usernameLabel": "Wprowadź swoją nazwę użytkownika",
+      "createButton": "Utwórz pokój"
+    },
+    "joinRoom": {
+      "title": "Dołącz do pokoju",
+      "description": "Wprowadź kod pokoju i swoją nazwę użytkownika, aby dołączyć do istniejącej sesji Poker Planning",
+      "roomCode": "Kod pokoju",
+      "roomCodeLabel": "Wprowadź kod pokoju",
+      "roomCodeHelp": "Kod jest udostępniany przez twórcę pokoju",
+      "username": "Twoja nazwa użytkownika",
+      "usernameLabel": "Wprowadź swoje imię, aby się zidentyfikować",
+      "joinButton": "Dołącz do pokoju",
+      "errors": {
+        "usernameRequired": "Proszę podać nazwę użytkownika",
+        "roomCodeRequired": "Proszę podać kod pokoju"
+      }
+    },
+    "room": {
+      "title": "Pokój",
+      "welcomeModal": {
+        "title": "Witaj w pokoju",
+        "description": "Aby uczestniczyć w tej sesji Poker Planning, musisz zidentyfikować się za pomocą nazwy użytkownika",
+        "usernameLabel": "Wprowadź swoją nazwę użytkownika",
+        "joinButton": "Dołącz do pokoju",
+        "continueButton": "Wprowadź imię, aby kontynuować"
+      },
+      "sidebar": {
+        "title": "Szczegóły pokoju",
+        "roomId": "ID",
+        "participants": "Uczestnicy",
+        "tasks": "Zadania",
+        "admin": "Admin",
+        "open": "Otwórz",
+        "close": "Zamknij",
+        "copySuccess": "ID pokoju skopiowane do schowka!",
+        "noUsers": "Brak uczestników",
+        "noTasks": "Nie dodano jeszcze zadań"
+      },
+      "currentTask": "Aktualne głosowanie",
+      "startNewVote": "Rozpocznij nowe głosowanie",
+      "startVoting": "Rozpocznij głosowanie",
+      "nextTask": "Następne Zadanie",
+      "finishVoting": "Zakończ Głosowanie",
+      "revealVotes": "Odkryj głosy",
+      "statistics": "Statystyki",
+      "average": "Średnia",
+      "median": "Mediana",
+      "min": "Minimum",
+      "max": "Maksimum",
+      "tooltips": {
+        "average": "Średnia arytmetyczna wszystkich głosów. Obliczana przez dodanie wszystkich wartości głosów i podzielenie przez liczbę głosów.",
+        "median": "Wartość środkowa gdy wszystkie głosy są ułożone w kolejności. Mniej dotknięta przez wartości odstające niż średnia.",
+        "min": "Najniższa wartość głosu przesłana przez dowolnego członka zespołu.",
+        "max": "Najwyższa wartość głosu przesłana przez dowolnego członka zespołu."
+      },
+      "alreadyVoted": "Już zagłosowałeś na to zadanie",
+      "votingComplete": "Głosowanie zakończone!",
+      "usersVoted": "użytkowników zagłosowało",
+      "waitingForVoting": "Oczekiwanie na rozpoczęcie głosowania",
+      "noUsers": "Żaden użytkownik jeszcze nie dołączył",
+      "userStatus": {
+        "voted": "Zagłosował",
+        "pending": "Oczekujące"
+      },
+      "notifications": {
+        "userJoined": "{{username}} dołączył do pokoju",
+        "userLeft": "{{username}} opuścił pokój",
+        "roomCreated": "Pokój {{roomId}} został pomyślnie utworzony",
+        "newVoting": "Rozpoczęła się nowa runda głosowania",
+        "votingStarted": "Głosowanie zostało rozpoczęte!",
+        "votesRevealed": "Głosy zostały odkryte!",
+        "votesReset": "Głosy zostały zresetowane",
+        "userVoted": "{{username}} zagłosował",
+        "allVotesIn": "Wszystkie głosy zostały oddane! Sprawdź statystyki.",
+        "connectionError": "Błąd połączenia. Nie można dołączyć do pokoju."
+      },
+      "you": "Ty"
+    },
+    "fibonacci": {
+      "chooseScore": "Wybierz swoją ocenę",
+      "youVoted": "Zagłosowałeś",
+      "votePoints": "Głosuj na {{points}} punktów"
+    },
+    "tasks": {
+      "title": "Zadania",
+      "description": "Dodaj zadania, które chcesz oszacować ze swoim zespołem:",
+      "addTask": "Dodaj zadanie",
+      "deleteTask": "Usuń to zadanie",
+      "taskPlaceholder": "Opisz zadanie tutaj...",
+      "taskLabel": "Zadanie",
+      "noTasks": "Nie dodano jeszcze zadań"
+    }
+  },
+  "upcomingTools": {
+    "sprintAnalytics": "Analityka Sprintu",
+    "backlogManager": "Zarządzanie Backlogiem",
+    "retrospectiveBoard": "Tablica Retrospektywy"
+  },
+  "mainMenu": {
+    "title": "Witaj na Platformie",
+    "subtitle": "Odkryj narzędzia, które poprawią Twoją produktywność i współpracę zespołową.",
+    "startButton": "Rozpocznij"
+  },
+  "appSelection": {
+    "title": "Wybierz aplikację",
+    "subtitle": "Wybierz aplikację, której chcesz użyć.",
+    "pokerPlanning": {
+      "title": "Poker Planning",
+      "description": "Szacuj zadania wspólnie ze swoim zespołem."
+    },
+    "quiz": {
+      "title": "Interaktywny Quiz",
+      "description": "Weź udział w zabawnych quizach i ucz się."
+    }
+  },
+  "roomNotFound": {
+    "title": "Pokój nie został znaleziony",
+    "description": "Pokój o ID <1>{{roomId}}</1> nie istnieje lub nie jest już dostępny.",
+    "backButton": "Powrót do strony głównej",
+    "gifAlt": "Animowana lupa szukająca pokoju"
+  },
+  "settings": {
+    "language": "Język",
+    "appearance": "Wygląd",
+    "darkMode": "Tryb ciemny",
+    "lightMode": "Tryb jasny"
+  },
+  "notFound": {
+    "title": "Strona nie została znaleziona",
+    "subtitle": "Przepraszamy, strona, której szukasz, nie istnieje.",
+    "description": "Wprowadzony adres URL nie odpowiada żadnej prawidłowej stronie. Możliwe, że źle wpisałeś adres lub strona została przeniesiona.",
+    "goHome": "Idź do strony głównej",
+    "goBack": "Wróć"
+  },
+  "connectionStatus": {
+    "serviceUnavailable": "Usługa niedostępna",
+    "retryingConnection": "Ponowne łączenie..."
+  },
+  "protectedRoute": {
+    "connectionRequired": "Do uzyskania dostępu do tej funkcjonalności wymagane jest połączenie z usługą. Proszę czekać, podczas gdy próbujemy ponownie się połączyć."
+  },
+  "connectionHelper": {
+    "troubleshooting": "Rozwiązywanie problemów",
+    "checkServer": "Sprawdź, czy serwer działa na {{url}}",
+    "verifyPort": "Upewnij się, że port 3000 jest dostępny",
+    "refreshPage": "Odśwież stronę, aby spróbować ponownie się połączyć",
+    "checkHealth": "Sprawdź Serwer",
+    "refresh": "Odśwież Stronę"
+  },
+  "resumeVotes": {
+    "title": "Podsumowanie Głosowania",
+    "subtitle": "Pełna analiza {{totalTasks}} zadań z {{totalVotes}} głosami",
+    "viewModes": {
+      "grid": "Siatka",
+      "list": "Lista"
+    },
+    "statsModes": {
+      "general": "Ogólne",
+      "individual": "Według Zadania"
+    },
+    "generalStats": {
+      "tasksCompleted": "Ukończone Zadania",
+      "participation": "Uczestnictwo",
+      "avgConsensus": "Średni Konsensus",
+      "avgEffort": "Średni Wysiłek"
+    },
+    "taskStats": {
+      "average": "Średnia",
+      "median": "Mediana",
+      "range": "Zakres",
+      "votes": "Głosy",
+      "consensus": "konsensus",
+      "votesByUser": "Głosy według użytkownika:",
+      "unknownUser": "Nieznany użytkownik",
+      "points": "punkty"
+    },
+    "consensus": {
+      "high": "Wysoki",
+      "medium": "Średni",
+      "low": "Niski"
+    },
+    "actions": {
+      "exportToJira": "Eksportuj do Jira"
+    },
+    "loading": {
+      "title": "Ładowanie podsumowania głosowania...",
+      "description": "Pobieramy dane Twojej sesji głosowania."
+    },
+    "error": {
+      "title": "Błąd podczas ładowania danych",
+      "description": "Nie mogliśmy załadować informacji o sesji głosowania.",
+      "retry": "Ponów"
+    },
+    "emptyState": {
+      "title": "Brak danych głosowania",
+      "description": "Aby zobaczyć podsumowanie głosowania, musisz ukończyć sesję Poker Planning ze swoim zespołem.",
+      "suggestions": {
+        "participants": "Upewnij się, że w pokoju są uczestnicy",
+        "tasks": "Dodaj zadania do oszacowania",
+        "votes": "Ukończ co najmniej jedną rundę głosowania"
+      },
+      "actions": {
+        "goBack": "Wróć",
+        "goHome": "Idź do domu"
+      }
+    }
+  },
+  "jiraExport": {
+    "title": "Eksportuj do Jira",
+    "auth": {
+      "title": "Połącz z Jira",
+      "description": "Autoryzuj połączenie z kontem Jira, aby eksportować oszacowane zadania.",
+      "login": "Zaloguj się do Jira",
+      "authenticating": "Uwierzytelnianie...",
+      "whyConnectTitle": "Dlaczego połączyć z Jira?",
+      "automaticallyExportTasks": "Automatycznie eksportuj oszacowane zadania",
+      "maintainEstimationTraceability": "Zachowaj śledzenie oszacowań",
+      "integrateWithExistingWorkflow": "Zintegruj z istniejącym przepływem pracy",
+      "verifyManually": "Zweryfikuj ręcznie",
+      "completeAuthMessage": "Ukończ uwierzytelnianie w oknie, które się otworzyło. Zostanie automatycznie wykryte po zakończeniu.",
+      "popupBlockedMessage": "Nie można otworzyć okna uwierzytelniania. Sprawdź, czy wyskakujące okienka nie są zablokowane.",
+      "authError": "Błąd podczas uwierzytelniania",
+      "benefits": {
+        "integration": "Pełna integracja z Jira",
+        "automation": "Automatyzacja przepływu pracy",
+        "traceability": "Śledzenie oszacowań"
+      }
+    },
+    "select": {
+      "title": "Wybierz miejsce docelowe",
+      "description": "Wybierz projekt i epic, w którym będą tworzone zadania.",
+      "project": "Projekt",
+      "selectProject": "Wybierz projekt...",
+      "epic": "Epic",
+      "selectEpic": "Wybierz epic...",
+      "existingEpic": "Użyj istniejącego epicu",
+      "createNewEpic": "Utwórz nowy epic"
+    },
+    "createEpic": {
+      "title": "Utwórz nowy Epic",
+      "description": "Zdefiniuj szczegóły nowego epicu, który będzie zawierał zadania.",
+      "summary": "Tytuł epicu",
+      "summaryPlaceholder": "np.: Sprint Q1 2024 - Główne funkcje",
+      "descriptionLabel": "Opis (opcjonalny)",
+      "descriptionPlaceholder": "Opisz cel i zakres tego epicu...",
+      "create": "Utwórz Epic",
+      "creating": "Tworzenie epicu..."
+    },
+    "preview": {
+      "title": "Podgląd",
+      "description": "Przejrzyj szczegóły przed utworzeniem zadań w Jira.",
+      "project": "Projekt",
+      "epic": "Epic",
+      "newEpic": "Nowy",
+      "tasksCount": "Zadania do utworzenia",
+      "tasksToCreate": "Zadania, które będą utworzone:",
+      "points": "pkt",
+      "votes": "głosy",
+      "consensus": "konsensus",
+      "createTasks": "Utwórz zadania",
+      "creating": "Tworzenie zadań..."
+    },
+    "creating": {
+      "title": "Tworzenie zadań",
+      "description": "Tworzymy zadania w Jira. Ten proces może potrwać kilka chwil.",
+      "progress": "Tworzenie zadań w Jira..."
+    },
+    "results": {
+      "title": "Eksport zakończony",
+      "description": "Wyniki eksportu do Jira.",
+      "successful": "pomyślne",
+      "failed": "nieudane",
+      "openInJira": "Otwórz w Jira"
+    },
+    "actions": {
+      "back": "Wróć",
+      "continue": "Kontynuuj",
+      "close": "Zamknij"
+    }
+  }
+}

@@ -1,0 +1,135 @@
+.room-not-found-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+}
+
+.room-not-found-content {
+  background-color: var(--modal-bg);
+  border-radius: 1.25rem;
+  box-shadow: 0 15px 35px var(--shadow-color);
+  padding: 3rem 2.5rem 2.5rem;
+  text-align: center;
+  max-width: 28.125rem;
+  width: 100%;
+  animation: fadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(0.625rem);
+  -webkit-backdrop-filter: blur(0.625rem);
+}
+
+.room-not-found-gif {
+  width: 12.5rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px var(--shadow-color);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.room-not-found-content h1 {
+  font-size: 2.2rem;
+  color: var(--text-color);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03125rem;
+  text-shadow: 1px 1px 3px var(--shadow-color);
+}
+
+.room-not-found-content p {
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.room-id {
+  font-weight: bold;
+  color: var(--highlight-color);
+  background: var(--card-hover-bg);
+  border-radius: 0.5rem;
+  padding: 0.1875rem 0.5rem;
+  display: inline-block;
+  margin: 0 0.25rem;
+  text-shadow: none;
+  letter-spacing: 0.03125rem;
+}
+
+.room-not-found-btn {
+  background: var(--primary-button-bg);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px var(--primary-shadow);
+  transition: all 0.3s ease;
+  letter-spacing: 0.03125rem;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1875rem;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 12px 28px var(--primary-shadow);
+    background: var(--primary-button-hover);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:active {
+    transform: translateY(-0.125rem);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2.5rem) scale(0.95);
+    filter: blur(0.625rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+// Add a pulse animation to the room-id
+.room-id {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--primary-shadow);
+  }
+  70% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}

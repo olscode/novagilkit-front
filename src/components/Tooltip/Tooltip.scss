@@ -1,0 +1,203 @@
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.tooltip {
+  position: absolute;
+  background: var(--toast-bg, var(--card-bg, rgba(40, 44, 52, 0.95)));
+  color: var(--toast-text, var(--text-color, #e0e0e0));
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  z-index: 9999;
+  box-shadow:
+    0 4px 12px var(--shadow-color, rgba(0, 0, 0, 0.2)),
+    0 2px 4px var(--shadow-color, rgba(0, 0, 0, 0.1));
+  max-width: 240px;
+  min-width: 160px;
+  width: max-content;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--toast-border, var(--border-color, rgba(255, 255, 255, 0.1)));
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  // Flecha del tooltip
+  &::after {
+    content: '';
+    position: absolute;
+    border: 6px solid transparent;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  }
+
+  &.tooltip-top {
+    bottom: calc(100% + 16px); // Aumentado de 10px a 16px
+    left: 50%;
+    transform: translateX(-50%) translateY(6px); // Aumentado de 4px a 6px
+
+    &.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    &::after {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-top-color: var(--toast-bg, var(--card-bg, rgba(40, 44, 52, 0.95)));
+    }
+  }
+
+  &.tooltip-bottom {
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+
+    &.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    &::after {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-color: var(--toast-bg, var(--card-bg, rgba(40, 44, 52, 0.95)));
+    }
+  }
+
+  &.tooltip-left {
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(4px);
+
+    &.visible {
+      transform: translateY(-50%) translateX(0);
+    }
+
+    &::after {
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left-color: var(--toast-bg, var(--card-bg, rgba(40, 44, 52, 0.95)));
+    }
+  }
+
+  &.tooltip-right {
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+
+    &.visible {
+      transform: translateY(-50%) translateX(0);
+    }
+
+    &::after {
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-right-color: var(--toast-bg, var(--card-bg, rgba(40, 44, 52, 0.95)));
+    }
+  }
+}
+
+// Estilos específicos para estadísticas
+.stats-grid {
+  // Crear un contexto de apilamiento fuerte para toda la grilla
+  position: relative;
+  z-index: 50;
+  
+  .tooltip-container {
+    // Asegurar que el tooltip tenga prioridad sobre los stat-item backgrounds
+    position: relative;
+    z-index: 200; // Muy alto
+    
+    .tooltip {
+      z-index: 10001 !important; // Forzamos con !important para estadísticas
+      
+      // Para estadísticas, mover el tooltip aún más lejos
+      &.tooltip-top {
+        bottom: calc(100% + 20px); // Aún más separación
+        transform: translateX(-50%) translateY(8px);
+        
+        &.visible {
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    }
+    
+    .stat-label {
+      border-bottom: 1px dotted var(--text-secondary, rgba(255, 255, 255, 0.5));
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-color: var(--text-color, rgba(255, 255, 255, 0.8));
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 200px;
+    min-width: 140px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tooltip {
+    max-width: 180px;
+    min-width: 120px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
+
+// Para tooltip-left y tooltip-right, ajustar la animación
+.tooltip-left {
+  @keyframes tooltipFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50%) translateX(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+  }
+}
+
+.tooltip-right {
+  @keyframes tooltipFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50%) translateX(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+  }
+}
+
+// Estilo para el ícono de información
+.info-icon {
+  margin-left: 6px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  cursor: help;
+
+  &:hover {
+    opacity: 1;
+  }
+}

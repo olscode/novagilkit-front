@@ -1,0 +1,104 @@
+.language-selector {
+  position: relative;
+  display: inline-block;
+  z-index: 100;
+}
+
+.language-selector__current {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--card-hover-bg);
+  }
+}
+
+.language-selector__dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  background: var(--modal-bg);
+  box-shadow: 0 8px 16px var(--shadow-color);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 150px; /* Fallback if JavaScript width calculation fails */
+  box-sizing: border-box;
+  max-height: 200px; /* Limita la altura máxima */
+  overflow-y: auto; /* Añade scroll vertical cuando sea necesario */
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: var(--border-color) transparent; /* Para Firefox */
+
+  /* Personalización del scrollbar para Chrome/Safari/Edge */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3px;
+  }
+
+  animation: fadeIn 0.2s ease;
+}
+
+.language-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background 0.2s;
+  padding-left: 30px;
+
+  &:hover {
+    background: var(--card-hover-bg);
+  }
+
+  &.active {
+    background: rgba(52, 152, 219, 0.2);
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 10px;
+      color: var(--primary-color);
+    }
+  }
+
+  .language-code {
+    font-weight: bold;
+    margin-right: 8px;
+    color: var(--primary-color);
+  }
+
+  .language-name {
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

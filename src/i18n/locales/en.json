@@ -1,0 +1,327 @@
+{
+  "app": {
+    "title": "Nova Tools",
+    "subtitle": "Innovative Tools Platform for Agile Methodologies",
+    "description": "A platform that offers a set of innovative tools to facilitate the implementation of agile methodologies in development teams. Our goal is to provide modern and intuitive solutions that improve collaboration and efficiency in agile processes."
+  },
+  "menu": {
+    "home": "Home",
+    "pokerPlanning": "Poker Planning",
+    "createRoom": "Create Room",
+    "joinRoom": "Join Room",
+    "back": "Back"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "submit": "Submit",
+    "copy": "Copy",
+    "close": "Close",
+    "settings": "Settings",
+    "key": "Key",
+    "closeErrorMessage": "Close error message"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "nl": "Dutch",
+    "pl": "Polish",
+    "selectLanguage": "Select language"
+  },
+  "pokerPlanning": {
+    "title": "Poker Planning",
+    "subtitle": "Estimate your tasks collaboratively with your team",
+    "createRoom": {
+      "title": "Create New Room",
+      "description": "Set up a Poker Planning room to estimate tasks with your team",
+      "username": "Your username",
+      "usernameLabel": "Enter your username",
+      "createButton": "Create Room"
+    },
+    "joinRoom": {
+      "title": "Join a Room",
+      "description": "Enter the room code and your username to join an existing Poker Planning session",
+      "roomCode": "Room code",
+      "roomCodeLabel": "Enter the room code",
+      "roomCodeHelp": "The code is shared by the room creator",
+      "username": "Your username",
+      "usernameLabel": "Enter your name to identify yourself",
+      "joinButton": "Join Room",
+      "errors": {
+        "usernameRequired": "Please enter your username",
+        "roomCodeRequired": "Please enter the room code"
+      }
+    },
+    "room": {
+      "title": "Room",
+      "welcomeModal": {
+        "title": "Welcome to the Room",
+        "description": "To participate in this Poker Planning session, you need to identify yourself with a username",
+        "usernameLabel": "Enter your username",
+        "joinButton": "Join Room",
+        "continueButton": "Enter a name to continue"
+      },
+      "sidebar": {
+        "title": "Room Details",
+        "roomId": "ID",
+        "participants": "Participants",
+        "tasks": "Tasks",
+        "admin": "Admin",
+        "open": "Open",
+        "close": "Close",
+        "copySuccess": "Room ID copied to clipboard!",
+        "noUsers": "No participants yet",
+        "noTasks": "No tasks added yet"
+      },
+      "currentTask": "Current voting",
+      "startNewVote": "Start New Vote",
+      "startVoting": "Start Voting",
+      "nextTask": "Next Task",
+      "finishVoting": "Finish Voting",
+      "revealVotes": "Reveal Votes",
+      "statistics": "Statistics",
+      "average": "Average",
+      "median": "Median",
+      "min": "Min",
+      "max": "Max",
+      "tooltips": {
+        "average": "The arithmetic mean of all votes. Calculated by adding all vote values and dividing by the number of votes.",
+        "median": "The middle value when all votes are arranged in order. Less affected by outliers than the average.",
+        "min": "The lowest vote value submitted by any team member.",
+        "max": "The highest vote value submitted by any team member."
+      },
+      "alreadyVoted": "You've already voted for this task",
+      "votingComplete": "Voting complete!",
+      "usersVoted": "users voted",
+      "waitingForVoting": "Waiting for voting to start",
+      "noUsers": "No users have joined yet",
+      "userStatus": {
+        "voted": "Voted",
+        "pending": "Pending"
+      },
+      "notifications": {
+        "userJoined": "{{username}} has joined the room",
+        "userLeft": "{{username}} has left the room",
+        "roomCreated": "Room {{roomId}} has been successfully created",
+        "newVoting": "A new voting round has started",
+        "votingStarted": "Voting has started!",
+        "votesRevealed": "Votes have been revealed!",
+        "votesReset": "Votes have been reset",
+        "userVoted": "{{username}} has voted",
+        "allVotesIn": "All votes are in! Check the statistics.",
+        "taskChanged": "Changed to the next task",
+        "taskChangedByCreator": "The admin has changed the current task",
+        "lastTask": "This is the last task in the list",
+        "connectionError": "Connection error. Unable to join the room."
+      },
+      "you": "You"
+    },
+    "fibonacci": {
+      "chooseScore": "Choose your score",
+      "youVoted": "You have voted",
+      "votePoints": "Vote {{points}} points"
+    },
+    "tasks": {
+      "title": "Tasks",
+      "description": "Add the tasks you want to estimate with your team:",
+      "addTask": "Add Task",
+      "deleteTask": "Delete this task",
+      "taskPlaceholder": "Describe the task here...",
+      "taskLabel": "Task",
+      "noTasks": "No tasks added yet"
+    }
+  },
+  "upcomingTools": {
+    "sprintAnalytics": "Sprint Analytics",
+    "backlogManager": "Product Backlog Manager",
+    "retrospectiveBoard": "Retrospective Board"
+  },
+  "mainMenu": {
+    "title": "Welcome to the Platform",
+    "subtitle": "Discover tools to improve your productivity and team collaboration.",
+    "startButton": "Get Started"
+  },
+  "appSelection": {
+    "title": "Select an Application",
+    "subtitle": "Choose the application you want to use.",
+    "pokerPlanning": {
+      "title": "Poker Planning",
+      "description": "Estimate tasks collaboratively with your team."
+    },
+    "quiz": {
+      "title": "Interactive Quiz",
+      "description": "Participate in fun quizzes and learn."
+    }
+  },
+  "roomNotFound": {
+    "title": "Room Not Found",
+    "description": "The room with ID <1>{{roomId}}</1> does not exist or is no longer available.",
+    "backButton": "Back to Home",
+    "gifAlt": "Animated magnifying glass searching for a room"
+  },
+  "settings": {
+    "language": "Language",
+    "appearance": "Appearance",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "Sorry, the page you are looking for does not exist.",
+    "description": "The URL you entered does not correspond to any valid page. You may have mistyped the address or the page may have been moved.",
+    "goHome": "Go home",
+    "goBack": "Go back"
+  },
+  "connectionStatus": {
+    "serviceUnavailable": "Service unavailable",
+    "retryingConnection": "Retrying connection..."
+  },
+  "protectedRoute": {
+    "connectionRequired": "A connection to the service is required to access this functionality. Please wait while we attempt to reconnect."
+  },
+  "connectionHelper": {
+    "troubleshooting": "Troubleshooting",
+    "checkServer": "Verify that the server is running at {{url}}",
+    "verifyPort": "Make sure port 3000 is available",
+    "refreshPage": "Refresh the page to try reconnecting",
+    "checkHealth": "Check Server",
+    "refresh": "Refresh Page"
+  },
+  "resumeVotes": {
+    "title": "Voting Summary",
+    "subtitle": "Complete analysis of {{totalTasks}} tasks with {{totalVotes}} votes",
+    "viewModes": {
+      "grid": "Grid",
+      "list": "List"
+    },
+    "statsModes": {
+      "general": "General",
+      "individual": "By Task"
+    },
+    "generalStats": {
+      "tasksCompleted": "Tasks Completed",
+      "participation": "Participation",
+      "avgConsensus": "Average Consensus",
+      "avgEffort": "Average Effort"
+    },
+    "taskStats": {
+      "average": "Average",
+      "median": "Median",
+      "range": "Range",
+      "votes": "Votes",
+      "consensus": "consensus",
+      "votesByUser": "Votes by user:",
+      "unknownUser": "Unknown user",
+      "points": "points"
+    },
+    "consensus": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "actions": {
+      "exportToJira": "Export to Jira"
+    },
+    "loading": {
+      "title": "Loading voting summary...",
+      "description": "We're retrieving your voting session data."
+    },
+    "error": {
+      "title": "Error loading data",
+      "description": "We couldn't load the voting session information.",
+      "retry": "Retry"
+    },
+    "emptyState": {
+      "title": "No voting data available",
+      "description": "To view the voting summary, you need to complete a Poker Planning session with your team.",
+      "suggestions": {
+        "participants": "Make sure there are participants in the room",
+        "tasks": "Add tasks to estimate",
+        "votes": "Complete at least one voting round"
+      },
+      "actions": {
+        "goBack": "Go back",
+        "goHome": "Go home"
+      }
+    }
+  },
+  "jiraExport": {
+    "title": "Export to Jira",
+    "auth": {
+      "title": "Connect with Jira",
+      "description": "Authorize the connection with your Jira account to export estimated tasks.",
+      "login": "Sign in with Jira",
+      "authenticating": "Authenticating...",
+      "whyConnectTitle": "Why connect with Jira?",
+      "automaticallyExportTasks": "Automatically export estimated tasks",
+      "maintainEstimationTraceability": "Maintain estimation traceability",
+      "integrateWithExistingWorkflow": "Integrate with your existing workflow",
+      "verifyManually": "Verify manually",
+      "completeAuthMessage": "Complete the authentication in the window that opened. It will be detected automatically when finished.",
+      "popupBlockedMessage": "Could not open the authentication window. Check that popups are not blocked.",
+      "authError": "Error during authentication",
+      "benefits": {
+        "integration": "Complete Jira integration",
+        "automation": "Workflow automation",
+        "traceability": "Estimation traceability"
+      }
+    },
+    "select": {
+      "title": "Select Destination",
+      "description": "Choose the project and epic where tasks will be created.",
+      "project": "Project",
+      "selectProject": "Select project...",
+      "epic": "Epic",
+      "selectEpic": "Select epic...",
+      "existingEpic": "Use existing epic",
+      "createNewEpic": "Create new epic"
+    },
+    "createEpic": {
+      "title": "Create New Epic",
+      "description": "Define the details of the new epic that will contain the tasks.",
+      "summary": "Epic title",
+      "summaryPlaceholder": "e.g: Q1 2024 Sprint - Main Features",
+      "descriptionLabel": "Description (optional)",
+      "descriptionPlaceholder": "Describe the objective and scope of this epic...",
+      "create": "Create Epic",
+      "creating": "Creating epic..."
+    },
+    "preview": {
+      "title": "Preview",
+      "description": "Review the details before creating tasks in Jira.",
+      "project": "Project",
+      "epic": "Epic",
+      "newEpic": "New",
+      "tasksCount": "Tasks to create",
+      "tasksToCreate": "Tasks that will be created:",
+      "points": "pts",
+      "votes": "votes",
+      "consensus": "consensus",
+      "createTasks": "Create Tasks",
+      "creating": "Creating tasks..."
+    },
+    "creating": {
+      "title": "Creating Tasks",
+      "description": "We're creating tasks in Jira. This process may take a few moments.",
+      "progress": "Creating tasks in Jira..."
+    },
+    "results": {
+      "title": "Export Complete",
+      "description": "Jira export results.",
+      "successful": "successful",
+      "failed": "failed",
+      "openInJira": "Open in Jira"
+    },
+    "actions": {
+      "back": "Back",
+      "continue": "Continue",
+      "close": "Close"
+    }
+  }
+}

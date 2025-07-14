@@ -1,0 +1,142 @@
+.settings-float-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--button-bg);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+
+  svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: var(--button-hover-bg);
+    box-shadow: 0 6px 14px var(--shadow-color);
+
+    svg {
+      transform: rotate(30deg);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.settings-modal-content {
+  padding: 1rem 0;
+
+  .settings-section {
+    margin-bottom: 1.5rem;
+
+    h3 {
+      color: var(--settings-title-color);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .settings-option {
+      padding: 0.75rem 0;
+
+      &.theme-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+
+        span {
+          font-size: 1rem;
+          color: var(--settings-text-color);
+        }
+      }
+
+      // Estilos para el selector de idioma
+      .language-selector button {
+        min-width: 180px;
+        height: 45px;
+        background: var(--primary-button-bg);
+        color: white;
+        border: none;
+        padding: 0 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}
+
+/* Toggle switch styling */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .slider {
+      background-color: #3498db;
+
+      &:before {
+        transform: translateX(26px);
+      }
+    }
+
+    &:focus + .slider {
+      box-shadow: 0 0 1px #3498db;
+    }
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444;
+    transition: 0.4s;
+
+    &:before {
+      position: absolute;
+      content: '';
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+    }
+
+    &.round {
+      border-radius: 34px;
+
+      &:before {
+        border-radius: 50%;
+      }
+    }
+  }
+}

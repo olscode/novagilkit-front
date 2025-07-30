@@ -124,7 +124,7 @@ export default function Room() {
       if (data.userId !== profile.userId) {
         console.log(`📢 Mostrando notificación para ${data.username}`);
         addToast({
-          message: t('pokerPlanning.room.notifications.userJoined', {
+          message: t('planningVotes.room.notifications.userJoined', {
             username: data.username,
           }),
           type: 'info',
@@ -205,7 +205,7 @@ export default function Room() {
       // Mostrar notificación si no es el voto del usuario actual
       if (data.userId !== profile.userId) {
         addToast({
-          message: t('pokerPlanning.room.notifications.userVoted', {
+          message: t('planningVotes.room.notifications.userVoted', {
             username:
               room.users.find((user) => user.userId === data.userId)
                 ?.username || 'Usuario',
@@ -239,7 +239,7 @@ export default function Room() {
         );
 
         addToast({
-          message: t('pokerPlanning.room.notifications.allVotesIn'),
+          message: t('planningVotes.room.notifications.allVotesIn'),
           type: 'success',
           duration: 4000,
           icon: '✅',
@@ -271,7 +271,7 @@ export default function Room() {
 
         // 2️⃣ Mostrar notificación al usuario
         addToast({
-          message: t('pokerPlanning.room.notifications.votingStarted'),
+          message: t('planningVotes.room.notifications.votingStarted'),
           type: 'info',
           duration: 4000,
           icon: '🎮',
@@ -282,7 +282,7 @@ export default function Room() {
       console.log('🔄 Socket event: user_left recibido', data);
 
       addToast({
-        message: t('pokerPlanning.room.notifications.userLeft', {
+        message: t('planningVotes.room.notifications.userLeft', {
           username: data.username,
         }),
         type: 'warning',
@@ -331,7 +331,7 @@ export default function Room() {
 
         // Notificar el cambio de tarea
         addToast({
-          message: t('pokerPlanning.room.notifications.taskChangedByCreator'),
+          message: t('planningVotes.room.notifications.taskChangedByCreator'),
           type: 'info',
           duration: 4000,
           icon: '📋',
@@ -349,14 +349,14 @@ export default function Room() {
 
       // Mostrar notificación de finalización de votación
       addToast({
-        message: t('pokerPlanning.room.notifications.votingFinished'),
+        message: t('planningVotes.room.notifications.votingFinished'),
         type: 'success',
         duration: 4000,
         icon: '🏁',
       });
 
       setTimeout(() => {
-        navigate(`/poker-planning/room/${roomId}/resumeVotes`, {
+        navigate(`/planning-votes/room/${roomId}/resumeVotes`, {
           replace: true,
         });
       }, 5000); // Esperar 5 segundos antes de limpiar el estado de votación
@@ -467,7 +467,7 @@ export default function Room() {
 
       // Notificar el cambio de tarea localmente
       addToast({
-        message: t('pokerPlanning.room.notifications.taskChanged'),
+        message: t('planningVotes.room.notifications.taskChanged'),
         type: 'info',
         duration: 4000,
         icon: '📋',
@@ -480,7 +480,7 @@ export default function Room() {
     } else {
       // Si es la última tarea, mostrar mensaje
       addToast({
-        message: t('pokerPlanning.room.notifications.lastTask'),
+        message: t('planningVotes.room.notifications.lastTask'),
         type: 'warning',
         duration: 4000,
         icon: '🏁',
@@ -504,11 +504,11 @@ export default function Room() {
       {shouldShowSpinner && <Spinner />}
       <Modal
         isOpen={modalIsOpen}
-        title={t('pokerPlanning.room.welcomeModal.title')}
+        title={t('planningVotes.room.welcomeModal.title')}
         showCloseButton={false}
       >
         <div className="modal-description">
-          {t('pokerPlanning.room.welcomeModal.description')}
+          {t('planningVotes.room.welcomeModal.description')}
         </div>
         {roomError && (
           <div
@@ -524,7 +524,7 @@ export default function Room() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder={t('pokerPlanning.room.welcomeModal.usernameLabel')}
+            placeholder={t('planningVotes.room.welcomeModal.usernameLabel')}
             maxLength={20}
             disabled={!!roomError}
           />
@@ -535,20 +535,20 @@ export default function Room() {
           className="modal-action-button"
         >
           {username
-            ? t('pokerPlanning.room.welcomeModal.joinButton')
-            : t('pokerPlanning.room.welcomeModal.continueButton')}
+            ? t('planningVotes.room.welcomeModal.joinButton')
+            : t('planningVotes.room.welcomeModal.continueButton')}
         </button>
       </Modal>
       <div className="room-header">
         <h1>
-          {t('pokerPlanning.room.title')} {roomId}
+          {t('planningVotes.room.title')} {roomId}
         </h1>
       </div>{' '}
       <div className="room-content">
         {' '}
         {room.currentTaskId && (
           <div className="current-task-banner">
-            {t('pokerPlanning.room.currentTask')}: {currentTaskDescription}{' '}
+            {t('planningVotes.room.currentTask')}: {currentTaskDescription}{' '}
             {votingProgress.totalUsers > 0 && (
               <div className="voting-progress">
                 <div className="progress-bar">
@@ -565,18 +565,18 @@ export default function Room() {
                   {votingProgress.status === VotingStatus.FINISHED ? (
                     // 1️⃣ Caso finished
                     <span className="complete-badge">
-                      {t('pokerPlanning.room.votingComplete')}
+                      {t('planningVotes.room.votingComplete')}
                     </span>
                   ) : votingProgress.status === VotingStatus.IN_PROGRESS ? (
                     // 2️⃣ Caso in_progress
                     <span className="vote-count">
                       {votingProgress.votedUsers}/{votingProgress.totalUsers}{' '}
-                      {t('pokerPlanning.room.usersVoted')}
+                      {t('planningVotes.room.usersVoted')}
                     </span>
                   ) : (
                     // 3️⃣ Caso not_started
                     <span className="waiting-text">
-                      {t('pokerPlanning.room.waitingForVoting')}
+                      {t('planningVotes.room.waitingForVoting')}
                     </span>
                   )}
                 </div>
@@ -586,48 +586,48 @@ export default function Room() {
         )}
         {votingProgress.status === VotingStatus.FINISHED && (
           <div className="vote-statistics animate-stats">
-            <h3>{t('pokerPlanning.room.statistics')}</h3>
+            <h3>{t('planningVotes.room.statistics')}</h3>
             <div className="stats-grid">
               <div className="stat-item">
                 <Tooltip
-                  content={t('pokerPlanning.room.tooltips.average')}
+                  content={t('planningVotes.room.tooltips.average')}
                   position="top"
                 >
                   <div className="stat-label">
-                    {t('pokerPlanning.room.average')}
+                    {t('planningVotes.room.average')}
                   </div>
                 </Tooltip>
                 <div className="stat-value">{voteStats.average.toFixed(1)}</div>
               </div>
               <div className="stat-item">
                 <Tooltip
-                  content={t('pokerPlanning.room.tooltips.median')}
+                  content={t('planningVotes.room.tooltips.median')}
                   position="top"
                 >
                   <div className="stat-label">
-                    {t('pokerPlanning.room.median')}
+                    {t('planningVotes.room.median')}
                   </div>
                 </Tooltip>
                 <div className="stat-value">{voteStats.median}</div>
               </div>
               <div className="stat-item">
                 <Tooltip
-                  content={t('pokerPlanning.room.tooltips.min')}
+                  content={t('planningVotes.room.tooltips.min')}
                   position="top"
                 >
                   <div className="stat-label">
-                    {t('pokerPlanning.room.min')}
+                    {t('planningVotes.room.min')}
                   </div>
                 </Tooltip>
                 <div className="stat-value">{voteStats.min}</div>
               </div>
               <div className="stat-item">
                 <Tooltip
-                  content={t('pokerPlanning.room.tooltips.max')}
+                  content={t('planningVotes.room.tooltips.max')}
                   position="top"
                 >
                   <div className="stat-label">
-                    {t('pokerPlanning.room.max')}
+                    {t('planningVotes.room.max')}
                   </div>
                 </Tooltip>
                 <div className="stat-value">{voteStats.max}</div>
@@ -655,7 +655,7 @@ export default function Room() {
           })}
           {room.users.length === 0 && (
             <div className="no-users-message">
-              {t('pokerPlanning.room.noUsers')}
+              {t('planningVotes.room.noUsers')}
             </div>
           )}
         </div>{' '}
@@ -666,7 +666,7 @@ export default function Room() {
               onClick={handleStartNewVoteClick}
               disabled={!room.currentTaskId}
             >
-              {t('pokerPlanning.room.startVoting')}
+              {t('planningVotes.room.startVoting')}
             </button>
           )}
           {isCreator &&
@@ -683,7 +683,7 @@ export default function Room() {
                     room.tasks.length - 1
                 }
               >
-                {t('pokerPlanning.room.nextTask')}
+                {t('planningVotes.room.nextTask')}
               </button>
             )}
           {isCreator && isLastTask && allTasksCompleted && (
@@ -693,7 +693,7 @@ export default function Room() {
                 socket?.emit('finish_voting', roomId);
               }}
             >
-              {t('pokerPlanning.room.finishVoting')}
+              {t('planningVotes.room.finishVoting')}
             </button>
           )}
           <FibonacciButtons
@@ -708,17 +708,17 @@ export default function Room() {
           {votingProgress.status === VotingStatus.IN_PROGRESS ? (
             hasCurrentUserVoted ? (
               <div className="vote-message">
-                {t('pokerPlanning.room.alreadyVoted')}
+                {t('planningVotes.room.alreadyVoted')}
               </div>
             ) : (
               <div className="vote-message">
-                {t('pokerPlanning.room.pleaseVote')}
+                {t('planningVotes.room.pleaseVote')}
               </div>
             )
           ) : votingProgress.status === VotingStatus.NOT_STARTED &&
             !(isLastTask && allTasksCompleted) ? (
             <div className="vote-message waiting">
-              {t('pokerPlanning.room.waitingForVoting')}
+              {t('planningVotes.room.waitingForVoting')}
             </div>
           ) : null}
         </div>

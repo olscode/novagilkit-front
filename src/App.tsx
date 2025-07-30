@@ -9,12 +9,15 @@ import MainMenu from './components/MainMenu/MainMenu';
 import MenuAppSelection from './components/MenuAppSelection/MenuAppSelection';
 import NotFound from './components/NotFound/NotFound';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import ProtectedSuperAdminRoute from './components/ProtectedSuperAdminRoute/ProtectedSuperAdminRoute';
 import ResumeVotes from './components/ResumeVotes/ResumeVotes';
 import Room from './components/Room/Room';
 import RoomNotFound from './components/RoomNotFound';
 import Settings from './components/Settings/Settings';
 import SocketDebugger from './components/SocketDebugger/SocketDebugger';
 import { ToastProvider } from './components/Toast/ToastContext';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import AdminDashboardLogin from './pages/AdminDashboardLogin/AdminDashboardLogin';
 import { SocketProvider } from './SocketContext';
 
 function App() {
@@ -53,16 +56,25 @@ function App() {
 
               <Routes>
                 <Route path="/" element={<MainMenu />} />
+                <Route path="/admin/login" element={<AdminDashboardLogin />} />
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <ProtectedSuperAdminRoute>
+                      <AdminDashboard />
+                    </ProtectedSuperAdminRoute>
+                  }
+                />
                 <Route
                   path="/menu-app-selection"
                   element={<MenuAppSelection />}
                 />
                 <Route
-                  path="/poker-planning/menu"
+                  path="/planning-votes/menu"
                   element={<HomeComponent />}
                 />
                 <Route
-                  path="/poker-planning/createRoom"
+                  path="/planning-votes/createRoom"
                   element={
                     <ProtectedRoute showMessage={true}>
                       <CreateRoomForm />
@@ -70,7 +82,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/poker-planning/joinRoom"
+                  path="/planning-votes/joinRoom"
                   element={
                     <ProtectedRoute showMessage={true}>
                       <JoinRoomForm />
@@ -78,7 +90,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/poker-planning/room/:roomId"
+                  path="/planning-votes/room/:roomId"
                   element={
                     <ProtectedRoute showMessage={true}>
                       <Room />
@@ -86,7 +98,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/poker-planning/room/:roomId/resumeVotes"
+                  path="/planning-votes/room/:roomId/resumeVotes"
                   element={
                     <ProtectedRoute showMessage={true}>
                       <ResumeVotes />

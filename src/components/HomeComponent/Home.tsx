@@ -14,16 +14,16 @@ function HomeComponent() {
   return (
     <div className="wrapper">
       <div className="home-header">
-        <h1>{t('pokerPlanning.title')}</h1>
-        <p>{t('pokerPlanning.subtitle')}</p>
+        <h1>{t('planningVotes.title')}</h1>
+        <p>{t('planningVotes.subtitle')}</p>
       </div>
 
       <div className="container">
         <ProtectedCard
           icon="✨"
           title={t('menu.createRoom')}
-          description={t('pokerPlanning.createRoom.description')}
-          onClick={() => handleNavigation('/poker-planning/createRoom')}
+          description={t('planningVotes.createRoom.description')}
+          onClick={() => handleNavigation('/planning-votes/createRoom')}
           variant="primary"
           className="create-room"
         />
@@ -31,8 +31,8 @@ function HomeComponent() {
         <ProtectedCard
           icon="🚪"
           title={t('menu.joinRoom')}
-          description={t('pokerPlanning.joinRoom.description')}
-          onClick={() => handleNavigation('/poker-planning/joinRoom')}
+          description={t('planningVotes.joinRoom.description')}
+          onClick={() => handleNavigation('/planning-votes/joinRoom')}
           variant="secondary"
           className="join-room"
         />

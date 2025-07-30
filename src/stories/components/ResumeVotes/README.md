@@ -1,6 +1,6 @@
 # ResumeVotes Stories
 
-Este archivo contiene las historias de Storybook para el componente `ResumeVotes`, que muestra el resumen de votaciones del Planning Poker.
+Este archivo contiene las historias de Storybook para el componente `ResumeVotes`, que muestra el resumen de votaciones del Planning Votes.
 
 ## Historias Disponibles
 
@@ -161,4 +161,4 @@ Este archivo contiene las historias de Storybook para el componente `ResumeVotes
 - Se incluye un store de Redux mock para cada historia
 - Las rutas son simuladas con MemoryRouter
 - Los nombres de usuario se reciclan si hay más usuarios que nombres disponibles
-- Las tareas se generan con descripciones realistas para Planning Poker
+- Las tareas se generan con descripciones realistas para Planning Votes

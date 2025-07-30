@@ -187,7 +187,7 @@ import { Tooltip } from '../Tooltip/Tooltip';
 ```json
 // i18n/locales/en.json
 {
-  "pokerPlanning": {
+  "planningVotes": {
     "room": {
       "statistics": {
         "tooltips": {
@@ -205,7 +205,7 @@ import { Tooltip } from '../Tooltip/Tooltip';
 ```json
 // i18n/locales/es.json
 {
-  "pokerPlanning": {
+  "planningVotes": {
     "room": {
       "statistics": {
         "tooltips": {
@@ -225,9 +225,9 @@ import { Tooltip } from '../Tooltip/Tooltip';
 ```typescript
 // En Room.tsx con traducción
 <div className="stat-item">
-  <Tooltip content={t('pokerPlanning.room.statistics.tooltips.average')}>
+  <Tooltip content={t('planningVotes.room.statistics.tooltips.average')}>
     <div className="stat-label">
-      {t('pokerPlanning.room.average')} <span className="info-icon">ℹ️</span>
+      {t('planningVotes.room.average')} <span className="info-icon">ℹ️</span>
     </div>
   </Tooltip>
   <div className="stat-value">{voteStats.average.toFixed(1)}</div>

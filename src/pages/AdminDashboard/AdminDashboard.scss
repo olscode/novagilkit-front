@@ -1,0 +1,151 @@
+// Estilo para textarea igual que los inputs
+// Unifica altura mínima para inputs y textarea
+.admin-dashboard__input,
+.admin-dashboard__form input,
+.admin-dashboard__form select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border, #ccc);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: var(--color-bg, #fff);
+  color: var(--color-text, #222);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+  min-height: 40px;
+}
+
+.admin-dashboard__input:focus,
+.admin-dashboard__form input:focus,
+.admin-dashboard__form select:focus {
+  outline: none;
+  border-color: var(--color-primary, #007bff);
+}
+.admin-dashboard__input:focus {
+  outline: none;
+  border-color: var(--color-primary, #007bff);
+}
+.admin-dashboard {
+  padding: 2rem;
+  background: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.admin-dashboard__header {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: var(--header-text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.admin-dashboard__section {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+.admin-dashboard__section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--card-title-color);
+}
+
+.admin-dashboard__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard__form input,
+.admin-dashboard__form select {
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition:
+    background 0.2s,
+    border 0.2s;
+}
+
+.admin-dashboard__form input:focus,
+.admin-dashboard__form select:focus {
+  background: var(--input-focus-bg);
+  border-color: var(--primary-color);
+}
+
+.admin-dashboard__form label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.admin-dashboard__form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+}
+
+.admin-dashboard__button {
+  background: var(--button-bg);
+  color: var(--input-text);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-dashboard__button:hover {
+  background: var(--button-hover-bg);
+}
+
+.admin-dashboard__error {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard__success {
+  color: var(--success-color);
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.admin-dashboard__table th,
+.admin-dashboard__table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.admin-dashboard__table th {
+  color: var(--card-title-color);
+  background: var(--secondary-bg);
+}
+
+.admin-dashboard__table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-dashboard__actions {
+  display: flex;
+  gap: 0.5rem;
+}

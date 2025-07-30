@@ -6,7 +6,7 @@
   },
   "menu": {
     "home": "Home",
-    "pokerPlanning": "Poker Planning",
+    "planningVotes": "Planning Votes",
     "createRoom": "Create Room",
     "joinRoom": "Join Room",
     "back": "Back"
@@ -34,19 +34,19 @@
     "pl": "Polish",
     "selectLanguage": "Select language"
   },
-  "pokerPlanning": {
-    "title": "Poker Planning",
+  "planningVotes": {
+    "title": "Planning Votes",
     "subtitle": "Estimate your tasks collaboratively with your team",
     "createRoom": {
       "title": "Create New Room",
-      "description": "Set up a Poker Planning room to estimate tasks with your team",
+      "description": "Set up a Planning Votes room to estimate tasks with your team",
       "username": "Your username",
       "usernameLabel": "Enter your username",
       "createButton": "Create Room"
     },
     "joinRoom": {
       "title": "Join a Room",
-      "description": "Enter the room code and your username to join an existing Poker Planning session",
+      "description": "Enter the room code and your username to join an existing Planning Votes session",
       "roomCode": "Room code",
       "roomCodeLabel": "Enter the room code",
       "roomCodeHelp": "The code is shared by the room creator",
@@ -62,7 +62,7 @@
       "title": "Room",
       "welcomeModal": {
         "title": "Welcome to the Room",
-        "description": "To participate in this Poker Planning session, you need to identify yourself with a username",
+        "description": "To participate in this Planning Votes session, you need to identify yourself with a username",
         "usernameLabel": "Enter your username",
         "joinButton": "Join Room",
         "continueButton": "Enter a name to continue"
@@ -150,8 +150,8 @@
   "appSelection": {
     "title": "Select an Application",
     "subtitle": "Choose the application you want to use.",
-    "pokerPlanning": {
-      "title": "Poker Planning",
+    "planningVotes": {
+      "title": "Planning Votes",
       "description": "Estimate tasks collaboratively with your team."
     },
     "quiz": {
@@ -239,7 +239,7 @@
     },
     "emptyState": {
       "title": "No voting data available",
-      "description": "To view the voting summary, you need to complete a Poker Planning session with your team.",
+      "description": "To view the voting summary, you need to complete a Planning Votes session with your team.",
       "suggestions": {
         "participants": "Make sure there are participants in the room",
         "tasks": "Add tasks to estimate",
@@ -322,6 +322,62 @@
       "back": "Back",
       "continue": "Continue",
       "close": "Close"
+    }
+  },
+  "adminDashboard": {
+    "title": "Super Admin Dashboard",
+    "createCompany": "Create new company",
+    "companyName": "Name",
+    "companyAddress": "Address",
+    "companyPhone": "Phone",
+    "companyEmail": "Email",
+    "maxUsers": "Max users",
+    "createCompanyBtn": "Create company",
+    "companyCreated": "Company created successfully.",
+    "companyList": "Registered companies",
+    "status": "Status",
+    "slug": "Slug",
+    "description": "Description",
+    "adminEmail": "Admin email",
+    "website": "Website",
+    "logo": "Logo",
+    "statusActive": "Active",
+    "statusSuspended": "Suspended",
+    "statusTrial": "Trial",
+    "statusInactive": "Inactive",
+    "createUser": "Register user in company",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "roleUser": "User",
+    "roleManager": "Manager",
+    "roleCompanyAdmin": "Company admin",
+    "roleViewer": "Viewer",
+    "phone": "Phone",
+    "company": "Company",
+    "selectCompany": "Select a company",
+    "createUserBtn": "Register user",
+    "userCreated": "User registered successfully."
+  },
+  "adminLogin": {
+    "title": "Admin Dashboard",
+    "subtitle": "Access the administrative panel",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Sign In",
+    "loggingIn": "Signing in...",
+    "backToHome": "Back to Home",
+    "footerText": "Secure access to administrative tools",
+    "errors": {
+      "usernameRequired": "Username is required",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "invalidCredentials": "Invalid username or password",
+      "loginFailed": "Login failed. Please try again."
     }
   }
 }

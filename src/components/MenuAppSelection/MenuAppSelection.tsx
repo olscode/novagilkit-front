@@ -22,17 +22,17 @@ export default function MenuAppSelection() {
         <div className="menu-app-selection__apps">
           <div
             className="menu-app-selection__app-button"
-            onClick={() => handleNavigation('/poker-planning/menu')}
+            onClick={() => handleNavigation('/planning-votes/menu')}
           >
             <img
               className="menu-app-selection__app-image"
               src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBAH9dsagNL9BMuGv1tb7EoDjXdldq0QmVM84OD3guzzuuIfKegU1vMuT0-R18zmauMMWlOpnZcE66WHzQCkjEaMZPOGKjqy1tskunLEBBmfKtTW8xikXVQ7HkOS7hldFYtczG4qAhEmrY/s1600/dados-rojos-vector_621212.jpg"
-              alt="poker-planning"
+              alt="planning-votes"
             />
             <div className="menu-app-selection__app-info">
               {' '}
-              <h4>{t('appSelection.pokerPlanning.title')}</h4>
-              <p>{t('appSelection.pokerPlanning.description')}</p>
+              <h4>{t('appSelection.planningVotes.title')}</h4>
+              <p>{t('appSelection.planningVotes.description')}</p>
             </div>
           </div>
           <div

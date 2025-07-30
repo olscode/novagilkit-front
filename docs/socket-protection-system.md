@@ -120,9 +120,9 @@ Si fallan todos los intentos automáticos:
 
 **Rutas Protegidas Actuales:**
 
-- `/poker-planning/createRoom`
-- `/poker-planning/joinRoom`
-- `/poker-planning/room/:roomId`
+- `/planning-votes/createRoom`
+- `/planning-votes/joinRoom`
+- `/planning-votes/room/:roomId`
 
 ### ProtectedCard
 

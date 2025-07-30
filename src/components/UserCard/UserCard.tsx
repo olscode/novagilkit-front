@@ -29,9 +29,9 @@ const UserCard = ({
         title={
           voteNumber
             ? `${username} ${t(
-                'pokerPlanning.room.userStatus.voted'
+                'planningVotes.room.userStatus.voted'
               )}: ${voteNumber}`
-            : `${username} ${t('pokerPlanning.room.userStatus.pending')}`
+            : `${username} ${t('planningVotes.room.userStatus.pending')}`
         }
       >
         {' '}
@@ -43,14 +43,14 @@ const UserCard = ({
         </span>
         {isCurrentUser && (
           <span className="current-user-badge">
-            {t('pokerPlanning.room.you')}
+            {t('planningVotes.room.you')}
           </span>
         )}
       </div>
       <div className="vote-status">
         {voteNumber
-          ? t('pokerPlanning.room.userStatus.voted')
-          : t('pokerPlanning.room.userStatus.pending')}
+          ? t('planningVotes.room.userStatus.voted')
+          : t('planningVotes.room.userStatus.pending')}
       </div>
     </div>
   );

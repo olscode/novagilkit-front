@@ -20,12 +20,12 @@ function JoinRoomForm() {
 
   const handleJoinRoom = () => {
     if (!username.trim()) {
-      setError(t('pokerPlanning.joinRoom.errors.usernameRequired'));
+      setError(t('planningVotes.joinRoom.errors.usernameRequired'));
       return;
     }
 
     if (!roomId.trim()) {
-      setError(t('pokerPlanning.joinRoom.errors.roomCodeRequired'));
+      setError(t('planningVotes.joinRoom.errors.roomCodeRequired'));
       return;
     }
 
@@ -47,7 +47,7 @@ function JoinRoomForm() {
     socket?.emit('joinRoom', roomId, userId, username);
 
     // Navigate to room
-    navigate(`/poker-planning/room/${roomId}`);
+    navigate(`/planning-votes/room/${roomId}`);
   };
   return (
     <div className="join-room-container">
@@ -58,28 +58,28 @@ function JoinRoomForm() {
 
       <div className="join-room-form">
         <div className="form-header">
-          <h1>{t('pokerPlanning.joinRoom.title')}</h1>
-          <p>{t('pokerPlanning.joinRoom.description')}</p>
+          <h1>{t('planningVotes.joinRoom.title')}</h1>
+          <p>{t('planningVotes.joinRoom.description')}</p>
         </div>
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">
-          <label htmlFor="roomId">{t('pokerPlanning.joinRoom.roomCode')}</label>
+          <label htmlFor="roomId">{t('planningVotes.joinRoom.roomCode')}</label>
           <div className="input-with-icon">
             <span className="input-icon">🔑</span>
             <input
               id="roomId"
               className="input-room-id"
               type="text"
-              placeholder={t('pokerPlanning.joinRoom.roomCodeLabel')}
+              placeholder={t('planningVotes.joinRoom.roomCodeLabel')}
               value={roomId}
               onChange={(e) => setRoomId(e.target.value)}
             />
           </div>
-          <small>{t('pokerPlanning.joinRoom.roomCodeHelp')}</small>
+          <small>{t('planningVotes.joinRoom.roomCodeHelp')}</small>
         </div>
         <div className="form-group">
           <label htmlFor="username">
-            {t('pokerPlanning.joinRoom.username')}
+            {t('planningVotes.joinRoom.username')}
           </label>
           <div className="input-with-icon">
             <span className="input-icon">👤</span>
@@ -87,7 +87,7 @@ function JoinRoomForm() {
               id="username"
               className="input-username"
               type="text"
-              placeholder={t('pokerPlanning.joinRoom.usernameLabel')}
+              placeholder={t('planningVotes.joinRoom.usernameLabel')}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               maxLength={20}
@@ -102,11 +102,11 @@ function JoinRoomForm() {
           >
             {isLoading
               ? t('common.loading')
-              : t('pokerPlanning.joinRoom.joinButton')}
+              : t('planningVotes.joinRoom.joinButton')}
           </button>
           <button
             className="button-secondary"
-            onClick={() => navigate('/poker-planning/menu')}
+            onClick={() => navigate('/planning-votes/menu')}
             disabled={isLoading}
           >
             {t('common.cancel')}

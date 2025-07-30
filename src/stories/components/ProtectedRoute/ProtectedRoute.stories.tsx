@@ -92,7 +92,7 @@ export const ConnectedContent: Story = {
         }}
       >
         <h1 style={{ color: 'var(--text-color)', marginBottom: '1rem' }}>
-          🎯 Poker Planning Room
+          🎯 Planning Votes Room
         </h1>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
           Bienvenido a la sala de estimación. Este contenido solo es visible

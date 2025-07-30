@@ -65,7 +65,7 @@ const ToastDemo = () => {
     }, 12000);
   };
 
-  // Ejemplos contextuales de uso en la aplicación de Poker Planning
+  // Ejemplos contextuales de uso en la aplicación de Planning Votes
   const simulateUserJoin = () => {
     showInfo('Juan se ha unido a la sala', { icon: '👋' });
   };
@@ -108,7 +108,7 @@ const ToastDemo = () => {
       <h2 style={{ margin: '0 0 5px 0' }}>Sistema de Notificaciones Toast</h2>
       <p style={{ margin: '0 0 20px 0', opacity: 0.7 }}>
         Una demostración interactiva del sistema de notificaciones para la
-        aplicación Poker Planning
+        aplicación Planning Votes
       </p>
 
       <div
@@ -190,7 +190,7 @@ const ToastDemo = () => {
           marginBottom: '20px',
         }}
       >
-        <h3 style={{ marginTop: 0 }}>Ejemplos de Poker Planning</h3>
+        <h3 style={{ marginTop: 0 }}>Ejemplos de Planning Votes</h3>
         <div
           style={{
             display: 'grid',
@@ -376,7 +376,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Un sistema de notificaciones toast completo para mostrar mensajes de información, éxito, advertencia y error en la aplicación Poker Planning.',
+          'Un sistema de notificaciones toast completo para mostrar mensajes de información, éxito, advertencia y error en la aplicación Planning Votes.',
       },
     },
   },

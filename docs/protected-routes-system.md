@@ -59,9 +59,9 @@ Botón que se deshabilita automáticamente cuando no hay conexión.
 
 Las siguientes rutas ahora están protegidas en `App.tsx`:
 
-- `/poker-planning/createRoom` - Crear sala
-- `/poker-planning/joinRoom` - Unirse a sala
-- `/poker-planning/room/:roomId` - Sala de poker planning
+- `/planning-votes/createRoom` - Crear sala
+- `/planning-votes/joinRoom` - Unirse a sala
+- `/planning-votes/room/:roomId` - Sala de planning votes
 
 Todas muestran un mensaje informativo cuando no hay conexión en lugar de redirigir.
 

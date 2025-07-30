@@ -5,7 +5,7 @@
 Cuando accedes directamente a una URL como:
 
 ```
-http://localhost:5173/poker-planning/room/ef0e733c-dfe8-4e6b-8bc0-5501c60a25b5
+http://localhost:5173/planning-votes/room/ef0e733c-dfe8-4e6b-8bc0-5501c60a25b5
 ```
 
 Y ves el mensaje "Servicio no disponible", significa que:

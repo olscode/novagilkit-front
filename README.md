@@ -4,11 +4,11 @@
 
 Nova Tools es una plataforma en desarrollo que ofrece un conjunto de herramientas innovadoras para facilitar la implementación de metodologías ágiles en equipos de desarrollo. Nuestro objetivo es proporcionar soluciones modernas e intuitivas que mejoren la colaboración y la eficiencia en los procesos ágiles.
 
-### Poker Planning - Nuestra Primera Herramienta
+### Planning Votes - Nuestra Primera Herramienta
 
-Actualmente disponible en nuestra plataforma, Poker Planning permite a los equipos estimar de forma colaborativa el esfuerzo necesario para las tareas utilizando la popular técnica de Planning Poker.
+Actualmente disponible en nuestra plataforma, Planning Votes permite a los equipos estimar de forma colaborativa el esfuerzo necesario para las tareas utilizando la popular técnica de Planning Votes.
 
-![Poker Planning](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBAH9dsagNL9BMuGv1tb7EoDjXdldq0QmVM84OD3guzzuuIfKegU1vMuT0-R18zmauMMWlOpnZcE66WHzQCkjEaMZPOGKjqy1tskunLEBBmfKtTW8xikXVQ7HkOS7hldFYtczG4qAhEmrY/s1600/dados-rojos-vector_621212.jpg)
+![Planning Votes](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBAH9dsagNL9BMuGv1tb7EoDjXdldq0QmVM84OD3guzzuuIfKegU1vMuT0-R18zmauMMWlOpnZcE66WHzQCkjEaMZPOGKjqy1tskunLEBBmfKtTW8xikXVQ7HkOS7hldFYtczG4qAhEmrY/s1600/dados-rojos-vector_621212.jpg)
 
 ## 🚀 Características Principales
 
@@ -19,7 +19,7 @@ Actualmente disponible en nuestra plataforma, Poker Planning permite a los equip
 - 🎨 **Interfaz unificada**: Diseño coherente y moderno en todas las herramientas
 - 🚀 **Enfoque innovador**: Soluciones creativas para problemas comunes en equipos ágiles
 
-### Poker Planning (Herramienta Actual)
+### Planning Votes (Herramienta Actual)
 
 - ✅ **Creación de salas de estimación**: Crea salas personalizadas para tu equipo
 - 👥 **Gestión de participantes**: Visualiza quién está conectado en tiempo real
@@ -82,10 +82,10 @@ Esto iniciará Storybook en [http://localhost:6006](http://localhost:6006) donde
 
 ## 📝 Uso de la Aplicación
 
-### Poker Planning
+### Planning Votes
 
 1. **Inicio**: Navega al menú principal
-2. **Selecciona**: Elige la aplicación "Poker Planning"
+2. **Selecciona**: Elige la aplicación "Planning Votes"
 3. **Crea o únete**: Crea una nueva sala o únete a una existente con un código
 4. **Estima**: Añade tareas y vota usando las tarjetas de Fibonacci
 5. **Colabora**: Visualiza los resultados en tiempo real con tu equipo

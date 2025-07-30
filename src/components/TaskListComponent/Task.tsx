@@ -29,15 +29,15 @@ export function Task({
     <div className="task-item">
       <div className="task-header">
         <label htmlFor={`task-${index}`} className="task-label">
-          {t('pokerPlanning.tasks.taskLabel')} {index + 1}
+          {t('planningVotes.tasks.taskLabel')} {index + 1}
         </label>
         {onTaskDelete && (
           <button
             type="button"
             className="button-delete-task"
             onClick={onTaskDelete}
-            title={t('pokerPlanning.tasks.deleteTask')}
-            aria-label={t('pokerPlanning.tasks.deleteTask')}
+            title={t('planningVotes.tasks.deleteTask')}
+            aria-label={t('planningVotes.tasks.deleteTask')}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ export function Task({
       <textarea
         id={`task-${index}`}
         className="task-textarea"
-        placeholder={t('pokerPlanning.tasks.taskPlaceholder')}
+        placeholder={t('planningVotes.tasks.taskPlaceholder')}
         onChange={onChangeTask}
         value={task || ''}
       />

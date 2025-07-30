@@ -2,7 +2,7 @@
 
 ## Resumen
 
-Esta documentación describe cómo implementar la integración completa con Jira para exportar las tareas estimadas en Poker Planning directamente como issues en Jira bajo una Epic específica.
+Esta documentación describe cómo implementar la integración completa con Jira para exportar las tareas estimadas en Planning Votes directamente como issues en Jira bajo una Epic específica.
 
 ## Funcionalidades
 
@@ -175,7 +175,7 @@ export class JiraApiService {
             { type: 'text', text: '📊 ', marks: [{ type: 'strong' }] },
             {
               type: 'text',
-              text: 'Resultados del Poker Planning',
+              text: 'Resultados del Planning Votes',
               marks: [{ type: 'strong' }],
             },
           ],

@@ -18,7 +18,7 @@ const createMockStore = (roomData: any) => {
 const scrollTestData = {
   roomId: 'room-scroll-test',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: [
     { userId: 'user-1', username: 'Ana García', active: true },
     { userId: 'user-2', username: 'Bruno Silva', active: true },

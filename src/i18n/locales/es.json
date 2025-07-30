@@ -6,7 +6,7 @@
   },
   "menu": {
     "home": "Inicio",
-    "pokerPlanning": "Poker Planning",
+    "planningVotes": "Planning Votes",
     "createRoom": "Crear Sala",
     "joinRoom": "Unirse a Sala",
     "back": "Volver"
@@ -34,19 +34,19 @@
     "pl": "Polaco",
     "selectLanguage": "Seleccionar idioma"
   },
-  "pokerPlanning": {
-    "title": "Poker Planning",
+  "planningVotes": {
+    "title": "Planning Votes",
     "subtitle": "Estima tus tareas de forma ágil y colaborativa",
     "createRoom": {
       "title": "Crear Nueva Sala",
-      "description": "Configura una sala de Poker Planning para estimar tareas con tu equipo",
+      "description": "Configura una sala de Planning Votes para estimar tareas con tu equipo",
       "username": "Tu nombre de usuario",
       "usernameLabel": "Ingresa tu nombre de usuario",
       "createButton": "Crear Sala"
     },
     "joinRoom": {
       "title": "Unirse a una Sala",
-      "description": "Ingresa el código de la sala y tu nombre de usuario para unirte a una sesión de Poker Planning existente",
+      "description": "Ingresa el código de la sala y tu nombre de usuario para unirte a una sesión de Planning Votes existente",
       "roomCode": "Código de la sala",
       "roomCodeLabel": "Ingresa el código de la sala",
       "roomCodeHelp": "El código es compartido por el creador de la sala",
@@ -62,7 +62,7 @@
       "title": "Sala",
       "welcomeModal": {
         "title": "Bienvenido a la Sala",
-        "description": "Para participar en esta sesión de Poker Planning, necesitas identificarte con un nombre de usuario",
+        "description": "Para participar en esta sesión de Planning Votes, necesitas identificarte con un nombre de usuario",
         "usernameLabel": "Ingresa tu nombre de usuario",
         "joinButton": "Unirse a la Sala",
         "continueButton": "Ingresa un nombre para continuar"
@@ -150,8 +150,8 @@
   "appSelection": {
     "title": "Selecciona una Aplicación",
     "subtitle": "Elige la aplicación que deseas utilizar.",
-    "pokerPlanning": {
-      "title": "Poker Planning",
+    "planningVotes": {
+      "title": "Planning Votes",
       "description": "Estima tareas de forma colaborativa con el equipo."
     },
     "quiz": {
@@ -239,7 +239,7 @@
     },
     "emptyState": {
       "title": "No hay datos de votación disponibles",
-      "description": "Para ver el resumen de votación, necesitas completar una sesión de Poker Planning con tu equipo.",
+      "description": "Para ver el resumen de votación, necesitas completar una sesión de Planning Votes con tu equipo.",
       "suggestions": {
         "participants": "Asegúrate de que haya participantes en la sala",
         "tasks": "Añade tareas para estimar",
@@ -322,6 +322,62 @@
       "back": "Atrás",
       "continue": "Continuar",
       "close": "Cerrar"
+    }
+  },
+  "adminDashboard": {
+    "title": "Panel Super Admin",
+    "createCompany": "Crear nueva empresa",
+    "companyName": "Nombre",
+    "companyAddress": "Dirección",
+    "companyPhone": "Teléfono",
+    "companyEmail": "Email",
+    "maxUsers": "Usuarios máximos",
+    "createCompanyBtn": "Crear empresa",
+    "companyCreated": "Empresa creada correctamente.",
+    "companyList": "Empresas registradas",
+    "status": "Estado",
+    "slug": "Slug",
+    "description": "Descripción",
+    "adminEmail": "Email administrador",
+    "website": "Sitio web",
+    "logo": "Logo",
+    "statusActive": "Activa",
+    "statusSuspended": "Suspendida",
+    "statusTrial": "Prueba",
+    "statusInactive": "Inactiva",
+    "createUser": "Registrar usuario en empresa",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Email",
+    "password": "Contraseña",
+    "role": "Rol",
+    "roleUser": "Usuario",
+    "roleManager": "Manager",
+    "roleCompanyAdmin": "Admin de empresa",
+    "roleViewer": "Solo lectura",
+    "phone": "Teléfono",
+    "company": "Empresa",
+    "selectCompany": "Selecciona una empresa",
+    "createUserBtn": "Registrar usuario",
+    "userCreated": "Usuario registrado correctamente."
+  },
+  "adminLogin": {
+    "title": "Panel de Administración",
+    "subtitle": "Accede al panel administrativo",
+    "username": "Usuario",
+    "usernamePlaceholder": "Ingresa tu usuario",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "loginButton": "Iniciar Sesión",
+    "loggingIn": "Iniciando sesión...",
+    "backToHome": "Volver al Inicio",
+    "footerText": "Acceso seguro a herramientas administrativas",
+    "errors": {
+      "usernameRequired": "El usuario es requerido",
+      "passwordRequired": "La contraseña es requerida",
+      "passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
+      "invalidCredentials": "Usuario o contraseña incorrectos",
+      "loginFailed": "Error al iniciar sesión. Inténtalo de nuevo."
     }
   }
 }

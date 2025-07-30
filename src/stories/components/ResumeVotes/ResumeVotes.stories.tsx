@@ -116,7 +116,7 @@ const generateMockTasks = (taskCount: number, users: any[]) => {
 const basicRoomData = {
   roomId: 'room-123',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: generateMockUsers(5),
   tasks: generateMockTasks(6, generateMockUsers(5)),
 };
@@ -125,7 +125,7 @@ const basicRoomData = {
 const manyUsersRoomData = {
   roomId: 'room-456',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: generateMockUsers(25),
   tasks: generateMockTasks(8, generateMockUsers(25)),
 };
@@ -134,7 +134,7 @@ const manyUsersRoomData = {
 const manyTasksRoomData = {
   roomId: 'room-789',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: generateMockUsers(8),
   tasks: generateMockTasks(20, generateMockUsers(8)),
 };
@@ -144,7 +144,7 @@ const highConsensusUsers = generateMockUsers(6);
 const highConsensusRoomData = {
   roomId: 'room-consensus',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: highConsensusUsers,
   tasks: [
     {
@@ -188,7 +188,7 @@ const highConsensusRoomData = {
 const emptyRoomData = {
   roomId: 'room-empty',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: [],
   tasks: [],
 };
@@ -197,7 +197,7 @@ const emptyRoomData = {
 const noVotesRoomData = {
   roomId: 'room-no-votes',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: generateMockUsers(4),
   tasks: [
     {
@@ -227,7 +227,7 @@ const meta: Meta<typeof ResumeVotes> = {
     docs: {
       description: {
         component:
-          'Componente para mostrar el resumen de votaciones de Planning Poker con estadísticas generales, vistas de grid/lista y funcionalidad de exportar a Jira.',
+          'Componente para mostrar el resumen de votaciones de Planning Votes con estadísticas generales, vistas de grid/lista y funcionalidad de exportar a Jira.',
       },
     },
   },
@@ -398,7 +398,7 @@ export const ExtremeCaseUsers: Story = {
     roomData: {
       roomId: 'room-extreme',
       creatorId: 'user-1',
-      app: 'poker-planning',
+      app: 'planning-votes',
       users: generateMockUsers(50),
       tasks: generateMockTasks(5, generateMockUsers(50)),
     },
@@ -419,7 +419,7 @@ export const ExtremeCaseTasks: Story = {
     roomData: {
       roomId: 'room-extreme-tasks',
       creatorId: 'user-1',
-      app: 'poker-planning',
+      app: 'planning-votes',
       users: generateMockUsers(6),
       tasks: generateMockTasks(50, generateMockUsers(6)),
     },
@@ -441,7 +441,7 @@ export const LongUsernames: Story = {
     roomData: {
       roomId: 'room-long-names',
       creatorId: 'user-1',
-      app: 'poker-planning',
+      app: 'planning-votes',
       users: [
         {
           userId: 'user-1',
@@ -525,7 +525,7 @@ export const LongTaskDescriptions: Story = {
     roomData: {
       roomId: 'room-long-descriptions',
       creatorId: 'user-1',
-      app: 'poker-planning',
+      app: 'planning-votes',
       users: generateMockUsers(4),
       tasks: [
         {

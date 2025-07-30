@@ -60,7 +60,7 @@ function CreateRoomForm() {
         creatorId: userId,
         tasks: formattedTasks,
         users: [{ username, userId, active: true }],
-        app: 'poker-planning',
+        app: 'planning-votes',
         currentTaskId: null,
       })
     );
@@ -78,7 +78,7 @@ function CreateRoomForm() {
     crearSala(roomId, userId, username, formattedTasks);
 
     // Navegar a la sala después de emitir los eventos
-    navigate(`/poker-planning/room/${roomId}`);
+    navigate(`/planning-votes/room/${roomId}`);
   }
 
   const onHandleChangeTaskList = (taskList: Array<string | undefined>) => {
@@ -90,18 +90,18 @@ function CreateRoomForm() {
       {' '}
       <div className="create-room-form">
         <div className="form-header">
-          <h1>{t('pokerPlanning.createRoom.title')}</h1>
-          <p>{t('pokerPlanning.createRoom.description')}</p>
+          <h1>{t('planningVotes.createRoom.title')}</h1>
+          <p>{t('planningVotes.createRoom.description')}</p>
         </div>{' '}
         <div className="form-group">
           <label htmlFor="username">
-            {t('pokerPlanning.createRoom.username')}
+            {t('planningVotes.createRoom.username')}
           </label>
           <input
             id="username"
             className="input-username"
             type="text"
-            placeholder={t('pokerPlanning.createRoom.usernameLabel')}
+            placeholder={t('planningVotes.createRoom.usernameLabel')}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -113,7 +113,7 @@ function CreateRoomForm() {
             disabled={isDisabled}
             onClick={handleSubmit}
           >
-            {t('pokerPlanning.createRoom.createButton')}
+            {t('planningVotes.createRoom.createButton')}
           </button>
         </div>
       </div>

@@ -18,7 +18,7 @@ const createMockStore = (roomData: any) => {
 const responsiveTestData = {
   roomId: 'room-responsive-test',
   creatorId: 'user-1',
-  app: 'poker-planning',
+  app: 'planning-votes',
   users: [
     { userId: 'user-1', username: 'Ana', active: true },
     { userId: 'user-2', username: 'Bruno', active: true },

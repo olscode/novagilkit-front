@@ -38,7 +38,7 @@ const FibonacciButtons = ({
             key={number}
             onClick={() => handleButtonClick(number)}
             className={selectedValue === number ? 'selected' : ''}
-            aria-label={t('pokerPlanning.fibonacci.votePoints', {
+            aria-label={t('planningVotes.fibonacci.votePoints', {
               points: number,
             })}
             disabled={disabled}

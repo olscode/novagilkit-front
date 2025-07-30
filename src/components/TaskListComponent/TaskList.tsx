@@ -38,13 +38,13 @@ export default function TaskList({
   };
   return (
     <div className="task-list-container">
-      <h2>{t('pokerPlanning.tasks.title')}</h2>
+      <h2>{t('planningVotes.tasks.title')}</h2>
       <p className="task-list-description">
-        {t('pokerPlanning.tasks.description')}
+        {t('planningVotes.tasks.description')}
       </p>
       {tasks.length === 0 ? (
         <div className="no-tasks-message">
-          <p>{t('pokerPlanning.tasks.noTasks')}</p>
+          <p>{t('planningVotes.tasks.noTasks')}</p>
         </div>
       ) : (
         <div className="tasks-wrapper">
@@ -77,7 +77,7 @@ export default function TaskList({
             strokeLinejoin="round"
           />
         </svg>
-        {t('pokerPlanning.tasks.addTask')}
+        {t('planningVotes.tasks.addTask')}
       </button>
     </div>
   );

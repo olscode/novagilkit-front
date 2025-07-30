@@ -68,14 +68,14 @@ export const CreateRoom: Story = {
     icon: '✨',
     title: 'Crear Sala',
     description:
-      'Configura una sala de Poker Planning para estimar tareas con tu equipo',
+      'Configura una sala de Planning Votes para estimar tareas con tu equipo',
     variant: 'primary',
     onClick: () => alert('¡Navegando a crear sala!'),
   },
   parameters: {
     docs: {
       description: {
-        story: 'Tarjeta para crear una nueva sala de Poker Planning.',
+        story: 'Tarjeta para crear una nueva sala de Planning Votes.',
       },
     },
   },
@@ -94,7 +94,7 @@ export const JoinRoom: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tarjeta para unirse a una sala existente de Poker Planning.',
+        story: 'Tarjeta para unirse a una sala existente de Planning Votes.',
       },
     },
   },
@@ -114,7 +114,7 @@ export const BothVariants: Story = {
       <ProtectedCard
         icon="✨"
         title="Crear Sala"
-        description="Configura una sala de Poker Planning para estimar tareas con tu equipo"
+        description="Configura una sala de Planning Votes para estimar tareas con tu equipo"
         variant="primary"
         onClick={() => alert('¡Crear sala!')}
       />
@@ -194,7 +194,7 @@ export const DisconnectedSimulation: Story = {
             <div className="protected-card__icon">✨</div>
             <div className="protected-card__title">Crear Sala</div>
             <div className="protected-card__description">
-              Configura una sala de Poker Planning para estimar tareas con tu
+              Configura una sala de Planning Votes para estimar tareas con tu
               equipo
             </div>
           </div>

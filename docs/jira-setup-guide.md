@@ -2,7 +2,7 @@
 
 ## Resumen
 
-Esta funcionalidad permite exportar las tareas estimadas en Poker Planning directamente como issues de Jira bajo una Epic específica, incluyendo todos los metadatos de la estimación (promedio, consenso, votos individuales, etc.).
+Esta funcionalidad permite exportar las tareas estimadas en Planning Votes directamente como issues de Jira bajo una Epic específica, incluyendo todos los metadatos de la estimación (promedio, consenso, votos individuales, etc.).
 
 ## Configuración Inicial
 
@@ -10,7 +10,7 @@ Esta funcionalidad permite exportar las tareas estimadas en Poker Planning direc
 
 1. Ve a [Atlassian Developer Console](https://developer.atlassian.com/console/myapps/)
 2. Haz clic en **"Create"** → **"OAuth 2.0 integration"**
-3. Proporciona un nombre para tu app (ej: "Nova Tools - Poker Planning")
+3. Proporciona un nombre para tu app (ej: "Nova Tools - Planning Votes")
 4. Configura los **Permissions (scopes)**:
    - `read:jira-work` - Para leer proyectos y issues
    - `write:jira-work` - Para crear y modificar issues
@@ -68,7 +68,7 @@ VITE_JIRA_CLIENT_SECRET=YOUR_JIRA_SECRET_CLIENT_ID
 
 ### 1. Desde ResumeVotes
 
-1. Completa una sesión de Poker Planning con tu equipo
+1. Completa una sesión de Planning Votes con tu equipo
 2. Ve al resumen de votación
 3. Haz clic en el botón **"Exportar a Jira"**
 
@@ -92,13 +92,13 @@ Descripción: [Opcional, la que definas]
 ### Stories
 
 ```
-Título: [Descripción de la tarea del poker planning]
+Título: [Descripción de la tarea del Planning Votes]
 Tipo: Story
 Parent: [Epic seleccionada]
 Story Points: [Promedio redondeado de la estimación]
 
 Descripción:
-📊 Resultados del Poker Planning
+📊 Resultados del Planning Votes
 • Estimación promedio: X.X puntos
 • Mediana: X puntos
 • Consenso del equipo: X%
@@ -115,7 +115,7 @@ Descripción:
 
 ### 🔄 Flujo Completo Integrado
 
-- **Estimación** (Poker Planning) → **Planificación** (Jira) → **Desarrollo**
+- **Estimación** (Planning Votes) → **Planificación** (Jira) → **Desarrollo**
 - Sin pérdida de contexto entre herramientas
 - Trazabilidad completa del proceso
 

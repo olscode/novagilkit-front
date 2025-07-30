@@ -1,0 +1,66 @@
+.modern-tabs {
+  width: 100%;
+  color: var(--text-color);
+  background: none;
+}
+
+.modern-tabs__bar {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--border-color);
+  background: var(--card-bg);
+  padding: 0 8px;
+  position: relative;
+}
+
+.modern-tabs__tab {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 20px 10px 20px;
+  margin-right: 2px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.modern-tabs__tab.active {
+  background: var(--background-color);
+  color: var(--highlight-color);
+  border-bottom: 2px solid var(--highlight-color);
+  z-index: 2;
+}
+
+.modern-tabs__tab.disabled {
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.modern-tabs__icon {
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.modern-tabs__extra {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.modern-tabs__content {
+  background: var(--card-bg);
+  border-radius: 0 0 8px 8px;
+  padding: 24px 16px;
+  min-height: 120px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: background 0.2s;
+}

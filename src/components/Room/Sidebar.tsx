@@ -53,7 +53,7 @@ export default function Sidebar() {
       .writeText(roomId)
       .then(() => {
         // Optional: Add feedback to the user, e.g., a toast notification
-        console.log(t('pokerPlanning.room.sidebar.copySuccess'));
+        console.log(t('planningVotes.room.sidebar.copySuccess'));
       })
       .catch((err) => {
         console.error('Failed to copy Room ID: ', err);
@@ -84,7 +84,7 @@ export default function Sidebar() {
               isOpened ? 'sidebar_title' : 'sidebar_title sidebar_title--closed'
             }
           >
-            {t('pokerPlanning.room.sidebar.title')}
+            {t('planningVotes.room.sidebar.title')}
           </h2>
         </div>
         <div
@@ -97,7 +97,7 @@ export default function Sidebar() {
           <div className="room-id-container">
             {' '}
             <span className="room-id-text">
-              {t('pokerPlanning.room.sidebar.roomId')}: {roomId}
+              {t('planningVotes.room.sidebar.roomId')}: {roomId}
             </span>
             <button
               onClick={copyRoomIdToClipboard}
@@ -109,7 +109,7 @@ export default function Sidebar() {
           </div>
           <ul>
             <li>
-              {t('pokerPlanning.room.sidebar.participants')} ({users.length})
+              {t('planningVotes.room.sidebar.participants')} ({users.length})
             </li>{' '}
             <ul>
               {' '}
@@ -130,7 +130,7 @@ export default function Sidebar() {
                       {user.username}
                       {isUserCreator && (
                         <span className="current-user-indicator">
-                          {t('pokerPlanning.room.sidebar.admin')}
+                          {t('planningVotes.room.sidebar.admin')}
                         </span>
                       )}
                     </li>
@@ -138,12 +138,12 @@ export default function Sidebar() {
                 })
               ) : (
                 <li className="empty-message">
-                  {t('pokerPlanning.room.sidebar.noUsers')}
+                  {t('planningVotes.room.sidebar.noUsers')}
                 </li>
               )}
             </ul>{' '}
             <li>
-              {t('pokerPlanning.room.sidebar.tasks')} ({tasks.length})
+              {t('planningVotes.room.sidebar.tasks')} ({tasks.length})
             </li>
             <ul>
               {tasks.length > 0 ? (
@@ -161,7 +161,7 @@ export default function Sidebar() {
                 })
               ) : (
                 <li className="empty-message">
-                  {t('pokerPlanning.room.sidebar.noTasks')}
+                  {t('planningVotes.room.sidebar.noTasks')}
                 </li>
               )}
             </ul>
@@ -174,8 +174,8 @@ export default function Sidebar() {
         >
           <span>
             {isOpened
-              ? t('pokerPlanning.room.sidebar.close')
-              : t('pokerPlanning.room.sidebar.open')}
+              ? t('planningVotes.room.sidebar.close')
+              : t('planningVotes.room.sidebar.open')}
           </span>
         </div>
       </div>

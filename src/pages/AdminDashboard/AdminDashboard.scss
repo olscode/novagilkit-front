@@ -298,8 +298,19 @@
   margin-bottom: 1rem;
 }
 
+.admin-dashboard__license-form .admin-dashboard__license-grid .admin-dashboard__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0;
+}
+
 .admin-dashboard__checkbox-group {
   margin: 1rem 0;
+  padding: 0.75rem;
+  background: var(--hover-bg, rgba(var(--primary-rgb), 0.02));
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
 }
 
 .admin-dashboard__checkbox-label {
@@ -308,11 +319,15 @@
   gap: 0.5rem;
   font-weight: 500;
   cursor: pointer;
+  color: var(--text-color);
+  font-size: 0.95rem;
 }
 
 .admin-dashboard__checkbox-label input[type='checkbox'] {
   width: auto;
   margin: 0;
+  min-height: auto;
+  accent-color: var(--primary-color);
 }
 
 // License form specific styles
@@ -339,6 +354,72 @@
   color: var(--text-color);
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+// Specific styles for license form inputs and selects
+.admin-dashboard__license-form input,
+.admin-dashboard__license-form select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--input-bg, var(--card-bg));
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  min-height: 44px;
+  font-family: inherit;
+  margin-bottom: 0;
+}
+
+.admin-dashboard__license-form input:focus,
+.admin-dashboard__license-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0, 123, 255), 0.1);
+}
+
+.admin-dashboard__license-form input::placeholder {
+  color: var(--text-secondary, #6c757d);
+  opacity: 0.7;
+}
+
+.admin-dashboard__license-form .admin-dashboard__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-dashboard__license-form .admin-dashboard__form-group label {
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+// Override any conflicting styles for license form
+.admin-dashboard__license-form form input,
+.admin-dashboard__license-form form select {
+  width: 100% !important;
+  padding: 0.75rem !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  background: var(--input-bg, var(--card-bg)) !important;
+  color: var(--text-color) !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  min-height: 44px !important;
+  font-family: inherit !important;
+  margin-bottom: 0 !important;
+}
+
+.admin-dashboard__license-form form input:focus,
+.admin-dashboard__license-form form select:focus {
+  outline: none !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0, 123, 255), 0.1) !important;
 }
 
 .admin-dashboard__close-button {
@@ -523,25 +604,37 @@
 .admin-dashboard__form-actions {
   display: flex;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   justify-content: flex-start;
   flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .admin-dashboard__form-actions .admin-dashboard__button {
-  padding: 0.6rem 1.25rem;
-  font-size: 0.9rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
-  min-width: 80px;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
 .admin-dashboard__form-actions .admin-dashboard__button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px var(--shadow-color);
+  box-shadow: 0 3px 6px var(--shadow-color);
+}
+
+.admin-dashboard__form-actions .admin-dashboard__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 // Primary button variant

@@ -1402,39 +1402,132 @@ export default function AdminDashboard() {
                     </tbody>
                   </table>
                 </div>
-                <div
-                  className="admin-dashboard__table-actions"
-                  style={{ marginTop: 16, justifyContent: 'center' }}
-                >
-                  <button
-                    className="admin-dashboard__table-button"
-                    disabled={usersPage === 1}
-                    onClick={() => setUsersPage((p) => Math.max(1, p - 1))}
-                  >
-                    ← Anterior
-                  </button>
-                  <span
-                    style={{
-                      margin: '0 16px',
-                      padding: '8px 12px',
-                      background: 'var(--secondary-bg)',
-                      borderRadius: '6px',
-                      fontSize: '0.9rem',
-                    }}
-                  >
-                    Página {usersData.data.page} de{' '}
-                    {Math.ceil(usersData.data.total / usersData.data.limit)}
-                  </span>
-                  <button
-                    className="admin-dashboard__table-button"
-                    disabled={
-                      usersData.data.page * usersData.data.limit >=
-                      usersData.data.total
-                    }
-                    onClick={() => setUsersPage((p) => p + 1)}
-                  >
-                    Siguiente →
-                  </button>
+                <div className="admin-dashboard__pagination">
+                  <div className="admin-dashboard__pagination-info">
+                    <span className="admin-dashboard__pagination-text">
+                      Mostrando{' '}
+                      <strong>
+                        {(usersData.data.page - 1) * usersData.data.limit + 1}
+                      </strong>{' '}
+                      a{' '}
+                      <strong>
+                        {Math.min(
+                          usersData.data.page * usersData.data.limit,
+                          usersData.data.total
+                        )}
+                      </strong>{' '}
+                      de <strong>{usersData.data.total}</strong> usuarios
+                    </span>
+                  </div>
+                  <div className="admin-dashboard__pagination-controls">
+                    <button
+                      className="admin-dashboard__pagination-button admin-dashboard__pagination-button--prev"
+                      disabled={usersPage === 1}
+                      onClick={() => setUsersPage((p) => Math.max(1, p - 1))}
+                      title="Página anterior"
+                    >
+                      <span className="admin-dashboard__pagination-icon">
+                        ‹
+                      </span>
+                      <span className="admin-dashboard__pagination-label">
+                        Anterior
+                      </span>
+                    </button>
+                    <div className="admin-dashboard__pagination-pages">
+                      {(() => {
+                        const totalPages = Math.ceil(
+                          usersData.data.total / usersData.data.limit
+                        );
+                        const currentPage = usersData.data.page;
+                        const pages = [];
+
+                        // Mostrar páginas alrededor de la actual
+                        const startPage = Math.max(1, currentPage - 2);
+                        const endPage = Math.min(totalPages, currentPage + 2);
+
+                        // Primera página
+                        if (startPage > 1) {
+                          pages.push(
+                            <button
+                              key={1}
+                              className="admin-dashboard__pagination-number"
+                              onClick={() => setUsersPage(1)}
+                            >
+                              1
+                            </button>
+                          );
+                          if (startPage > 2) {
+                            pages.push(
+                              <span
+                                key="dots1"
+                                className="admin-dashboard__pagination-dots"
+                              >
+                                ...
+                              </span>
+                            );
+                          }
+                        }
+
+                        // Páginas del rango
+                        for (let i = startPage; i <= endPage; i++) {
+                          pages.push(
+                            <button
+                              key={i}
+                              className={`admin-dashboard__pagination-number ${
+                                i === currentPage
+                                  ? 'admin-dashboard__pagination-number--active'
+                                  : ''
+                              }`}
+                              onClick={() => setUsersPage(i)}
+                            >
+                              {i}
+                            </button>
+                          );
+                        }
+
+                        // Última página
+                        if (endPage < totalPages) {
+                          if (endPage < totalPages - 1) {
+                            pages.push(
+                              <span
+                                key="dots2"
+                                className="admin-dashboard__pagination-dots"
+                              >
+                                ...
+                              </span>
+                            );
+                          }
+                          pages.push(
+                            <button
+                              key={totalPages}
+                              className="admin-dashboard__pagination-number"
+                              onClick={() => setUsersPage(totalPages)}
+                            >
+                              {totalPages}
+                            </button>
+                          );
+                        }
+
+                        return pages;
+                      })()}
+                    </div>
+                    <button
+                      className="admin-dashboard__pagination-button admin-dashboard__pagination-button--next"
+                      disabled={
+                        usersData.data.page * usersData.data.limit >=
+                        usersData.data.total
+                      }
+                      onClick={() => setUsersPage((p) => p + 1)}
+                      title="Página siguiente"
+                    >
+                      <span className="admin-dashboard__pagination-label">
+                        Siguiente
+                      </span>
+                      <span className="admin-dashboard__pagination-icon">
+                        ›
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (

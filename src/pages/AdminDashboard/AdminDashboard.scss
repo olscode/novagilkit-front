@@ -2,29 +2,41 @@
 // Unifica altura mínima para inputs y textarea
 .admin-dashboard__input,
 .admin-dashboard__form input,
-.admin-dashboard__form select {
+.admin-dashboard__form select,
+.admin-dashboard__form textarea {
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-border, #ccc);
-  border-radius: 6px;
-  font-size: 1rem;
-  background: var(--color-bg, #fff);
-  color: var(--color-text, #222);
-  transition: border-color 0.2s;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--input-bg, var(--card-bg, #fff));
+  color: var(--text-color, #222);
+  transition: all 0.2s ease;
   box-sizing: border-box;
   margin-bottom: 0.5rem;
-  min-height: 40px;
+  min-height: 44px;
+  font-family: inherit;
 }
 
 .admin-dashboard__input:focus,
 .admin-dashboard__form input:focus,
-.admin-dashboard__form select:focus {
+.admin-dashboard__form select:focus,
+.admin-dashboard__form textarea:focus {
   outline: none;
-  border-color: var(--color-primary, #007bff);
+  border-color: var(--primary-color, #007bff);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0, 123, 255), 0.1);
 }
-.admin-dashboard__input:focus {
-  outline: none;
-  border-color: var(--color-primary, #007bff);
+
+.admin-dashboard__input::placeholder,
+.admin-dashboard__form input::placeholder,
+.admin-dashboard__form textarea::placeholder {
+  color: var(--text-secondary, #6c757d);
+  opacity: 0.7;
+}
+
+.admin-dashboard__form textarea {
+  min-height: 80px;
+  resize: vertical;
 }
 .admin-dashboard {
   padding: 2rem;
@@ -66,35 +78,18 @@
   margin-bottom: 1rem;
 }
 
-.admin-dashboard__form input,
-.admin-dashboard__form select {
-  background: var(--input-bg);
-  color: var(--input-text);
-  border: 1px solid var(--input-border);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  outline: none;
-  transition:
-    background 0.2s,
-    border 0.2s;
-}
-
-.admin-dashboard__form input:focus,
-.admin-dashboard__form select:focus {
-  background: var(--input-focus-bg);
-  border-color: var(--primary-color);
-}
-
 .admin-dashboard__form label {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
 .admin-dashboard__form-group {
   display: flex;
   flex-direction: column;
   flex: 1 1 200px;
+  gap: 0.25rem;
 }
 
 .admin-dashboard__button {
@@ -240,21 +235,32 @@
   color: var(--secondary-dark, #383d41);
 }
 
-// Responsive design for tables
 @media (max-width: 768px) {
   .admin-dashboard__table-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   .admin-dashboard__table th,
   .admin-dashboard__table td {
     padding: 0.75rem 0.5rem;
     font-size: 0.9rem;
   }
-  
+
   .admin-dashboard__table th {
     font-size: 0.8rem;
+  }
+
+  .admin-dashboard__filters-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dashboard__filters-actions {
+    flex-direction: column;
+  }
+
+  .admin-dashboard__license-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -277,7 +283,258 @@
   opacity: 0.5;
 }
 
+// License form styles
+.admin-dashboard__license-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard__checkbox-group {
+  margin: 1rem 0;
+}
+
+.admin-dashboard__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.admin-dashboard__checkbox-label input[type='checkbox'] {
+  width: auto;
+  margin: 0;
+}
+
+// License form specific styles
+.admin-dashboard__license-form {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.admin-dashboard__license-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-dashboard__license-form h4 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.admin-dashboard__close-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard__close-button:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+// License info container and related styles
+.admin-dashboard__license-info-container {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.admin-dashboard__license-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-dashboard__license-info-header h5 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.admin-dashboard__empty-license {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.admin-dashboard__empty-license-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-dashboard__empty-license p {
+  margin: 0.5rem 0 1rem 0;
+  font-size: 0.95rem;
+}
+
+.admin-dashboard__license-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-dashboard__license-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.admin-dashboard__license-item:last-child {
+  border-bottom: none;
+}
+
+.admin-dashboard__license-label {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-right: 1rem;
+}
+
+// Filters styles
+.admin-dashboard__filters {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.admin-dashboard__filters-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-dashboard__filters-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.admin-dashboard__filters-actions {
+  display: flex;
+  gap: 0.5rem;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+}
+
+// Form actions styling
+.admin-dashboard__form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.admin-dashboard__form-actions .admin-dashboard__button {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 80px;
+}
+
+.admin-dashboard__form-actions .admin-dashboard__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+// Primary button variant
+.admin-dashboard__button--primary {
+  background: var(--primary-color, #007bff);
+  color: white;
+}
+
+.admin-dashboard__button--primary:hover {
+  background: var(--primary-dark, #0056b3);
+}
+
+// Secondary button variant
+.admin-dashboard__button--secondary {
+  background: var(--secondary-bg, #6c757d);
+  color: white;
+}
+
+.admin-dashboard__button--secondary:hover {
+  background: var(--secondary-dark, #545b62);
+}
+
+// Success button variant
+.admin-dashboard__button--success {
+  background: var(--success-color, #28a745);
+  color: white;
+}
+
+.admin-dashboard__button--success:hover {
+  background: var(--success-dark, #1e7e34);
+}
+
 .admin-dashboard__actions {
   display: flex;
   gap: 0.5rem;
+}
+
+// Loading states and animations
+.admin-dashboard__form--loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.admin-dashboard__form--loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--card-bg-rgb, 255, 255, 255), 0.8);
+  border-radius: inherit;
+  z-index: 1;
+}
+
+// Disabled state
+.admin-dashboard__form input:disabled,
+.admin-dashboard__form select:disabled,
+.admin-dashboard__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--disabled-bg, #f8f9fa);
+  color: var(--disabled-text, #6c757d);
 }

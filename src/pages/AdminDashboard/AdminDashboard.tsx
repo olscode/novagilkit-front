@@ -776,12 +776,17 @@ export default function AdminDashboard() {
                                     style={{ flex: 1, minWidth: 120 }}
                                   >
                                     <option value="active">Activa</option>
-                                    <option value="suspended">Suspendida</option>
+                                    <option value="suspended">
+                                      Suspendida
+                                    </option>
                                     <option value="trial">Prueba</option>
                                     <option value="inactive">Inactiva</option>
                                   </select>
                                 </div>
-                                <div className="admin-dashboard__table-actions" style={{ marginTop: 12 }}>
+                                <div
+                                  className="admin-dashboard__table-actions"
+                                  style={{ marginTop: 12 }}
+                                >
                                   <button
                                     type="submit"
                                     className="admin-dashboard__table-button"
@@ -806,18 +811,28 @@ export default function AdminDashboard() {
                           </tr>
                         ) : (
                           <tr>
-                            <td><strong>{c.name}</strong></td>
                             <td>
-                              <code style={{ 
-                                background: 'var(--secondary-bg)', 
-                                padding: '2px 6px', 
-                                borderRadius: '4px',
-                                fontSize: '0.85em'
-                              }}>
+                              <strong>{c.name}</strong>
+                            </td>
+                            <td>
+                              <code
+                                style={{
+                                  background: 'var(--secondary-bg)',
+                                  padding: '2px 6px',
+                                  borderRadius: '4px',
+                                  fontSize: '0.85em',
+                                }}
+                              >
                                 {c.slug || '-'}
                               </code>
                             </td>
-                            <td style={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <td
+                              style={{
+                                maxWidth: 200,
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                              }}
+                            >
                               {c.description || '-'}
                             </td>
                             <td>{c.adminEmail || '-'}</td>
@@ -827,9 +842,14 @@ export default function AdminDashboard() {
                                   href={c.website}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  style={{ color: 'var(--primary-color)', textDecoration: 'none' }}
+                                  style={{
+                                    color: 'var(--primary-color)',
+                                    textDecoration: 'none',
+                                  }}
                                 >
-                                  {c.website.length > 20 ? `${c.website.substring(0, 20)}...` : c.website}
+                                  {c.website.length > 20
+                                    ? `${c.website.substring(0, 20)}...`
+                                    : c.website}
                                 </a>
                               ) : (
                                 '-'
@@ -851,11 +871,19 @@ export default function AdminDashboard() {
                                 '-'
                               )}
                             </td>
-                            <td style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <td
+                              style={{
+                                maxWidth: 150,
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                              }}
+                            >
                               {c.address || '-'}
                             </td>
                             <td>
-                              <span className={`admin-dashboard__status-badge admin-dashboard__status-badge--${c.status || 'inactive'}`}>
+                              <span
+                                className={`admin-dashboard__status-badge admin-dashboard__status-badge--${c.status || 'inactive'}`}
+                              >
                                 {c.status || 'inactive'}
                               </span>
                             </td>
@@ -871,238 +899,342 @@ export default function AdminDashboard() {
                             </td>
                           </tr>
                         )}
-                      <tr>
-                        <td colSpan={10}>
-                          {/* Licencia UI restored */}
-                          {editingLicense[c.id] ? (
-                            <form
-                              className="admin-dashboard__form admin-dashboard__license-form"
-                              style={{
-                                marginTop: 10,
-                                marginBottom: 10,
-                                background: '#f8f8f8',
-                                padding: 10,
-                                borderRadius: 6,
-                              }}
-                              onSubmit={(e) => {
-                                e.preventDefault();
-                                if (c.license) {
-                                  handleUpdateLicense(c.id);
-                                } else {
-                                  handleCreateLicense(c.id);
-                                }
-                              }}
-                            >
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  flexWrap: 'wrap',
-                                  gap: 10,
-                                }}
-                              >
-                                <input
-                                  placeholder="Plan Type"
-                                  value={licenseForms[c.id]?.planType || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'planType',
-                                      e.target.value
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="number"
-                                  placeholder="Max Users"
-                                  value={licenseForms[c.id]?.maxUsers || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'maxUsers',
-                                      Number(e.target.value)
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="number"
-                                  placeholder="Max Projects"
-                                  value={licenseForms[c.id]?.maxProjects || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'maxProjects',
-                                      Number(e.target.value)
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="number"
-                                  placeholder="Max Storage MB"
-                                  value={licenseForms[c.id]?.maxStorageMB || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'maxStorageMB',
-                                      Number(e.target.value)
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="checkbox"
-                                  checked={!!licenseForms[c.id]?.customBranding}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'customBranding',
-                                      e.target.checked
-                                    )
-                                  }
-                                  style={{ marginTop: 8 }}
-                                />{' '}
-                                Custom Branding
-                                <input
-                                  placeholder="Start Date (YYYY-MM-DD)"
-                                  value={licenseForms[c.id]?.startDate || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'startDate',
-                                      e.target.value
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="End Date (YYYY-MM-DD)"
-                                  value={licenseForms[c.id]?.endDate || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'endDate',
-                                      e.target.value
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="number"
-                                  placeholder="Monthly Price"
-                                  value={licenseForms[c.id]?.monthlyPrice || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'monthlyPrice',
-                                      Number(e.target.value)
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="number"
-                                  placeholder="Yearly Price"
-                                  value={licenseForms[c.id]?.yearlyPrice || ''}
-                                  onChange={(e) =>
-                                    handleLicenseInputChange(
-                                      c.id,
-                                      'yearlyPrice',
-                                      Number(e.target.value)
-                                    )
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                              </div>
-                              <div style={{ marginTop: 10 }}>
-                                <button
-                                  type="submit"
-                                  className="admin-dashboard__button"
-                                  disabled={licenseLoading[c.id]}
-                                >
-                                  {licenseLoading[c.id]
-                                    ? t('common.loading')
-                                    : c.license
-                                      ? 'Actualizar licencia'
-                                      : 'Crear licencia'}
-                                </button>
-                                <button
-                                  type="button"
-                                  className="admin-dashboard__button"
-                                  style={{
-                                    marginLeft: 8,
-                                    background: '#ccc',
-                                    color: '#222',
-                                  }}
-                                  onClick={() => cancelEditLicense(c.id)}
-                                >
-                                  Cancelar
-                                </button>
-                              </div>
-                            </form>
-                          ) : (
-                            <div style={{ marginTop: 10 }}>
-                              {c.license ? (
-                                <>
-                                  <div>
-                                    <b>Plan:</b> {c.license.planType || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Número máximo usuarios:</b>{' '}
-                                    {c.license.maxUsers || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Proyectos:</b>{' '}
-                                    {c.license.maxProjects || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Almacenamiento:</b>{' '}
-                                    {c.license.maxStorageMB || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Custom Branding:</b>{' '}
-                                    {c.license.customBranding ? 'Sí' : 'No'}
-                                  </div>
-                                  <div>
-                                    <b>Inicio:</b> {c.license.startDate || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Fin:</b> {c.license.endDate || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Mensual:</b>{' '}
-                                    {c.license.monthlyPrice || '-'}
-                                  </div>
-                                  <div>
-                                    <b>Anual:</b> {c.license.yearlyPrice || '-'}
-                                  </div>
+                        <tr>
+                          <td colSpan={10}>
+                            {/* Licencia UI restored */}
+                            {editingLicense[c.id] ? (
+                              <div className="admin-dashboard__license-form">
+                                <div className="admin-dashboard__license-form-header">
+                                  <h4>
+                                    {c.license
+                                      ? '✏️ Editar Licencia'
+                                      : '➕ Crear Nueva Licencia'}
+                                  </h4>
                                   <button
-                                    className="admin-dashboard__button"
-                                    style={{ marginTop: 8 }}
-                                    onClick={() => startEditLicense(c)}
+                                    type="button"
+                                    className="admin-dashboard__close-button"
+                                    onClick={() => cancelEditLicense(c.id)}
                                   >
-                                    Editar licencia
+                                    ✕
                                   </button>
-                                </>
-                              ) : (
-                                <button
-                                  className="admin-dashboard__button"
-                                  style={{ marginTop: 8 }}
-                                  onClick={() => startEditLicense(c)}
+                                </div>
+                                <form
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    if (c.license) {
+                                      handleUpdateLicense(c.id);
+                                    } else {
+                                      handleCreateLicense(c.id);
+                                    }
+                                  }}
                                 >
-                                  Crear licencia
-                                </button>
-                              )}
-                            </div>
-                          )}
-                        </td>
-                      </tr>
-                    </React.Fragment>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                                  <div className="admin-dashboard__license-grid">
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Tipo de Plan</label>
+                                      <select
+                                        value={
+                                          licenseForms[c.id]?.planType || 'free'
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'planType',
+                                            e.target.value
+                                          )
+                                        }
+                                      >
+                                        <option value="free">Gratuito</option>
+                                        <option value="starter">
+                                          Iniciador
+                                        </option>
+                                        <option value="professional">
+                                          Profesional
+                                        </option>
+                                        <option value="enterprise">
+                                          Empresarial
+                                        </option>
+                                        <option value="custom">
+                                          Personalizado
+                                        </option>
+                                      </select>
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Máximo Usuarios</label>
+                                      <input
+                                        type="number"
+                                        min="1"
+                                        value={
+                                          licenseForms[c.id]?.maxUsers || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'maxUsers',
+                                            Number(e.target.value)
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Máximo Proyectos</label>
+                                      <input
+                                        type="number"
+                                        min="1"
+                                        value={
+                                          licenseForms[c.id]?.maxProjects || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'maxProjects',
+                                            Number(e.target.value)
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Almacenamiento (MB)</label>
+                                      <input
+                                        type="number"
+                                        min="0"
+                                        value={
+                                          licenseForms[c.id]?.maxStorageMB || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'maxStorageMB',
+                                            Number(e.target.value)
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Fecha de Inicio</label>
+                                      <input
+                                        type="date"
+                                        value={
+                                          licenseForms[c.id]?.startDate || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'startDate',
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Fecha de Fin</label>
+                                      <input
+                                        type="date"
+                                        value={
+                                          licenseForms[c.id]?.endDate || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'endDate',
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Precio Mensual ($)</label>
+                                      <input
+                                        type="number"
+                                        min="0"
+                                        step="0.01"
+                                        value={
+                                          licenseForms[c.id]?.monthlyPrice || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'monthlyPrice',
+                                            Number(e.target.value)
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="admin-dashboard__form-group">
+                                      <label>Precio Anual ($)</label>
+                                      <input
+                                        type="number"
+                                        min="0"
+                                        step="0.01"
+                                        value={
+                                          licenseForms[c.id]?.yearlyPrice || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'yearlyPrice',
+                                            Number(e.target.value)
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="admin-dashboard__checkbox-group">
+                                    <label className="admin-dashboard__checkbox-label">
+                                      <input
+                                        type="checkbox"
+                                        checked={
+                                          !!licenseForms[c.id]?.customBranding
+                                        }
+                                        onChange={(e) =>
+                                          handleLicenseInputChange(
+                                            c.id,
+                                            'customBranding',
+                                            e.target.checked
+                                          )
+                                        }
+                                      />
+                                      <span>🎨 Branding Personalizado</span>
+                                    </label>
+                                  </div>
+                                  <div className="admin-dashboard__form-actions">
+                                    <button
+                                      type="submit"
+                                      className="admin-dashboard__button admin-dashboard__button--success"
+                                      disabled={licenseLoading[c.id]}
+                                    >
+                                      {licenseLoading[c.id]
+                                        ? '⏳ Guardando...'
+                                        : c.license
+                                          ? '💾 Actualizar Licencia'
+                                          : '➕ Crear Licencia'}
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="admin-dashboard__button admin-dashboard__button--secondary"
+                                      onClick={() => cancelEditLicense(c.id)}
+                                    >
+                                      ✕ Cancelar
+                                    </button>
+                                  </div>
+                                </form>
+                              </div>
+                            ) : (
+                              <div className="admin-dashboard__license-info-container">
+                                {c.license ? (
+                                  <div>
+                                    <div className="admin-dashboard__license-info-header">
+                                      <h5>📋 Información de Licencia</h5>
+                                      <button
+                                        className="admin-dashboard__table-button admin-dashboard__table-button--edit"
+                                        onClick={() => startEditLicense(c)}
+                                      >
+                                        ✏️ Editar
+                                      </button>
+                                    </div>
+                                    <div className="admin-dashboard__license-info">
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          📦 Plan:
+                                        </span>
+                                        <span
+                                          className={`admin-dashboard__status-badge admin-dashboard__status-badge--${c.license.planType === 'enterprise' || c.license.planType === 'professional' ? 'active' : c.license.planType === 'starter' ? 'trial' : 'inactive'}`}
+                                        >
+                                          {c.license.planType || '-'}
+                                        </span>
+                                      </div>
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          👥 Máx. Usuarios:
+                                        </span>
+                                        <span>{c.license.maxUsers || '-'}</span>
+                                      </div>
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          📁 Proyectos:
+                                        </span>
+                                        <span>
+                                          {c.license.maxProjects || '-'}
+                                        </span>
+                                      </div>
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          💾 Almacenamiento:
+                                        </span>
+                                        <span>
+                                          {c.license.maxStorageMB
+                                            ? `${c.license.maxStorageMB} MB`
+                                            : '-'}
+                                        </span>
+                                      </div>
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          🎨 Custom Branding:
+                                        </span>
+                                        <span
+                                          className={`admin-dashboard__status-badge admin-dashboard__status-badge--${c.license.customBranding ? 'active' : 'inactive'}`}
+                                        >
+                                          {c.license.customBranding
+                                            ? 'Activado'
+                                            : 'Desactivado'}
+                                        </span>
+                                      </div>
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          📅 Vigencia:
+                                        </span>
+                                        <span>
+                                          {c.license.startDate &&
+                                          c.license.endDate
+                                            ? `${c.license.startDate} → ${c.license.endDate}`
+                                            : '-'}
+                                        </span>
+                                      </div>
+                                      <div className="admin-dashboard__license-item">
+                                        <span className="admin-dashboard__license-label">
+                                          💰 Precios:
+                                        </span>
+                                        <span>
+                                          {c.license.monthlyPrice
+                                            ? `$${c.license.monthlyPrice}/mes`
+                                            : ''}
+                                          {c.license.monthlyPrice &&
+                                          c.license.yearlyPrice
+                                            ? ' • '
+                                            : ''}
+                                          {c.license.yearlyPrice
+                                            ? `$${c.license.yearlyPrice}/año`
+                                            : ''}
+                                          {!c.license.monthlyPrice &&
+                                          !c.license.yearlyPrice
+                                            ? '-'
+                                            : ''}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="admin-dashboard__empty-license">
+                                    <div className="admin-dashboard__empty-license-icon">
+                                      📄
+                                    </div>
+                                    <p>Sin licencia asignada</p>
+                                    <button
+                                      className="admin-dashboard__button admin-dashboard__button--primary"
+                                      onClick={() => startEditLicense(c)}
+                                    >
+                                      ➕ Crear licencia
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      </React.Fragment>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </section>
 
@@ -1112,251 +1244,105 @@ export default function AdminDashboard() {
               Usuarios registrados
             </div>
             {/* Filtros de usuarios */}
-            <form
-              style={{
-                display: 'flex',
-                gap: 12,
-                marginBottom: 16,
-                flexWrap: 'wrap',
-              }}
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleUserFilter();
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Buscar por nombre o email"
-                value={userFilterSearch}
-                onChange={(e) => setUserFilterSearch(e.target.value)}
-                style={{ minWidth: 180 }}
-              />
-              <select
-                value={userFilterCompanyId}
-                onChange={(e) => setUserFilterCompanyId(e.target.value)}
-                style={{ minWidth: 160 }}
+            <div className="admin-dashboard__filters">
+              <div className="admin-dashboard__filters-title">
+                🔍 Filtros de búsqueda
+              </div>
+              <form
+                className="admin-dashboard__filters-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleUserFilter();
+                }}
               >
-                <option value="">Todas las empresas</option>
-                {companiesData.data.companies.map((c: Company) => (
-                  <React.Fragment key={c.id}>
-                    {editingCompanyId === c.id ? (
-                      <tr>
-                        <td colSpan={10}>
-                          <form
-                            className="admin-dashboard__form"
-                            onSubmit={handleUpdateCompany}
-                            style={{
-                              background: '#f8f8f8',
-                              padding: 10,
-                              borderRadius: 6,
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                gap: 10,
-                              }}
-                            >
-                              <input
-                                required
-                                placeholder="Nombre"
-                                value={editCompanyForm.name}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    name: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                placeholder="Slug"
-                                value={editCompanyForm.slug}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    slug: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                placeholder="Descripción"
-                                value={editCompanyForm.description}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    description: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                type="email"
-                                placeholder="Email administrador"
-                                value={editCompanyForm.adminEmail}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    adminEmail: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                placeholder="Sitio web"
-                                value={editCompanyForm.website}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    website: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                placeholder="Teléfono"
-                                value={editCompanyForm.phone}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    phone: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                placeholder="Logo (URL)"
-                                value={editCompanyForm.logo}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    logo: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <input
-                                placeholder="Dirección"
-                                value={editCompanyForm.address}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    address: e.target.value,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              />
-                              <select
-                                value={editCompanyForm.status}
-                                onChange={(e) =>
-                                  setEditCompanyForm((f) => ({
-                                    ...f,
-                                    status: e.target.value as CompanyStatus,
-                                  }))
-                                }
-                                style={{ flex: 1 }}
-                              >
-                                <option value="active">Activa</option>
-                                <option value="suspended">Suspendida</option>
-                                <option value="trial">Prueba</option>
-                                <option value="inactive">Inactiva</option>
-                              </select>
-                            </div>
-                            <div style={{ marginTop: 10 }}>
-                              <button
-                                type="submit"
-                                className="admin-dashboard__button"
-                                disabled={loading}
-                              >
-                                Guardar cambios
-                              </button>
-                              <button
-                                type="button"
-                                className="admin-dashboard__button"
-                                style={{
-                                  marginLeft: 8,
-                                  background: '#ccc',
-                                  color: '#222',
-                                }}
-                                onClick={cancelEditCompany}
-                              >
-                                Cancelar
-                              </button>
-                            </div>
-                          </form>
-                        </td>
-                      </tr>
-                    ) : (
-                      <tr>
-                        <td>{c.name}</td>
-                        <td>{c.slug || '-'}</td>
-                        <td>{c.description || '-'}</td>
-                        <td>{c.adminEmail || '-'}</td>
-                        <td>
-                          {c.website ? (
-                            <a
-                              href={c.website}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {c.website}
-                            </a>
-                          ) : (
-                            '-'
-                          )}
-                        </td>
-                        <td>{c.phone || '-'}</td>
-                        <td>
-                          {c.logo ? (
-                            <img
-                              src={c.logo}
-                              alt="logo"
-                              style={{
-                                maxWidth: 40,
-                                maxHeight: 40,
-                                borderRadius: '50%',
-                              }}
-                            />
-                          ) : (
-                            '-'
-                          )}
-                        </td>
-                        <td>{c.address || '-'}</td>
-                        <td>{c.status || '-'}</td>
-                        <td>
-                          <button
-                            className="admin-dashboard__button"
-                            style={{ fontSize: 13, padding: '2px 8px' }}
-                            onClick={() => startEditCompany(c)}
-                          >
-                            Editar
-                          </button>
-                        </td>
-                      </tr>
-                    )}
-                    <tr>
-                      <td colSpan={10}>
-                        {/* ...licencia y otros controles... */}
-                      </td>
-                    </tr>
-                  </React.Fragment>
-                ))}
-                <option value="expired">Expirado</option>
-                <option value="cancelled">Cancelado</option>
-              </select>
-              <button className="admin-dashboard__button" type="submit">
-                Filtrar
-              </button>
-            </form>
+                <div className="admin-dashboard__form-group">
+                  <label>🔎 Buscar</label>
+                  <input
+                    type="text"
+                    placeholder="Buscar por nombre o email..."
+                    value={userFilterSearch}
+                    onChange={(e) => setUserFilterSearch(e.target.value)}
+                  />
+                </div>
+                <div className="admin-dashboard__form-group">
+                  <label>🏢 Empresa</label>
+                  <select
+                    value={userFilterCompanyId}
+                    onChange={(e) => setUserFilterCompanyId(e.target.value)}
+                  >
+                    <option value="">Todas las empresas</option>
+                    {companiesData.data.companies.map((c: Company) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="admin-dashboard__form-group">
+                  <label>👤 Rol</label>
+                  <select
+                    value={userFilterRole}
+                    onChange={(e) => setUserFilterRole(e.target.value)}
+                  >
+                    <option value="">Todos los roles</option>
+                    <option value="user">Usuario</option>
+                    <option value="manager">Manager</option>
+                    <option value="company_admin">Admin empresa</option>
+                    <option value="viewer">Solo lectura</option>
+                  </select>
+                </div>
+                <div className="admin-dashboard__form-group">
+                  <label>📊 Estado</label>
+                  <select
+                    value={userFilterStatus}
+                    onChange={(e) => setUserFilterStatus(e.target.value)}
+                  >
+                    <option value="">Todos los estados</option>
+                    <option value="active">Activo</option>
+                    <option value="inactive">Inactivo</option>
+                    <option value="suspended">Suspendido</option>
+                    <option value="pending">Pendiente</option>
+                  </select>
+                </div>
+                <div className="admin-dashboard__filters-actions">
+                  <button
+                    type="submit"
+                    className="admin-dashboard__table-button"
+                    style={{
+                      background: 'var(--primary-color)',
+                      color: 'white',
+                    }}
+                  >
+                    🔍 Filtrar
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-dashboard__table-button"
+                    onClick={() => {
+                      setUserFilterSearch('');
+                      setUserFilterCompanyId('');
+                      setUserFilterRole('');
+                      setUserFilterStatus('');
+                      setUsersPage(1);
+                      fetchUsers(1);
+                    }}
+                    style={{
+                      background: 'var(--secondary-bg)',
+                      color: 'var(--text-color)',
+                    }}
+                  >
+                    🔄 Limpiar
+                  </button>
+                </div>
+              </form>
+            </div>
             {/* Botón exportar CSV */}
             <button
               className="admin-dashboard__table-button"
-              style={{ 
+              style={{
                 marginBottom: 16,
                 background: 'var(--success-color, #28a745)',
-                color: 'white'
+                color: 'white',
               }}
               onClick={exportUsersToCSV}
               disabled={!usersData || !usersData.data.users.length}
@@ -1384,28 +1370,37 @@ export default function AdminDashboard() {
                     <tbody>
                       {usersData.data.users.map((u: CompanyUser) => (
                         <tr key={u.id}>
-                          <td><strong>{u.firstName}</strong></td>
+                          <td>
+                            <strong>{u.firstName}</strong>
+                          </td>
                           <td>{u.lastName}</td>
                           <td>
-                            <a 
-                              href={`mailto:${u.email}`} 
-                              style={{ color: 'var(--primary-color)', textDecoration: 'none' }}
+                            <a
+                              href={`mailto:${u.email}`}
+                              style={{
+                                color: 'var(--primary-color)',
+                                textDecoration: 'none',
+                              }}
                             >
                               {u.email}
                             </a>
                           </td>
                           <td>
-                            <code style={{ 
-                              background: 'var(--secondary-bg)', 
-                              padding: '2px 6px', 
-                              borderRadius: '4px',
-                              fontSize: '0.85em'
-                            }}>
+                            <code
+                              style={{
+                                background: 'var(--secondary-bg)',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
+                                fontSize: '0.85em',
+                              }}
+                            >
                               {u.role}
                             </code>
                           </td>
                           <td>
-                            <span className={`admin-dashboard__status-badge admin-dashboard__status-badge--${u.status === 'active' ? 'active' : 'inactive'}`}>
+                            <span
+                              className={`admin-dashboard__status-badge admin-dashboard__status-badge--${u.status === 'active' ? 'active' : 'inactive'}`}
+                            >
                               {u.status}
                             </span>
                           </td>
@@ -1415,7 +1410,10 @@ export default function AdminDashboard() {
                     </tbody>
                   </table>
                 </div>
-                <div className="admin-dashboard__table-actions" style={{ marginTop: 16, justifyContent: 'center' }}>
+                <div
+                  className="admin-dashboard__table-actions"
+                  style={{ marginTop: 16, justifyContent: 'center' }}
+                >
                   <button
                     className="admin-dashboard__table-button"
                     disabled={usersPage === 1}
@@ -1423,13 +1421,15 @@ export default function AdminDashboard() {
                   >
                     ← Anterior
                   </button>
-                  <span style={{ 
-                    margin: '0 16px', 
-                    padding: '8px 12px',
-                    background: 'var(--secondary-bg)',
-                    borderRadius: '6px',
-                    fontSize: '0.9rem'
-                  }}>
+                  <span
+                    style={{
+                      margin: '0 16px',
+                      padding: '8px 12px',
+                      background: 'var(--secondary-bg)',
+                      borderRadius: '6px',
+                      fontSize: '0.9rem',
+                    }}
+                  >
                     Página {usersData.data.page} de{' '}
                     {Math.ceil(usersData.data.total / usersData.data.limit)}
                   </span>
@@ -1446,12 +1446,14 @@ export default function AdminDashboard() {
                 </div>
               </>
             ) : (
-              <div style={{ 
-                textAlign: 'center', 
-                padding: '2rem',
-                color: 'var(--text-secondary)',
-                fontStyle: 'italic'
-              }}>
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '2rem',
+                  color: 'var(--text-secondary)',
+                  fontStyle: 'italic',
+                }}
+              >
                 No hay usuarios registrados.
               </div>
             )}

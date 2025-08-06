@@ -125,24 +125,156 @@
 
 .admin-dashboard__table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-top: 1rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  border: 1px solid var(--border-color);
 }
 
 .admin-dashboard__table th,
 .admin-dashboard__table td {
-  padding: 0.7rem 1rem;
-  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.25rem;
   text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
 }
 
 .admin-dashboard__table th {
-  color: var(--card-title-color);
-  background: var(--secondary-bg);
+  color: var(--text-color);
+  background: var(--header-bg, rgba(var(--primary-rgb), 0.05));
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border-color);
 }
 
-.admin-dashboard__table tr:last-child td {
+.admin-dashboard__table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.admin-dashboard__table tbody tr:hover {
+  background: var(--hover-bg, rgba(var(--primary-rgb), 0.02));
+}
+
+.admin-dashboard__table tbody tr:last-child td {
   border-bottom: none;
+}
+
+.admin-dashboard__table td img {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.admin-dashboard__table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.admin-dashboard__table-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-dashboard__table-button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: auto;
+}
+
+.admin-dashboard__table-button:hover {
+  background: var(--button-hover-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.admin-dashboard__table-button--edit {
+  background: var(--info-color, #17a2b8);
+  color: white;
+}
+
+.admin-dashboard__table-button--edit:hover {
+  background: var(--info-dark, #138496);
+}
+
+.admin-dashboard__status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-dashboard__status-badge--active {
+  background: var(--success-light, #d4edda);
+  color: var(--success-dark, #155724);
+}
+
+.admin-dashboard__status-badge--suspended {
+  background: var(--warning-light, #fff3cd);
+  color: var(--warning-dark, #856404);
+}
+
+.admin-dashboard__status-badge--trial {
+  background: var(--info-light, #d1ecf1);
+  color: var(--info-dark, #0c5460);
+}
+
+.admin-dashboard__status-badge--inactive {
+  background: var(--secondary-light, #e2e3e5);
+  color: var(--secondary-dark, #383d41);
+}
+
+// Responsive design for tables
+@media (max-width: 768px) {
+  .admin-dashboard__table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .admin-dashboard__table th,
+  .admin-dashboard__table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .admin-dashboard__table th {
+    font-size: 0.8rem;
+  }
+}
+
+// Loading states
+.admin-dashboard__table tbody tr.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// Empty state
+.admin-dashboard__empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+.admin-dashboard__empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
 }
 
 .admin-dashboard__actions {

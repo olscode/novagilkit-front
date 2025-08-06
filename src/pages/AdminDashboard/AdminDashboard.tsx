@@ -633,224 +633,244 @@ export default function AdminDashboard() {
             {loading ? (
               <div>{t('common.loading')}</div>
             ) : (
-              <table className="admin-dashboard__table">
-                <thead>
-                  <tr>
-                    <th>{t('adminDashboard.companyName', 'Nombre')}</th>
-                    <th>{t('adminDashboard.slug', 'Slug')}</th>
-                    <th>{t('adminDashboard.description', 'Descripción')}</th>
-                    <th>
-                      {t('adminDashboard.adminEmail', 'Email administrador')}
-                    </th>
-                    <th>{t('adminDashboard.website', 'Sitio web')}</th>
-                    <th>{t('adminDashboard.phone', 'Teléfono')}</th>
-                    <th>{t('adminDashboard.logo', 'Logo')}</th>
-                    <th>{t('adminDashboard.companyAddress', 'Dirección')}</th>
-                    <th>{t('adminDashboard.status', 'Estado')}</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {companiesData.data.companies.map((c: Company) => (
-                    <React.Fragment key={c.id}>
-                      {editingCompanyId === c.id ? (
-                        <tr>
-                          <td colSpan={10}>
-                            <form
-                              className="admin-dashboard__form"
-                              onSubmit={handleUpdateCompany}
-                              style={{
-                                background: '#f8f8f8',
-                                padding: 10,
-                                borderRadius: 6,
-                              }}
-                            >
-                              <div
+              <div className="admin-dashboard__table-container">
+                <table className="admin-dashboard__table">
+                  <thead>
+                    <tr>
+                      <th>{t('adminDashboard.companyName', 'Nombre')}</th>
+                      <th>{t('adminDashboard.slug', 'Slug')}</th>
+                      <th>{t('adminDashboard.description', 'Descripción')}</th>
+                      <th>
+                        {t('adminDashboard.adminEmail', 'Email administrador')}
+                      </th>
+                      <th>{t('adminDashboard.website', 'Sitio web')}</th>
+                      <th>{t('adminDashboard.phone', 'Teléfono')}</th>
+                      <th>{t('adminDashboard.logo', 'Logo')}</th>
+                      <th>{t('adminDashboard.companyAddress', 'Dirección')}</th>
+                      <th>{t('adminDashboard.status', 'Estado')}</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {companiesData.data.companies.map((c: Company) => (
+                      <React.Fragment key={c.id}>
+                        {editingCompanyId === c.id ? (
+                          <tr>
+                            <td colSpan={10}>
+                              <form
+                                className="admin-dashboard__form"
+                                onSubmit={handleUpdateCompany}
                                 style={{
-                                  display: 'flex',
-                                  flexWrap: 'wrap',
-                                  gap: 10,
+                                  background: 'var(--card-bg)',
+                                  padding: 16,
+                                  borderRadius: 8,
+                                  border: '1px solid var(--border-color)',
                                 }}
                               >
-                                {/* ...company edit inputs... */}
-                                <input
-                                  required
-                                  placeholder="Nombre"
-                                  value={editCompanyForm.name}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      name: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="Slug"
-                                  value={editCompanyForm.slug}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      slug: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="Descripción"
-                                  value={editCompanyForm.description}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      description: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  type="email"
-                                  placeholder="Email administrador"
-                                  value={editCompanyForm.adminEmail}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      adminEmail: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="Sitio web"
-                                  value={editCompanyForm.website}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      website: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="Teléfono"
-                                  value={editCompanyForm.phone}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      phone: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="Logo (URL)"
-                                  value={editCompanyForm.logo}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      logo: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <input
-                                  placeholder="Dirección"
-                                  value={editCompanyForm.address}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      address: e.target.value,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                />
-                                <select
-                                  value={editCompanyForm.status}
-                                  onChange={(e) =>
-                                    setEditCompanyForm((f) => ({
-                                      ...f,
-                                      status: e.target.value as CompanyStatus,
-                                    }))
-                                  }
-                                  style={{ flex: 1 }}
-                                >
-                                  <option value="active">Activa</option>
-                                  <option value="suspended">Suspendida</option>
-                                  <option value="trial">Prueba</option>
-                                  <option value="inactive">Inactiva</option>
-                                </select>
-                              </div>
-                              <div style={{ marginTop: 10 }}>
-                                <button
-                                  type="submit"
-                                  className="admin-dashboard__button"
-                                  disabled={loading}
-                                >
-                                  Guardar cambios
-                                </button>
-                                <button
-                                  type="button"
-                                  className="admin-dashboard__button"
+                                <div
                                   style={{
-                                    marginLeft: 8,
-                                    background: '#ccc',
-                                    color: '#222',
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    gap: 12,
                                   }}
-                                  onClick={cancelEditCompany}
                                 >
-                                  Cancelar
+                                  {/* ...company edit inputs... */}
+                                  <input
+                                    required
+                                    placeholder="Nombre"
+                                    value={editCompanyForm.name}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        name: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 200 }}
+                                  />
+                                  <input
+                                    placeholder="Slug"
+                                    value={editCompanyForm.slug}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        slug: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 150 }}
+                                  />
+                                  <input
+                                    placeholder="Descripción"
+                                    value={editCompanyForm.description}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        description: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 200 }}
+                                  />
+                                  <input
+                                    type="email"
+                                    placeholder="Email administrador"
+                                    value={editCompanyForm.adminEmail}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        adminEmail: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 200 }}
+                                  />
+                                  <input
+                                    placeholder="Sitio web"
+                                    value={editCompanyForm.website}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        website: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 150 }}
+                                  />
+                                  <input
+                                    placeholder="Teléfono"
+                                    value={editCompanyForm.phone}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        phone: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 130 }}
+                                  />
+                                  <input
+                                    placeholder="Logo (URL)"
+                                    value={editCompanyForm.logo}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        logo: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 150 }}
+                                  />
+                                  <input
+                                    placeholder="Dirección"
+                                    value={editCompanyForm.address}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        address: e.target.value,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 150 }}
+                                  />
+                                  <select
+                                    value={editCompanyForm.status}
+                                    onChange={(e) =>
+                                      setEditCompanyForm((f) => ({
+                                        ...f,
+                                        status: e.target.value as CompanyStatus,
+                                      }))
+                                    }
+                                    style={{ flex: 1, minWidth: 120 }}
+                                  >
+                                    <option value="active">Activa</option>
+                                    <option value="suspended">Suspendida</option>
+                                    <option value="trial">Prueba</option>
+                                    <option value="inactive">Inactiva</option>
+                                  </select>
+                                </div>
+                                <div className="admin-dashboard__table-actions" style={{ marginTop: 12 }}>
+                                  <button
+                                    type="submit"
+                                    className="admin-dashboard__table-button"
+                                    disabled={loading}
+                                  >
+                                    Guardar cambios
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="admin-dashboard__table-button"
+                                    style={{
+                                      background: 'var(--secondary-bg)',
+                                      color: 'var(--text-color)',
+                                    }}
+                                    onClick={cancelEditCompany}
+                                  >
+                                    Cancelar
+                                  </button>
+                                </div>
+                              </form>
+                            </td>
+                          </tr>
+                        ) : (
+                          <tr>
+                            <td><strong>{c.name}</strong></td>
+                            <td>
+                              <code style={{ 
+                                background: 'var(--secondary-bg)', 
+                                padding: '2px 6px', 
+                                borderRadius: '4px',
+                                fontSize: '0.85em'
+                              }}>
+                                {c.slug || '-'}
+                              </code>
+                            </td>
+                            <td style={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {c.description || '-'}
+                            </td>
+                            <td>{c.adminEmail || '-'}</td>
+                            <td>
+                              {c.website ? (
+                                <a
+                                  href={c.website}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{ color: 'var(--primary-color)', textDecoration: 'none' }}
+                                >
+                                  {c.website.length > 20 ? `${c.website.substring(0, 20)}...` : c.website}
+                                </a>
+                              ) : (
+                                '-'
+                              )}
+                            </td>
+                            <td>{c.phone || '-'}</td>
+                            <td>
+                              {c.logo ? (
+                                <img
+                                  src={c.logo}
+                                  alt="logo"
+                                  style={{
+                                    maxWidth: 32,
+                                    maxHeight: 32,
+                                    borderRadius: 6,
+                                  }}
+                                />
+                              ) : (
+                                '-'
+                              )}
+                            </td>
+                            <td style={{ maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {c.address || '-'}
+                            </td>
+                            <td>
+                              <span className={`admin-dashboard__status-badge admin-dashboard__status-badge--${c.status || 'inactive'}`}>
+                                {c.status || 'inactive'}
+                              </span>
+                            </td>
+                            <td>
+                              <div className="admin-dashboard__table-actions">
+                                <button
+                                  className="admin-dashboard__table-button admin-dashboard__table-button--edit"
+                                  onClick={() => startEditCompany(c)}
+                                >
+                                  Editar
                                 </button>
                               </div>
-                            </form>
-                          </td>
-                        </tr>
-                      ) : (
-                        <tr>
-                          <td>{c.name}</td>
-                          <td>{c.slug || '-'}</td>
-                          <td>{c.description || '-'}</td>
-                          <td>{c.adminEmail || '-'}</td>
-                          <td>
-                            {c.website ? (
-                              <a
-                                href={c.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {c.website}
-                              </a>
-                            ) : (
-                              '-'
-                            )}
-                          </td>
-                          <td>{c.phone || '-'}</td>
-                          <td>
-                            {c.logo ? (
-                              <img
-                                src={c.logo}
-                                alt="logo"
-                                style={{
-                                  maxWidth: 40,
-                                  maxHeight: 40,
-                                  borderRadius: '50%',
-                                }}
-                              />
-                            ) : (
-                              '-'
-                            )}
-                          </td>
-                          <td>{c.address || '-'}</td>
-                          <td>{c.status || '-'}</td>
-                          <td>
-                            <button
-                              className="admin-dashboard__button"
-                              style={{ fontSize: 13, padding: '2px 8px' }}
-                              onClick={() => startEditCompany(c)}
-                            >
-                              Editar
-                            </button>
-                          </td>
-                        </tr>
-                      )}
+                            </td>
+                          </tr>
+                        )}
                       <tr>
                         <td colSpan={10}>
                           {/* Licencia UI restored */}
@@ -1082,6 +1102,7 @@ export default function AdminDashboard() {
                   ))}
                 </tbody>
               </table>
+            </div>
             )}
           </section>
 
@@ -1331,12 +1352,16 @@ export default function AdminDashboard() {
             </form>
             {/* Botón exportar CSV */}
             <button
-              className="admin-dashboard__button"
-              style={{ marginBottom: 12 }}
+              className="admin-dashboard__table-button"
+              style={{ 
+                marginBottom: 16,
+                background: 'var(--success-color, #28a745)',
+                color: 'white'
+              }}
               onClick={exportUsersToCSV}
               disabled={!usersData || !usersData.data.users.length}
             >
-              Exportar CSV
+              📊 Exportar CSV
             </button>
             {usersLoading ? (
               <div>Cargando usuarios...</div>
@@ -1344,56 +1369,91 @@ export default function AdminDashboard() {
               <div className="admin-dashboard__error">{usersError}</div>
             ) : usersData && usersData.data.users.length > 0 ? (
               <>
-                <table className="admin-dashboard__table">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Email</th>
-                      <th>Rol</th>
-                      <th>Estado</th>
-                      <th>Empresa</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {usersData.data.users.map((u: CompanyUser) => (
-                      <tr key={u.id}>
-                        <td>{u.firstName}</td>
-                        <td>{u.lastName}</td>
-                        <td>{u.email}</td>
-                        <td>{u.role}</td>
-                        <td>{u.status}</td>
-                        <td>{u.company?.name ?? '-'}</td>
+                <div className="admin-dashboard__table-container">
+                  <table className="admin-dashboard__table">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Empresa</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div style={{ marginTop: 10 }}>
+                    </thead>
+                    <tbody>
+                      {usersData.data.users.map((u: CompanyUser) => (
+                        <tr key={u.id}>
+                          <td><strong>{u.firstName}</strong></td>
+                          <td>{u.lastName}</td>
+                          <td>
+                            <a 
+                              href={`mailto:${u.email}`} 
+                              style={{ color: 'var(--primary-color)', textDecoration: 'none' }}
+                            >
+                              {u.email}
+                            </a>
+                          </td>
+                          <td>
+                            <code style={{ 
+                              background: 'var(--secondary-bg)', 
+                              padding: '2px 6px', 
+                              borderRadius: '4px',
+                              fontSize: '0.85em'
+                            }}>
+                              {u.role}
+                            </code>
+                          </td>
+                          <td>
+                            <span className={`admin-dashboard__status-badge admin-dashboard__status-badge--${u.status === 'active' ? 'active' : 'inactive'}`}>
+                              {u.status}
+                            </span>
+                          </td>
+                          <td>{u.company?.name ?? '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="admin-dashboard__table-actions" style={{ marginTop: 16, justifyContent: 'center' }}>
                   <button
-                    className="admin-dashboard__button"
+                    className="admin-dashboard__table-button"
                     disabled={usersPage === 1}
                     onClick={() => setUsersPage((p) => Math.max(1, p - 1))}
                   >
-                    Anterior
+                    ← Anterior
                   </button>
-                  <span style={{ margin: '0 12px' }}>
+                  <span style={{ 
+                    margin: '0 16px', 
+                    padding: '8px 12px',
+                    background: 'var(--secondary-bg)',
+                    borderRadius: '6px',
+                    fontSize: '0.9rem'
+                  }}>
                     Página {usersData.data.page} de{' '}
                     {Math.ceil(usersData.data.total / usersData.data.limit)}
                   </span>
                   <button
-                    className="admin-dashboard__button"
+                    className="admin-dashboard__table-button"
                     disabled={
                       usersData.data.page * usersData.data.limit >=
                       usersData.data.total
                     }
                     onClick={() => setUsersPage((p) => p + 1)}
                   >
-                    Siguiente
+                    Siguiente →
                   </button>
                 </div>
               </>
             ) : (
-              <div>No hay usuarios registrados.</div>
+              <div style={{ 
+                textAlign: 'center', 
+                padding: '2rem',
+                color: 'var(--text-secondary)',
+                fontStyle: 'italic'
+              }}>
+                No hay usuarios registrados.
+              </div>
             )}
           </section>
 

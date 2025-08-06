@@ -88,6 +88,19 @@
     --modal-title-color: #ffffff;
     --modal-text-color: #e0e0e0;
     --modal-close-color: #e0e0e0;
+
+    // Variables específicas para Analytics Dashboard
+    --analytics-bg: rgba(255, 255, 255, 0.05);
+    --analytics-card-bg: rgba(255, 255, 255, 0.12);
+    --analytics-border: rgba(255, 255, 255, 0.2);
+    --analytics-title-color: #ffffff;
+    --analytics-text-color: #ffffff;
+    --analytics-text-secondary: #d0d0d0;
+    --analytics-hover-bg: rgba(255, 255, 255, 0.15);
+    --analytics-shadow: rgba(0, 0, 0, 0.4);
+    --analytics-tooltip-bg: rgba(50, 55, 65, 0.98);
+    --analytics-tooltip-border: rgba(255, 255, 255, 0.25);
+    --analytics-chart-text: #ffffff;
   }
 }
 
@@ -175,6 +188,19 @@
     --modal-title-color: #1a202c;
     --modal-text-color: #2d3748;
     --modal-close-color: #4a5568;
+
+    // Variables específicas para Analytics Dashboard
+    --analytics-bg: rgba(255, 255, 255, 0.8);
+    --analytics-card-bg: rgba(255, 255, 255, 0.95);
+    --analytics-border: rgba(0, 0, 0, 0.08);
+    --analytics-title-color: #2c3e50;
+    --analytics-text-color: #333333;
+    --analytics-text-secondary: #5a6c7d;
+    --analytics-hover-bg: rgba(52, 152, 219, 0.05);
+    --analytics-shadow: rgba(0, 0, 0, 0.08);
+    --analytics-tooltip-bg: rgba(255, 255, 255, 0.98);
+    --analytics-tooltip-border: rgba(0, 0, 0, 0.12);
+    --analytics-chart-text: #333333;
   }
 }
 
@@ -263,6 +289,19 @@
   --modal-title-color: #ffffff;
   --modal-text-color: #e0e0e0;
   --modal-close-color: #e0e0e0;
+
+  // Variables específicas para Analytics Dashboard
+  --analytics-bg: rgba(255, 255, 255, 0.05);
+  --analytics-card-bg: rgba(255, 255, 255, 0.12);
+  --analytics-border: rgba(255, 255, 255, 0.2);
+  --analytics-title-color: #ffffff;
+  --analytics-text-color: #ffffff;
+  --analytics-text-secondary: #d0d0d0;
+  --analytics-hover-bg: rgba(255, 255, 255, 0.15);
+  --analytics-shadow: rgba(0, 0, 0, 0.4);
+  --analytics-tooltip-bg: rgba(50, 55, 65, 0.98);
+  --analytics-tooltip-border: rgba(255, 255, 255, 0.25);
+  --analytics-chart-text: #ffffff;
 }
 
 [data-theme='light'] {
@@ -348,6 +387,19 @@
   --modal-title-color: #1a202c;
   --modal-text-color: #2d3748;
   --modal-close-color: #4a5568;
+
+  // Variables específicas para Analytics Dashboard
+  --analytics-bg: rgba(255, 255, 255, 0.8);
+  --analytics-card-bg: rgba(255, 255, 255, 0.95);
+  --analytics-border: rgba(0, 0, 0, 0.08);
+  --analytics-title-color: #2c3e50;
+  --analytics-text-color: #333333;
+  --analytics-text-secondary: #5a6c7d;
+  --analytics-hover-bg: rgba(52, 152, 219, 0.05);
+  --analytics-shadow: rgba(0, 0, 0, 0.08);
+  --analytics-tooltip-bg: rgba(255, 255, 255, 0.98);
+  --analytics-tooltip-border: rgba(0, 0, 0, 0.12);
+  --analytics-chart-text: #333333;
 }
 
 // Aplicar el tema al body con transiciones suaves

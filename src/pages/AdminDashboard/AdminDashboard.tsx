@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiBarChart2, FiLogOut, FiUsers } from 'react-icons/fi';
 import { useNavigate } from 'react-router';
+import { AnalyticsDashboard } from '../../components/AnalyticsDashboard';
 import Tabs, { Tab } from '../../components/Tabs/Tabs';
 import { logoutAdmin } from '../../services/AdminDashboardService';
 import SuperAdminService, {
@@ -1921,6 +1922,8 @@ export default function AdminDashboard() {
           </section>
         </div>
       )}
+
+      {activeTab === 'stats' && <AnalyticsDashboard />}
     </Tabs>
   );
 }

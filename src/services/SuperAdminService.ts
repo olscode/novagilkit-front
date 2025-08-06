@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { GlobalAnalyticsResponse } from '../types/analytics';
 
 const apiClient = axios.create({
   baseURL: '/api',
@@ -225,12 +226,16 @@ export const SuperAdminService = {
   },
 
   // 7. Analytics globales
-  async getGlobalAnalytics() {
+  async getGlobalAnalytics(): Promise<GlobalAnalyticsResponse> {
     try {
       const { data } = await apiClient.get('/companies/analytics/global');
       return data;
     } catch (error) {
       handleAuthError(error as AxiosError);
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        throw new Error(error.response.data.message);
+      }
+      throw error;
     }
   },
 

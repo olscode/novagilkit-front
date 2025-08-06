@@ -1,0 +1,173 @@
+.kpi-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    color: white;
+  }
+
+  &__value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  &__trend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+
+    &--positive {
+      color: var(--success-color, #10b981);
+    }
+
+    &--negative {
+      color: var(--error-color, #ef4444);
+    }
+  }
+
+  &__trend-value {
+    font-weight: 600;
+  }
+
+  &__trend-label {
+    color: var(--text-secondary);
+  }
+
+  // Color variants
+  &--blue {
+    .kpi-card__icon {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    }
+  }
+
+  &--green {
+    .kpi-card__icon {
+      background: linear-gradient(135deg, #10b981, #047857);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #047857);
+    }
+  }
+
+  &--yellow {
+    .kpi-card__icon {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+    }
+  }
+
+  &--purple {
+    .kpi-card__icon {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+    }
+  }
+
+  &--red {
+    .kpi-card__icon {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ef4444, #dc2626);
+    }
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    &__value {
+      font-size: 1.875rem;
+    }
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1rem;
+    }
+  }
+}

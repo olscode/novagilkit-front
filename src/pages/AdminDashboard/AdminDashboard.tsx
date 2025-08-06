@@ -1307,17 +1307,13 @@ export default function AdminDashboard() {
                 <div className="admin-dashboard__filters-actions">
                   <button
                     type="submit"
-                    className="admin-dashboard__table-button"
-                    style={{
-                      background: 'var(--primary-color)',
-                      color: 'white',
-                    }}
+                    className="admin-dashboard__button admin-dashboard__button--primary"
                   >
                     🔍 Filtrar
                   </button>
                   <button
                     type="button"
-                    className="admin-dashboard__table-button"
+                    className="admin-dashboard__button admin-dashboard__button--secondary"
                     onClick={() => {
                       setUserFilterSearch('');
                       setUserFilterCompanyId('');
@@ -1325,10 +1321,6 @@ export default function AdminDashboard() {
                       setUserFilterStatus('');
                       setUsersPage(1);
                       fetchUsers(1);
-                    }}
-                    style={{
-                      background: 'var(--secondary-bg)',
-                      color: 'var(--text-color)',
                     }}
                   >
                     🔄 Limpiar

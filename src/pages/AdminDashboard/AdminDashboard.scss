@@ -118,6 +118,7 @@
   margin-bottom: 1rem;
 }
 
+// Mejorar transiciones de la tabla
 .admin-dashboard__table {
   width: 100%;
   border-collapse: separate;
@@ -128,6 +129,40 @@
   overflow: hidden;
   box-shadow: 0 2px 8px var(--shadow-color);
   border: 1px solid var(--border-color);
+  opacity: 1;
+  transition: opacity 0.2s ease;
+
+  &.loading {
+    opacity: 0.7;
+    pointer-events: none; // Prevenir interacciones durante la carga
+  }
+}
+
+// Indicador de loading sutil para filtros
+.admin-dashboard__filters-form {
+  position: relative;
+
+  &.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--primary-rgb, 0, 123, 255), 0.1);
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+// Mensaje de ayuda para filtros
+.admin-dashboard__filter-hint {
+  color: var(--warning-color, #ff9800);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+  font-style: italic;
 }
 
 .admin-dashboard__table th,
@@ -169,6 +204,9 @@
   overflow-x: auto;
   border-radius: 12px;
   margin-top: 1rem;
+  min-height: 500px; // Aumentar altura mínima para evitar más saltos
+  transition: all 0.3s ease;
+  position: relative; // Para posicionar el loader
 }
 
 // Paginación moderna

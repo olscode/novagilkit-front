@@ -67,7 +67,8 @@ export type GetAllUsersParams = {
   companyId?: string;
   role?: string;
   status?: string;
-  search?: string;
+  // Nota: 'search' se maneja localmente en el frontend
+  // ya que el backend no tiene soporte para búsqueda por nombre/apellido/email
 };
 
 // Error handler para 401/403
@@ -89,6 +90,7 @@ export const SuperAdminService = {
       const { data } = await apiClient.get('/companies/users/all', { params });
       return data;
     } catch (error) {
+      console.error('❌ Error en API getAllUsers:', error);
       handleAuthError(error as AxiosError);
       if (axios.isAxiosError(error) && error.response?.data?.message) {
         throw new Error(error.response.data.message);

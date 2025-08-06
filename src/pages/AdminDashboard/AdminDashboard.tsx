@@ -131,6 +131,9 @@ export default function AdminDashboard() {
     {}
   );
   const [usersData, setUsersData] = useState<GetAllUsersResponse | null>(null);
+  const [allUsersData, setAllUsersData] = useState<GetAllUsersResponse | null>(
+    null
+  );
   const [usersLoading, setUsersLoading] = useState(false);
   const [usersError, setUsersError] = useState<string | null>(null);
   const [usersPage, setUsersPage] = useState(1);
@@ -139,6 +142,7 @@ export default function AdminDashboard() {
   const [userFilterRole, setUserFilterRole] = useState('');
   const [userFilterStatus, setUserFilterStatus] = useState('');
   const [userFilterSearch, setUserFilterSearch] = useState('');
+  const [filtersApplied, setFiltersApplied] = useState(false);
   const [editingCompanyId, setEditingCompanyId] = useState<string | null>(null);
   const [editCompanyForm, setEditCompanyForm] = useState(initialCompanyForm);
 
@@ -375,9 +379,97 @@ export default function AdminDashboard() {
   };
 
   // Actualizar usuarios con filtros
-  const handleUserFilter = () => {
+  const handleUserFilter = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
+    console.log('🔍 [handleUserFilter] Iniciando filtrado manual');
+    console.log('🔍 [handleUserFilter] Filtros actuales:', {
+      search: userFilterSearch,
+      companyId: userFilterCompanyId,
+      role: userFilterRole,
+      status: userFilterStatus,
+    });
+
+    // Si solo hay filtro de búsqueda y ya tenemos datos cargados, filtrar localmente
+    const hasApiFilters =
+      userFilterCompanyId || userFilterRole || userFilterStatus;
+    const hasSearchFilter = userFilterSearch.trim();
+
+    if (hasSearchFilter && !hasApiFilters && allUsersData) {
+      console.log(
+        '🔍 [handleUserFilter] Aplicando solo filtro de búsqueda local'
+      );
+      const searchTerm = userFilterSearch.trim().toLowerCase();
+
+      const filteredUsers = allUsersData.data.users.filter(
+        (user: CompanyUser) => {
+          const searchInName = user.firstName
+            ?.toLowerCase()
+            .includes(searchTerm);
+          const searchInLastName = user.lastName
+            ?.toLowerCase()
+            .includes(searchTerm);
+          const searchInEmail = user.email?.toLowerCase().includes(searchTerm);
+          return searchInName || searchInLastName || searchInEmail;
+        }
+      );
+
+      console.log(
+        `🔍 [handleUserFilter] Filtro local: ${filteredUsers.length} de ${allUsersData.data.users.length} usuarios`
+      );
+
+      // Crear respuesta con usuarios filtrados localmente
+      const filteredData: GetAllUsersResponse = {
+        ...allUsersData,
+        data: {
+          ...allUsersData.data,
+          users: filteredUsers,
+          total: filteredUsers.length,
+          page: 1, // Resetear a página 1 en filtrado local
+        },
+      };
+
+      setUsersData(filteredData);
+      setUsersPage(1);
+      setFiltersApplied(true);
+    } else {
+      console.log(
+        '🔍 [handleUserFilter] Hay filtros de API activos, llamando al backend'
+      );
+      // Resetear a página 1 y aplicar filtros (incluyendo búsqueda local después)
+      setUsersPage(1);
+      await fetchUsers(1);
+    }
+
+    setFiltersApplied(true); // Marcar que se han aplicado filtros manualmente
+  };
+
+  // Función para limpiar filtros
+  const handleClearFilters = async () => {
+    console.log('🔄 [handleClearFilters] Limpiando todos los filtros');
+
+    // Limpiar todos los filtros de forma síncrona
+    setUserFilterSearch('');
+    setUserFilterCompanyId('');
+    setUserFilterRole('');
+    setUserFilterStatus('');
     setUsersPage(1);
-    fetchUsers(1);
+    setFiltersApplied(false); // Resetear el estado de filtros aplicados
+
+    // Hacer fetch con filtros completamente vacíos para obtener todos los usuarios
+    // Usar ignoreSearch=true y useCustomFiltersOnly=true para ignorar estados antiguos
+    await fetchUsers(
+      1,
+      {
+        companyId: undefined,
+        role: undefined,
+        status: undefined,
+      },
+      true, // ignoreSearch = true
+      true // useCustomFiltersOnly = true
+    );
+
+    console.log('✅ [handleClearFilters] Filtros limpiados y datos recargados');
   };
 
   // Modificar fetchUsers para usar filtros y búsqueda
@@ -434,20 +526,108 @@ export default function AdminDashboard() {
     link.click();
     document.body.removeChild(link);
   };
-  const fetchUsers = async (page = 1) => {
+  const fetchUsers = async (
+    page = 1,
+    customFilters: Partial<{
+      companyId: string | undefined;
+      role: string | undefined;
+      status: string | undefined;
+    }> = {},
+    ignoreSearch = false,
+    useCustomFiltersOnly = false // Nuevo parámetro para usar solo customFilters
+  ) => {
     setUsersLoading(true);
     setUsersError(null);
     try {
-      const data = await SuperAdminService.getAllUsers({
+      // Solo enviamos a la API los filtros que el backend soporta (NO search)
+      const apiFilters: any = {
         page,
         limit: usersLimit,
-        companyId: userFilterCompanyId || undefined,
-        role: userFilterRole || undefined,
-        status: userFilterStatus || undefined,
-        search: userFilterSearch || undefined,
+        // Si useCustomFiltersOnly=true, solo usar customFilters, sino hacer fallback a estados
+        companyId: useCustomFiltersOnly
+          ? customFilters.companyId
+          : customFilters.companyId !== undefined
+            ? customFilters.companyId
+            : userFilterCompanyId || undefined,
+        role: useCustomFiltersOnly
+          ? customFilters.role
+          : customFilters.role !== undefined
+            ? customFilters.role
+            : userFilterRole || undefined,
+        status: useCustomFiltersOnly
+          ? customFilters.status
+          : customFilters.status !== undefined
+            ? customFilters.status
+            : userFilterStatus || undefined,
+      };
+
+      // Remover filtros undefined para limpiar la query
+      Object.keys(apiFilters).forEach((key) => {
+        if (apiFilters[key] === undefined) {
+          delete apiFilters[key];
+        }
       });
-      setUsersData(data);
+
+      console.log(
+        '🔍 [fetchUsers] Llamando a API con filtros (SIN search):',
+        apiFilters
+      );
+
+      const data = await SuperAdminService.getAllUsers(apiFilters);
+
+      console.log('📊 [fetchUsers] Respuesta del backend:', {
+        total: data.data.total,
+        usersCount: data.data.users.length,
+        page: data.data.page,
+      });
+
+      // Guardar datos originales sin filtrar localmente
+      setAllUsersData(data);
+
+      // Aplicar filtro de búsqueda local si existe Y no se está ignorando
+      const searchTerm = !ignoreSearch
+        ? userFilterSearch.trim().toLowerCase()
+        : '';
+      if (searchTerm) {
+        console.log(
+          '🔍 [fetchUsers] Aplicando filtro de búsqueda local para:',
+          searchTerm
+        );
+
+        const filteredUsers = data.data.users.filter((user: CompanyUser) => {
+          const searchInName = user.firstName
+            ?.toLowerCase()
+            .includes(searchTerm);
+          const searchInLastName = user.lastName
+            ?.toLowerCase()
+            .includes(searchTerm);
+          const searchInEmail = user.email?.toLowerCase().includes(searchTerm);
+          return searchInName || searchInLastName || searchInEmail;
+        });
+
+        console.log(
+          `🔍 [fetchUsers] Filtro local aplicado: ${filteredUsers.length} de ${data.data.users.length} usuarios coinciden`
+        );
+
+        // Crear respuesta con usuarios filtrados localmente
+        const filteredData: GetAllUsersResponse = {
+          ...data,
+          data: {
+            ...data.data,
+            users: filteredUsers,
+            total: filteredUsers.length, // Actualizar total con los resultados filtrados
+          },
+        };
+
+        setUsersData(filteredData);
+      } else {
+        // Sin búsqueda, mostrar todos los datos de la API
+        setUsersData(data);
+      }
+
+      console.log('✅ [fetchUsers] Proceso completado exitosamente');
     } catch (e: any) {
+      console.error('❌ [fetchUsers] Error:', e);
       setUsersError(e.message || 'Error al cargar usuarios');
     } finally {
       setUsersLoading(false);
@@ -455,7 +635,23 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchUsers(usersPage);
+    // Solo hacer fetch cuando cambie la página si no tenemos filtros locales activos
+    const hasLocalSearchFilter =
+      userFilterSearch.trim() &&
+      !(userFilterCompanyId || userFilterRole || userFilterStatus);
+
+    if (!hasLocalSearchFilter) {
+      // Sin filtros locales, cargar usuarios normalmente desde la API
+      fetchUsers(usersPage);
+    } else {
+      // Con filtros locales activos, re-aplicar el filtro sobre los datos existentes
+      console.log(
+        '🔍 [useEffect] Filtro local activo, manteniendo filtrado local'
+      );
+      if (allUsersData) {
+        handleUserFilter(); // Re-aplicar filtro local
+      }
+    }
   }, [usersPage]);
 
   return (
@@ -1249,26 +1445,41 @@ export default function AdminDashboard() {
                 🔍 Filtros de búsqueda
               </div>
               <form
-                className="admin-dashboard__filters-form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleUserFilter();
-                }}
+                className={`admin-dashboard__filters-form ${usersLoading ? 'loading' : ''}`}
+                onSubmit={handleUserFilter}
               >
                 <div className="admin-dashboard__form-group">
                   <label>🔎 Buscar</label>
                   <input
                     type="text"
-                    placeholder="Buscar por nombre o email..."
+                    placeholder="Buscar por nombre, apellido o email..."
                     value={userFilterSearch}
-                    onChange={(e) => setUserFilterSearch(e.target.value)}
+                    onChange={(e) => {
+                      setUserFilterSearch(e.target.value);
+                      setFiltersApplied(false); // Resetear estado cuando se cambia búsqueda
+                    }}
                   />
+                  {userFilterSearch && !filtersApplied && (
+                    <small
+                      style={{
+                        color: 'var(--warning-color, #ff9800)',
+                        fontSize: '0.8rem',
+                        marginTop: '0.25rem',
+                        display: 'block',
+                      }}
+                    >
+                      💡 Presiona "Filtrar" para aplicar la búsqueda
+                    </small>
+                  )}
                 </div>
                 <div className="admin-dashboard__form-group">
                   <label>🏢 Empresa</label>
                   <select
                     value={userFilterCompanyId}
-                    onChange={(e) => setUserFilterCompanyId(e.target.value)}
+                    onChange={(e) => {
+                      setUserFilterCompanyId(e.target.value);
+                      setFiltersApplied(false); // Resetear estado cuando se cambia filtro
+                    }}
                   >
                     <option value="">Todas las empresas</option>
                     {companiesData.data.companies.map((c: Company) => (
@@ -1282,7 +1493,10 @@ export default function AdminDashboard() {
                   <label>👤 Rol</label>
                   <select
                     value={userFilterRole}
-                    onChange={(e) => setUserFilterRole(e.target.value)}
+                    onChange={(e) => {
+                      setUserFilterRole(e.target.value);
+                      setFiltersApplied(false); // Resetear estado cuando se cambia filtro
+                    }}
                   >
                     <option value="">Todos los roles</option>
                     <option value="user">Usuario</option>
@@ -1295,7 +1509,10 @@ export default function AdminDashboard() {
                   <label>📊 Estado</label>
                   <select
                     value={userFilterStatus}
-                    onChange={(e) => setUserFilterStatus(e.target.value)}
+                    onChange={(e) => {
+                      setUserFilterStatus(e.target.value);
+                      setFiltersApplied(false); // Resetear estado cuando se cambia filtro
+                    }}
                   >
                     <option value="">Todos los estados</option>
                     <option value="active">Activo</option>
@@ -1308,22 +1525,17 @@ export default function AdminDashboard() {
                   <button
                     type="submit"
                     className="admin-dashboard__button admin-dashboard__button--primary"
+                    disabled={usersLoading}
                   >
-                    🔍 Filtrar
+                    {usersLoading ? '⏳ Filtrando...' : '🔍 Filtrar'}
                   </button>
                   <button
                     type="button"
                     className="admin-dashboard__button admin-dashboard__button--secondary"
-                    onClick={() => {
-                      setUserFilterSearch('');
-                      setUserFilterCompanyId('');
-                      setUserFilterRole('');
-                      setUserFilterStatus('');
-                      setUsersPage(1);
-                      fetchUsers(1);
-                    }}
+                    onClick={handleClearFilters}
+                    disabled={usersLoading}
                   >
-                    🔄 Limpiar
+                    {usersLoading ? '⏳ Limpiando...' : '🔄 Limpiar'}
                   </button>
                 </div>
               </form>
@@ -1342,13 +1554,66 @@ export default function AdminDashboard() {
               📊 Exportar CSV
             </button>
             {usersLoading ? (
-              <div>Cargando usuarios...</div>
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '2rem',
+                  color: 'var(--text-secondary)',
+                }}
+              >
+                ⏳ Cargando usuarios...
+              </div>
             ) : usersError ? (
               <div className="admin-dashboard__error">{usersError}</div>
             ) : usersData && usersData.data.users.length > 0 ? (
               <>
+                {/* Mostrar información de filtros aplicados solo después de filtrar manualmente */}
+                {filtersApplied &&
+                  (userFilterSearch ||
+                    userFilterCompanyId ||
+                    userFilterRole ||
+                    userFilterStatus) && (
+                    <div
+                      style={{
+                        background: 'var(--info-bg, #e3f2fd)',
+                        border: '1px solid var(--info-color, #2196f3)',
+                        borderRadius: '8px',
+                        padding: '0.75rem',
+                        marginBottom: '1rem',
+                        fontSize: '0.9rem',
+                        color: 'var(--info-text, #1976d2)',
+                      }}
+                    >
+                      🔍 <strong>Filtros aplicados:</strong>{' '}
+                      {userFilterSearch && (
+                        <span>
+                          Búsqueda: "{userFilterSearch}" (filtro local){' '}
+                        </span>
+                      )}
+                      {userFilterCompanyId && (
+                        <span>
+                          Empresa:{' '}
+                          {
+                            companiesData.data.companies.find(
+                              (c) => c.id === userFilterCompanyId
+                            )?.name
+                          }{' '}
+                        </span>
+                      )}
+                      {userFilterRole && <span>Rol: {userFilterRole} </span>}
+                      {userFilterStatus && (
+                        <span>Estado: {userFilterStatus} </span>
+                      )}
+                      <span>
+                        • {usersData?.data.total || 0} resultado(s)
+                        encontrado(s)
+                      </span>
+                    </div>
+                  )}
                 <div className="admin-dashboard__table-container">
-                  <table className="admin-dashboard__table">
+                  <table
+                    className={`admin-dashboard__table ${usersLoading ? 'loading' : ''}`}
+                  >
                     <thead>
                       <tr>
                         <th>Nombre</th>

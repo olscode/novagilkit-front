@@ -379,5 +379,44 @@
       "invalidCredentials": "Usuario o contraseña incorrectos",
       "loginFailed": "Error al iniciar sesión. Inténtalo de nuevo."
     }
+  },
+  "analytics": {
+    "title": "Estadísticas Globales",
+    "refresh": "Actualizar",
+    "loading": "Cargando estadísticas...",
+    "error": "Error al cargar estadísticas",
+    "retry": "Reintentar",
+    "noData": "No hay datos disponibles",
+    "kpis": {
+      "totalCompanies": "Total Empresas",
+      "totalUsers": "Total Usuarios",
+      "activeUsers": "Usuarios Activos",
+      "averageUsersPerCompany": "Promedio Usuarios/Empresa",
+      "activeCompanies": "Empresas Activas",
+      "companiesRegistered": "Empresas registradas",
+      "usersRegistered": "Usuarios registrados",
+      "last30Days": "Últimos 30 días",
+      "perCompany": "Por empresa",
+      "ofTotal": "Del total de empresas",
+      "newLast30Days": "nuevas últimos 30 días",
+      "newUsersLast30Days": "nuevos últimos 30 días",
+      "ofTotalUsers": "del total"
+    },
+    "charts": {
+      "companyStatus": "Estado de Empresas",
+      "userRoles": "Distribución de Roles",
+      "userStatus": "Estado de Usuarios",
+      "topCompanies": "Top 5 Empresas por Usuarios"
+    },
+    "status": {
+      "trial": "En Prueba",
+      "active": "Activas",
+      "pending": "Pendientes"
+    },
+    "roles": {
+      "admins": "Admins",
+      "superAdmin": "Super Admin",
+      "users": "Usuarios"
+    }
   }
 }

@@ -376,5 +376,44 @@
       "invalidCredentials": "Nieprawidłowa nazwa użytkownika lub hasło",
       "loginFailed": "Logowanie nieudane. Spróbuj ponownie."
     }
+  },
+  "analytics": {
+    "title": "Globalne Analytics",
+    "refresh": "Odśwież",
+    "loading": "Ładowanie analytics...",
+    "error": "Błąd podczas ładowania analytics",
+    "retry": "Spróbuj ponownie",
+    "noData": "Brak dostępnych danych",
+    "kpis": {
+      "totalCompanies": "Łączne Firmy",
+      "totalUsers": "Łączni Użytkownicy",
+      "activeUsers": "Aktywni Użytkownicy",
+      "averageUsersPerCompany": "Średnio Użytkowników/Firma",
+      "activeCompanies": "Aktywne Firmy",
+      "companiesRegistered": "Zarejestrowane firmy",
+      "usersRegistered": "Zarejestrowani użytkownicy",
+      "last30Days": "Ostatnie 30 dni",
+      "perCompany": "Na firmę",
+      "ofTotal": "Z łącznych firm",
+      "newLast30Days": "nowych ostatnie 30 dni",
+      "newUsersLast30Days": "nowych ostatnie 30 dni",
+      "ofTotalUsers": "z łącznych"
+    },
+    "charts": {
+      "companyStatus": "Status Firmy",
+      "userRoles": "Rozkład Ról",
+      "userStatus": "Status Użytkownika",
+      "topCompanies": "Top 5 Firm według Użytkowników"
+    },
+    "status": {
+      "trial": "Próbny",
+      "active": "Aktywny",
+      "pending": "Oczekujący"
+    },
+    "roles": {
+      "admins": "Administratorzy",
+      "superAdmin": "Super Administrator",
+      "users": "Użytkownicy"
+    }
   }
 }

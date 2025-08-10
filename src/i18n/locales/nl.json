@@ -376,5 +376,44 @@
       "invalidCredentials": "Ongeldige gebruikersnaam of wachtwoord",
       "loginFailed": "Inloggen mislukt. Probeer opnieuw."
     }
+  },
+  "analytics": {
+    "title": "Globale Analytics",
+    "refresh": "Verversen",
+    "loading": "Analytics laden...",
+    "error": "Fout bij laden analytics",
+    "retry": "Opnieuw proberen",
+    "noData": "Geen data beschikbaar",
+    "kpis": {
+      "totalCompanies": "Totaal Bedrijven",
+      "totalUsers": "Totaal Gebruikers",
+      "activeUsers": "Actieve Gebruikers",
+      "averageUsersPerCompany": "Gemiddeld Gebruikers/Bedrijf",
+      "activeCompanies": "Actieve Bedrijven",
+      "companiesRegistered": "Geregistreerde bedrijven",
+      "usersRegistered": "Geregistreerde gebruikers",
+      "last30Days": "Laatste 30 dagen",
+      "perCompany": "Per bedrijf",
+      "ofTotal": "Van totaal bedrijven",
+      "newLast30Days": "nieuw laatste 30 dagen",
+      "newUsersLast30Days": "nieuw laatste 30 dagen",
+      "ofTotalUsers": "van totaal"
+    },
+    "charts": {
+      "companyStatus": "Bedrijfsstatus",
+      "userRoles": "Rol Distributie",
+      "userStatus": "Gebruikersstatus",
+      "topCompanies": "Top 5 Bedrijven op Gebruikers"
+    },
+    "status": {
+      "trial": "Proefperiode",
+      "active": "Actief",
+      "pending": "In behandeling"
+    },
+    "roles": {
+      "admins": "Beheerders",
+      "superAdmin": "Super Beheerder",
+      "users": "Gebruikers"
+    }
   }
 }

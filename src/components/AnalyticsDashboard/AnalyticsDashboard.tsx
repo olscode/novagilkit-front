@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaRegBuilding } from 'react-icons/fa';
 import { FiActivity, FiPercent, FiTrendingUp, FiUsers } from 'react-icons/fi';
 import {
@@ -62,6 +63,7 @@ const renderCustomLabel = ({
 };
 
 export const AnalyticsDashboard: React.FC = () => {
+  const { t } = useTranslation();
   const {
     analytics,
     loading,
@@ -77,7 +79,7 @@ export const AnalyticsDashboard: React.FC = () => {
     return (
       <div className="analytics-dashboard__loading">
         <Spinner />
-        <p>Cargando estadísticas...</p>
+        <p>{t('analytics.loading')}</p>
       </div>
     );
   }
@@ -85,10 +87,10 @@ export const AnalyticsDashboard: React.FC = () => {
   if (error) {
     return (
       <div className="analytics-dashboard__error">
-        <h3>Error al cargar estadísticas</h3>
+        <h3>{t('analytics.error')}</h3>
         <p>{error}</p>
         <button className="analytics-dashboard__retry-btn" onClick={refetch}>
-          Reintentar
+          {t('analytics.retry')}
         </button>
       </div>
     );
@@ -97,7 +99,7 @@ export const AnalyticsDashboard: React.FC = () => {
   if (!analytics) {
     return (
       <div className="analytics-dashboard__no-data">
-        <p>No hay datos disponibles</p>
+        <p>{t('analytics.noData')}</p>
       </div>
     );
   }
@@ -105,71 +107,73 @@ export const AnalyticsDashboard: React.FC = () => {
   return (
     <div className="analytics-dashboard">
       <div className="analytics-dashboard__header">
-        <h2 className="analytics-dashboard__title">📊 Estadísticas Globales</h2>
+        <h2 className="analytics-dashboard__title">
+          📊 {t('analytics.title')}
+        </h2>
         <button
           className="analytics-dashboard__refresh-btn"
           onClick={refetch}
           disabled={loading}
         >
-          🔄 Actualizar
+          🔄 {t('analytics.refresh')}
         </button>
       </div>
 
       {/* KPI Cards */}
       <div className="analytics-dashboard__kpis">
         <KPICard
-          title="Total Empresas"
+          title={t('analytics.kpis.totalCompanies')}
           value={analytics.companies.total.toLocaleString()}
-          subtitle="Empresas registradas"
+          subtitle={t('analytics.kpis.companiesRegistered')}
           icon={<FaRegBuilding />}
           color="blue"
           trend={{
             value: analytics.companies.newLast30Days,
-            label: 'nuevas últimos 30 días',
+            label: t('analytics.kpis.newLast30Days'),
             isPositive: analytics.companies.newLast30Days > 0,
           }}
         />
 
         <KPICard
-          title="Total Usuarios"
+          title={t('analytics.kpis.totalUsers')}
           value={analytics.users.total.toLocaleString()}
-          subtitle="Usuarios registrados"
+          subtitle={t('analytics.kpis.usersRegistered')}
           icon={<FiUsers />}
           color="green"
           trend={{
             value: analytics.users.newLast30Days,
-            label: 'nuevos últimos 30 días',
+            label: t('analytics.kpis.newUsersLast30Days'),
             isPositive: analytics.users.newLast30Days > 0,
           }}
         />
 
         <KPICard
-          title="Usuarios Activos"
+          title={t('analytics.kpis.activeUsers')}
           value={analytics.users.activeLast30Days.toLocaleString()}
-          subtitle="Últimos 30 días"
+          subtitle={t('analytics.kpis.last30Days')}
           icon={<FiActivity />}
           color="purple"
           trend={{
             value: Math.round(
               (analytics.users.activeLast30Days / analytics.users.total) * 100
             ),
-            label: 'del total',
+            label: t('analytics.kpis.ofTotalUsers'),
             isPositive: true,
           }}
         />
 
         <KPICard
-          title="Promedio Usuarios/Empresa"
+          title={t('analytics.kpis.averageUsersPerCompany')}
           value={analytics.platform.averageUsersPerCompany}
-          subtitle="Por empresa"
+          subtitle={t('analytics.kpis.perCompany')}
           icon={<FiTrendingUp />}
           color="yellow"
         />
 
         <KPICard
-          title="Empresas Activas"
+          title={t('analytics.kpis.activeCompanies')}
           value={`${analytics.platform.activeCompaniesPercentage.toFixed(1)}%`}
-          subtitle="Del total de empresas"
+          subtitle={t('analytics.kpis.ofTotal')}
           icon={<FiPercent />}
           color="green"
         />
@@ -180,7 +184,7 @@ export const AnalyticsDashboard: React.FC = () => {
         {/* Estado de Empresas - Donut */}
         <div className="analytics-dashboard__chart-card">
           <h3 className="analytics-dashboard__chart-title">
-            🏢 Estado de Empresas
+            🏢 {t('analytics.charts.companyStatus')}
           </h3>
           <div className="analytics-dashboard__chart-container">
             <ResponsiveContainer width="100%" height={300}>
@@ -210,7 +214,7 @@ export const AnalyticsDashboard: React.FC = () => {
         {/* Roles de Usuarios - Donut */}
         <div className="analytics-dashboard__chart-card">
           <h3 className="analytics-dashboard__chart-title">
-            👥 Distribución de Roles
+            👥 {t('analytics.charts.userRoles')}
           </h3>
           <div className="analytics-dashboard__chart-container">
             <ResponsiveContainer width="100%" height={300}>
@@ -240,7 +244,7 @@ export const AnalyticsDashboard: React.FC = () => {
         {/* Estado de Usuarios - Donut */}
         <div className="analytics-dashboard__chart-card">
           <h3 className="analytics-dashboard__chart-title">
-            📊 Estado de Usuarios
+            📊 {t('analytics.charts.userStatus')}
           </h3>
           <div className="analytics-dashboard__chart-container">
             <ResponsiveContainer width="100%" height={300}>
@@ -270,7 +274,7 @@ export const AnalyticsDashboard: React.FC = () => {
         {/* Top Empresas - Bar Chart */}
         <div className="analytics-dashboard__chart-card analytics-dashboard__chart-card--wide">
           <h3 className="analytics-dashboard__chart-title">
-            🏆 Top 5 Empresas por Usuarios
+            🏆 {t('analytics.charts.topCompanies')}
           </h3>
           <div className="analytics-dashboard__chart-container">
             <ResponsiveContainer width="100%" height={300}>

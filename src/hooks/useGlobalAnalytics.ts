@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SuperAdminService } from '../services/SuperAdminService';
 import { BarChartData, ChartData, GlobalAnalytics } from '../types/analytics';
 
 export const useGlobalAnalytics = () => {
+  const { t } = useTranslation();
   const [analytics, setAnalytics] = useState<GlobalAnalytics | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const hasInitialized = useRef(false);
 
   const fetchAnalytics = async () => {
     setLoading(true);
@@ -26,7 +29,10 @@ export const useGlobalAnalytics = () => {
   };
 
   useEffect(() => {
-    fetchAnalytics();
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      fetchAnalytics();
+    }
   }, []);
 
   // Funciones para procesar datos para los gráficos
@@ -43,10 +49,10 @@ export const useGlobalAnalytics = () => {
     };
 
     const statusLabels: { [key: string]: string } = {
-      active: 'Activas',
-      suspended: 'Suspendidas',
-      trial: 'En Prueba',
-      inactive: 'Inactivas',
+      active: t('analytics.status.active'),
+      suspended: t('analytics.status.pending'),
+      trial: t('analytics.status.trial'),
+      inactive: t('analytics.status.pending'),
     };
 
     const result = analytics.companies.byStatus
@@ -75,11 +81,11 @@ export const useGlobalAnalytics = () => {
     };
 
     const roleLabels: { [key: string]: string } = {
-      user: 'Usuarios',
-      manager: 'Managers',
-      company_admin: 'Admins',
-      viewer: 'Solo Lectura',
-      super_admin: 'Super Admin', // agregado por si viene del backend
+      user: t('analytics.roles.users'),
+      manager: t('analytics.roles.admins'),
+      company_admin: t('analytics.roles.admins'),
+      viewer: t('analytics.roles.users'),
+      super_admin: t('analytics.roles.superAdmin'),
     };
 
     const result = analytics.users.byRole
@@ -107,10 +113,10 @@ export const useGlobalAnalytics = () => {
     };
 
     const statusLabels: { [key: string]: string } = {
-      active: 'Activos',
-      inactive: 'Inactivos',
-      suspended: 'Suspendidos',
-      pending: 'Pendientes',
+      active: t('analytics.status.active'),
+      inactive: t('analytics.status.pending'),
+      suspended: t('analytics.status.pending'),
+      pending: t('analytics.status.pending'),
     };
 
     const result = analytics.users.byStatus

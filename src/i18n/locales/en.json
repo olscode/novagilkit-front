@@ -379,5 +379,44 @@
       "invalidCredentials": "Invalid username or password",
       "loginFailed": "Login failed. Please try again."
     }
+  },
+  "analytics": {
+    "title": "Global Analytics",
+    "refresh": "Refresh",
+    "loading": "Loading analytics...",
+    "error": "Error loading analytics",
+    "retry": "Retry",
+    "noData": "No data available",
+    "kpis": {
+      "totalCompanies": "Total Companies",
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "averageUsersPerCompany": "Average Users/Company",
+      "activeCompanies": "Active Companies",
+      "companiesRegistered": "Registered companies",
+      "usersRegistered": "Registered users",
+      "last30Days": "Last 30 days",
+      "perCompany": "Per company",
+      "ofTotal": "Of total companies",
+      "newLast30Days": "new last 30 days",
+      "newUsersLast30Days": "new last 30 days",
+      "ofTotalUsers": "of total"
+    },
+    "charts": {
+      "companyStatus": "Company Status",
+      "userRoles": "Role Distribution",
+      "userStatus": "User Status",
+      "topCompanies": "Top 5 Companies by Users"
+    },
+    "status": {
+      "trial": "Trial",
+      "active": "Active",
+      "pending": "Pending"
+    },
+    "roles": {
+      "admins": "Admins",
+      "superAdmin": "Super Admin",
+      "users": "Users"
+    }
   }
 }

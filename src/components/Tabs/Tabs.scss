@@ -11,6 +11,17 @@
   background: var(--card-bg);
   padding: 0 8px;
   position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  // Scroll suave en móvil
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+  }
 }
 
 .modern-tabs__tab {
@@ -26,9 +37,43 @@
   cursor: pointer;
   transition:
     background 0.2s,
-    color 0.2s;
+    color 0.2s,
+    transform 0.1s;
   position: relative;
   z-index: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  // Hover state mejorado
+  &:hover:not(.disabled):not(.active) {
+    background: var(--border-color);
+    transform: translateY(-1px);
+  }
+
+  // Focus state para accesibilidad
+  &:focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 2px;
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 768px) {
+  .modern-tabs__tab {
+    padding: 10px 16px 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-tabs__tab {
+    padding: 8px 12px 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .modern-tabs__icon {
+    margin-right: 6px;
+  }
 }
 
 .modern-tabs__tab.active {
@@ -63,4 +108,25 @@
   min-height: 120px;
   box-shadow: 0 2px 8px var(--shadow-color);
   transition: background 0.2s;
+}
+
+// Responsividad para el contenido
+@media (max-width: 768px) {
+  .modern-tabs__content {
+    padding: 16px 12px;
+  }
+
+  .modern-tabs__bar {
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-tabs__content {
+    padding: 12px 8px;
+  }
+
+  .modern-tabs__bar {
+    padding: 0 2px;
+  }
 }

@@ -42,7 +42,11 @@
       "description": "Configura una sala de Planning Votes para estimar tareas con tu equipo",
       "username": "Tu nombre de usuario",
       "usernameLabel": "Ingresa tu nombre de usuario",
-      "createButton": "Crear Sala"
+      "createButton": "Crear Sala",
+      "tasks": {
+        "title": "Tareas",
+        "importFromJira": "Importar desde Jira"
+      }
     },
     "joinRoom": {
       "title": "Unirse a una Sala",
@@ -417,6 +421,62 @@
       "admins": "Admins",
       "superAdmin": "Super Admin",
       "users": "Usuarios"
+    }
+  },
+  "jiraImport": {
+    "title": "Importar desde Jira",
+    "auth": {
+      "title": "Conectar con Jira",
+      "description": "Autoriza la conexión con tu cuenta de Jira para importar tareas existentes.",
+      "login": "Iniciar sesión con Jira",
+      "completeAuthMessage": "Completa la autenticación en la ventana que se abrió. Se detectará automáticamente cuando termine.",
+      "popupBlockedMessage": "No se pudo abrir la ventana de autenticación. Verifica que los popups no estén bloqueados.",
+      "authError": "Error durante la autenticación",
+      "benefits": {
+        "title": "¿Por qué importar desde Jira?",
+        "importTasks": "Importa tareas existentes desde tus proyectos",
+        "maintainTraceability": "Mantiene la conexión con los issues originales",
+        "saveTime": "Ahorra tiempo creando tareas manualmente"
+      }
+    },
+    "config": {
+      "title": "Configurar Importación",
+      "description": "Selecciona qué tareas deseas importar desde Jira.",
+      "project": "Proyecto",
+      "selectProject": "Seleccionar proyecto...",
+      "epic": "Épica",
+      "selectEpic": "Seleccionar épica...",
+      "jql": "Consulta JQL personalizada",
+      "jqlPlaceholder": "Ej: status != Done AND assignee = currentUser()",
+      "jqlHelp": "Opcional: Define una consulta JQL personalizada para filtrar las tareas",
+      "issueTypes": "Tipos de Issues"
+    },
+    "importing": {
+      "title": "Importando Tareas",
+      "description": "Estamos importando las tareas desde Jira. Esto puede tomar unos momentos.",
+      "progress": "Progreso",
+      "starting": "Iniciando importación..."
+    },
+    "results": {
+      "title": "Importación Completada",
+      "successDescription": "Se importaron {{count}} tareas exitosamente desde Jira.",
+      "errorDescription": "Importación completada: {{success}} exitosas, {{failed}} fallidas.",
+      "tasksImported": "tareas importadas",
+      "tasksSelected": "tareas seleccionadas",
+      "tasksFailed": "tareas fallidas",
+      "selectTasks": "Seleccionar Tareas a Usar",
+      "selectAll": "Seleccionar todas",
+      "deselectAll": "Deseleccionar todas",
+      "importedTasks": "Tareas Importadas",
+      "moreTasks": "tareas más...",
+      "useTasks": "Usar estas tareas",
+      "useSelectedTasks": "Usar {{count}} tareas seleccionadas"
+    },
+    "actions": {
+      "continue": "Continuar",
+      "back": "Volver",
+      "import": "Importar",
+      "close": "Cerrar"
     }
   }
 }

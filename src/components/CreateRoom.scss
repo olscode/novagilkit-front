@@ -27,6 +27,89 @@
   }
 }
 
+// Nueva sección de tareas con header
+.task-section {
+  margin-bottom: 30px;
+
+  .task-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    h3 {
+      margin: 0;
+      color: var(--text-color);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-import-jira {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--highlight-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--highlight-color-hover, var(--highlight-color));
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      svg {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 768px) {
+  .task-section {
+    .task-section-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+
+      h3 {
+        text-align: left;
+      }
+
+      .task-actions {
+        justify-content: center;
+
+        .btn-import-jira {
+          flex: 1;
+          justify-content: center;
+          max-width: 200px;
+        }
+      }
+    }
+  }
+
+  .create-room-form {
+    padding: 25px 20px;
+    margin: 0 10px;
+  }
+}
+
 .form-header {
   text-align: center;
   margin-bottom: 30px;

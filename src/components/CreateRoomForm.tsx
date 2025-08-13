@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaDownload } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 import { useSocket } from '../hooks/useSocket';
@@ -10,7 +11,9 @@ import {
   Task,
   VotingStatus,
 } from '../redux/reducers';
+import { ImportedTask } from '../services/JiraImportService';
 import './CreateRoom.scss';
+import { JiraImportModal } from './JiraImport';
 import TaskList from './TaskListComponent/TaskList';
 
 function CreateRoomForm() {
@@ -21,6 +24,7 @@ function CreateRoomForm() {
 
   const [username, setUsername] = useState('');
   const [tasks, setTasks] = useState<Array<string | undefined>>([]);
+  const [showImportModal, setShowImportModal] = useState(false);
 
   function createRoomId() {
     return uuidv4();
@@ -84,6 +88,14 @@ function CreateRoomForm() {
   const onHandleChangeTaskList = (taskList: Array<string | undefined>) => {
     setTasks(taskList);
   };
+
+  const handleTasksImported = (importedTasks: ImportedTask[]) => {
+    // Convertir las tareas importadas al formato que espera el componente
+    const taskDescriptions = importedTasks.map((task) => task.description);
+    setTasks(taskDescriptions);
+    setShowImportModal(false);
+  };
+
   const isDisabled = tasks.length < 1 || username.trim() === '';
   return (
     <div className="create-room-container">
@@ -106,7 +118,26 @@ function CreateRoomForm() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <TaskList taskList={tasks} onTaskListChange={onHandleChangeTaskList} />
+        <div className="task-section">
+          <div className="task-section-header">
+            <h3>{t('planningVotes.createRoom.tasks.title')}</h3>
+            <div className="task-actions">
+              <button
+                type="button"
+                className="btn-import-jira"
+                onClick={() => setShowImportModal(true)}
+                title={t('planningVotes.createRoom.tasks.importFromJira')}
+              >
+                <FaDownload />
+                {t('planningVotes.createRoom.tasks.importFromJira')}
+              </button>
+            </div>
+          </div>
+          <TaskList
+            taskList={tasks}
+            onTaskListChange={onHandleChangeTaskList}
+          />
+        </div>
         <div className="form-actions">
           <button
             className="button-primary"
@@ -117,6 +148,12 @@ function CreateRoomForm() {
           </button>
         </div>
       </div>
+      {/* Modal de importación de Jira */}
+      <JiraImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onTasksImported={handleTasksImported}
+      />
     </div>
   );
 }

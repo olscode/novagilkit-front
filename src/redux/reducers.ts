@@ -15,7 +15,13 @@ export enum VotingStatus {
 
 export interface Task {
   id: string;
-  description: string;
+  title?: string; // Nuevo campo para el título (ej: "PROJ-123 - Implementar nueva funcionalidad")
+  description: string; // Descripción detallada
+  jiraKey?: string; // Clave de Jira si es importada (ej: "PROJ-123")
+  jiraUrl?: string; // URL de Jira si es importada
+  type?: string; // Tipo de issue (Story, Task, etc.)
+  priority?: string; // Prioridad (High, Medium, Low)
+  originalStoryPoints?: number; // Story points originales de Jira
   voting: {
     status: VotingStatus;
     votes: Record<string, number>; // userId → vote

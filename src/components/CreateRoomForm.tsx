@@ -24,6 +24,9 @@ function CreateRoomForm() {
 
   const [username, setUsername] = useState('');
   const [tasks, setTasks] = useState<Array<string | undefined>>([]);
+  const [importedJiraTasks, setImportedJiraTasks] = useState<ImportedTask[]>(
+    []
+  );
   const [showImportModal, setShowImportModal] = useState(false);
 
   function createRoomId() {
@@ -43,26 +46,54 @@ function CreateRoomForm() {
     const userId = uuidv4();
     const roomId = createRoomId();
 
-    // Convertir las tareas al formato correcto para el reducer
-    const formattedTasks = tasks
+    // Convertir tareas manuales al formato correcto
+    const manualTasks = tasks
       .filter((task) => task && task.trim() !== '')
       .map((task) => ({
         id: uuidv4(),
+        title: undefined,
         description: task || '',
+        jiraKey: undefined,
+        jiraUrl: undefined,
+        type: undefined,
+        priority: undefined,
+        originalStoryPoints: undefined,
         voting: {
-          status: VotingStatus.NOT_STARTED, // Estado inicial de la votación
-          votes: {}, // Inicialmente no hay votos
+          status: VotingStatus.NOT_STARTED,
+          votes: {},
         },
       }));
 
+    // Convertir tareas importadas de Jira al formato correcto
+    const jiraTasks = importedJiraTasks.map((task) => ({
+      id: uuidv4(),
+      title: `${task.jiraKey} - ${task.description}`,
+      description: task.details || task.description,
+      jiraKey: task.jiraKey,
+      jiraUrl: task.jiraUrl,
+      type: task.type,
+      priority: task.priority,
+      originalStoryPoints: task.originalStoryPoints,
+      voting: {
+        status: VotingStatus.NOT_STARTED,
+        votes: {},
+      },
+    }));
+
+    // Combinar todas las tareas
+    const allTasks = [...manualTasks, ...jiraTasks];
+
     console.log(`🏠 Creando sala: ${roomId} con usuario: ${userId}`);
+    console.log(
+      `📝 Tareas totales: ${allTasks.length} (${manualTasks.length} manuales + ${jiraTasks.length} de Jira)`
+    );
 
     // Primero actualizar el estado de Redux
     dispatch(
       createRoom({
         roomId: roomId,
         creatorId: userId,
-        tasks: formattedTasks,
+        tasks: allTasks,
         users: [{ username, userId, active: true }],
         app: 'planning-votes',
         currentTaskId: null,
@@ -79,7 +110,7 @@ function CreateRoomForm() {
 
     // Primero crear la sala y luego unirse a ella
     console.log(`📤 Emitiendo createRoom: ${roomId}, ${userId}, ${username}`);
-    crearSala(roomId, userId, username, formattedTasks);
+    crearSala(roomId, userId, username, allTasks);
 
     // Navegar a la sala después de emitir los eventos
     navigate(`/planning-votes/room/${roomId}`);
@@ -90,13 +121,23 @@ function CreateRoomForm() {
   };
 
   const handleTasksImported = (importedTasks: ImportedTask[]) => {
-    // Convertir las tareas importadas al formato que espera el componente
-    const taskDescriptions = importedTasks.map((task) => task.description);
-    setTasks(taskDescriptions);
+    console.log('📥 Tareas importadas desde Jira:', importedTasks);
+
+    // Guardar las tareas importadas con toda su información
+    setImportedJiraTasks((prev) => [...prev, ...importedTasks]);
+
+    // NO añadir las tareas al TaskList visual - solo las mantenemos separadas
+    // El TaskList solo mostrará tareas manuales
+    console.log(
+      '📝 Tareas de Jira guardadas (no se añaden al TaskList):',
+      importedTasks
+    );
     setShowImportModal(false);
   };
 
-  const isDisabled = tasks.length < 1 || username.trim() === '';
+  const isDisabled =
+    (tasks.length < 1 && importedJiraTasks.length < 1) ||
+    username.trim() === '';
   return (
     <div className="create-room-container">
       {' '}
@@ -133,10 +174,63 @@ function CreateRoomForm() {
               </button>
             </div>
           </div>
+
+          {/* Tareas manuales */}
           <TaskList
             taskList={tasks}
             onTaskListChange={onHandleChangeTaskList}
           />
+
+          {/* Tareas importadas de Jira */}
+          {importedJiraTasks.length > 0 && (
+            <div className="imported-tasks-section">
+              <h4 className="imported-tasks-title">
+                📋 {t('planningVotes.createRoom.tasks.importedFromJira')} (
+                {importedJiraTasks.length})
+              </h4>
+              <div className="imported-tasks-list">
+                {importedJiraTasks.map((task, index) => (
+                  <div key={task.id || index} className="imported-task-item">
+                    <div className="imported-task-header">
+                      <span className="jira-key-badge">{task.jiraKey}</span>
+                      <span className="task-title">{task.description}</span>
+                      <button
+                        type="button"
+                        className="btn-remove-imported"
+                        onClick={() => {
+                          setImportedJiraTasks((prev) =>
+                            prev.filter((_, i) => i !== index)
+                          );
+                        }}
+                        title={t(
+                          'planningVotes.createRoom.tasks.removeImported'
+                        )}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <div className="task-meta">
+                      {task.type && (
+                        <span className="meta-badge meta-type">
+                          {task.type}
+                        </span>
+                      )}
+                      {task.priority && (
+                        <span className="meta-badge meta-priority">
+                          {task.priority}
+                        </span>
+                      )}
+                      {task.originalStoryPoints && (
+                        <span className="meta-badge meta-points">
+                          {task.originalStoryPoints} SP
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         <div className="form-actions">
           <button

@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 type TaskProps = {
   taskValue: string | undefined;
   onTaskChange?: (task: string | undefined) => void;
-  onTaskDelete?: () => void; // Añadir función para eliminar tarea
-  index: number; // Añadir índice para mostrar número de tarea
+  onTaskDelete?: () => void;
+  index: number;
+  isJiraTask?: boolean; // Nuevo prop para identificar si es de Jira
 };
 
 export function Task({
@@ -13,6 +14,7 @@ export function Task({
   onTaskChange,
   onTaskDelete,
   index,
+  isJiraTask = false,
 }: TaskProps) {
   const { t } = useTranslation();
   const [task, setTask] = useState<string | undefined>(taskValue);
@@ -25,11 +27,31 @@ export function Task({
     }
   };
 
+  // Detectar si parece ser una tarea de Jira por el formato
+  const looksLikeJiraTask =
+    taskValue?.includes(' - ') && taskValue?.match(/^[A-Z]+-\d+/);
+  const isFromJira = isJiraTask || looksLikeJiraTask;
+
   return (
-    <div className="task-item">
+    <div className={`task-item ${isFromJira ? 'task-item--jira' : ''}`}>
       <div className="task-header">
         <label htmlFor={`task-${index}`} className="task-label">
-          {t('planningVotes.tasks.taskLabel')} {index + 1}
+          {isFromJira ? (
+            <span className="task-label-jira">
+              <svg
+                className="jira-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M11.53 2c0 2.4 1.97 4.35 4.35 4.35h1.78v1.7c0 2.4 1.97 4.35 4.35 4.35V2.84c-.5-.84-1.36-1.39-2.35-1.39L11.53 2zm-4.35 4.35c0 2.4 1.97 4.35 4.35 4.35h1.78v1.7c0 2.4 1.97 4.35 4.35 4.35V7.19c-.5-.84-1.36-1.39-2.35-1.39L7.18 6.35zm-4.35 4.35c0 2.4 1.97 4.35 4.35 4.35h1.78v1.7c0 2.4 1.97 4.35 4.35 4.35v-9.55c-.5-.84-1.36-1.39-2.35-1.39L2.83 10.7z" />
+              </svg>
+              {t('planningVotes.tasks.jiraTaskLabel')} {index + 1}
+            </span>
+          ) : (
+            `${t('planningVotes.tasks.taskLabel')} ${index + 1}`
+          )}
         </label>
         {onTaskDelete && (
           <button

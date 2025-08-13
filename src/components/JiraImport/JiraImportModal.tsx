@@ -310,6 +310,7 @@ export const JiraImportModal: React.FC<JiraImportModalProps> = ({
     const selectedTasks = importedTasks.filter((task) =>
       selectedTaskIds.has(task.id)
     );
+    console.log('✅ Enviando tareas seleccionadas:', selectedTasks);
     onTasksImported(selectedTasks);
     handleClose();
   };

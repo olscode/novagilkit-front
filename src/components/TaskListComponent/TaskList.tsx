@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Task } from './Task';
 
@@ -13,6 +13,11 @@ export default function TaskList({
 }: TaskListProps) {
   const { t } = useTranslation();
   const [tasks, setTasks] = useState<Array<string | undefined>>(taskList);
+
+  // Sincronizar el estado interno cuando cambian las props
+  useEffect(() => {
+    setTasks(taskList);
+  }, [taskList]);
 
   const onAddTask = () => {
     const newTasks = [...tasks, ''];
@@ -48,15 +53,23 @@ export default function TaskList({
         </div>
       ) : (
         <div className="tasks-wrapper">
-          {tasks.map((task, index) => (
-            <Task
-              key={index}
-              index={index}
-              taskValue={task}
-              onTaskChange={(newTask) => handleTaskChange(index, newTask)}
-              onTaskDelete={() => handleTaskDelete(index)}
-            />
-          ))}
+          {tasks.map((task, index) => {
+            // Detectar si es una tarea de Jira
+            const isJiraTask = Boolean(
+              task?.includes(' - ') && task?.match(/^[A-Z]+-\d+/)
+            );
+
+            return (
+              <Task
+                key={index}
+                index={index}
+                taskValue={task}
+                onTaskChange={(newTask) => handleTaskChange(index, newTask)}
+                onTaskDelete={() => handleTaskDelete(index)}
+                isJiraTask={isJiraTask}
+              />
+            );
+          })}
         </div>
       )}{' '}
       <button

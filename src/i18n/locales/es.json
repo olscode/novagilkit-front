@@ -45,7 +45,9 @@
       "createButton": "Crear Sala",
       "tasks": {
         "title": "Tareas",
-        "importFromJira": "Importar desde Jira"
+        "importFromJira": "Importar desde Jira",
+        "importedFromJira": "Tareas importadas desde Jira",
+        "removeImported": "Eliminar tarea importada"
       }
     },
     "joinRoom": {
@@ -138,6 +140,7 @@
       "deleteTask": "Eliminar esta tarea",
       "taskPlaceholder": "Describe la tarea aquí...",
       "taskLabel": "Tarea",
+      "jiraTaskLabel": "Tarea de Jira",
       "noTasks": "Aún no hay tareas añadidas"
     }
   },

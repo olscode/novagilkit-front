@@ -188,6 +188,39 @@
   &:hover {
     background-color: var(--task-item-hover-bg);
   }
+
+  // Estilos especiales para tareas de Jira
+  &.task-item--jira {
+    border-left: 4px solid var(--highlight-color);
+    background: linear-gradient(
+      135deg,
+      var(--task-item-bg) 0%,
+      rgba(var(--highlight-color-rgb, 33, 150, 243), 0.05) 100%
+    );
+
+    .task-label-jira {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--highlight-color);
+      font-weight: 600;
+
+      .jira-icon {
+        color: var(--highlight-color);
+      }
+    }
+
+    .task-textarea {
+      background: rgba(var(--highlight-color-rgb, 33, 150, 243), 0.02);
+      border: 1px solid rgba(var(--highlight-color-rgb, 33, 150, 243), 0.1);
+
+      &:focus {
+        border-color: var(--highlight-color);
+        box-shadow: 0 0 0 2px
+          rgba(var(--highlight-color-rgb, 33, 150, 243), 0.1);
+      }
+    }
+  }
 }
 
 .task-header {
@@ -327,4 +360,150 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 30px;
+}
+
+// Sección de tareas importadas
+.imported-tasks-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: rgba(var(--highlight-color-rgb, 33, 150, 243), 0.05);
+  border: 1px solid rgba(var(--highlight-color-rgb, 33, 150, 243), 0.2);
+  border-radius: 12px;
+
+  .imported-tasks-title {
+    margin: 0 0 16px 0;
+    color: var(--highlight-color);
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .imported-tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .imported-task-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--highlight-color);
+      box-shadow: 0 2px 8px rgba(var(--highlight-color-rgb, 33, 150, 243), 0.1);
+    }
+
+    .imported-task-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+
+      .jira-key-badge {
+        background: var(--highlight-color);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .task-title {
+        flex: 1;
+        color: var(--text-color);
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .btn-remove-imported {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+
+        &:hover {
+          background: rgba(244, 67, 54, 0.1);
+          color: #f44336;
+        }
+      }
+    }
+
+    .task-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+
+      .meta-badge {
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        border-radius: 12px;
+        font-weight: 500;
+
+        &.meta-type {
+          background: rgba(33, 150, 243, 0.1);
+          color: #2196f3;
+        }
+
+        &.meta-priority {
+          background: rgba(255, 152, 0, 0.1);
+          color: #ff9800;
+        }
+
+        &.meta-points {
+          background: rgba(76, 175, 80, 0.1);
+          color: #4caf50;
+        }
+      }
+    }
+  }
+}
+
+// Responsividad para móviles
+@media (max-width: 768px) {
+  .task-section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    .task-actions {
+      justify-content: center;
+    }
+
+    .btn-import-jira {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .imported-tasks-section {
+    padding: 16px;
+
+    .imported-task-item .imported-task-header {
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .task-title {
+        flex-basis: 100%;
+        order: 2;
+      }
+
+      .btn-remove-imported {
+        order: 3;
+      }
+    }
+
+    .task-meta {
+      justify-content: flex-start;
+    }
+  }
 }

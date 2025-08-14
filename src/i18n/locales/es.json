@@ -139,8 +139,13 @@
       "addTask": "Añadir Tarea",
       "deleteTask": "Eliminar esta tarea",
       "taskPlaceholder": "Describe la tarea aquí...",
+      "titlePlaceholder": "Título de la tarea...",
+      "descriptionPlaceholder": "Descripción adicional (opcional)...",
       "taskLabel": "Tarea",
+      "titleLabel": "Título",
+      "descriptionLabel": "Descripción",
       "jiraTaskLabel": "Tarea de Jira",
+      "jiraTask": "Tarea de Jira",
       "noTasks": "Aún no hay tareas añadidas"
     }
   },

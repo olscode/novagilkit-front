@@ -46,35 +46,37 @@
 
     .task-actions {
       display: flex;
-      gap: 8px;
-    }
-
-    .btn-import-jira {
-      display: flex;
+      gap: 12px;
       align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--highlight-color);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      flex-wrap: wrap;
 
-      &:hover {
-        background: var(--highlight-color-hover, var(--highlight-color));
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
+      .btn-import-jira {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: var(--highlight-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
 
-      &:active {
-        transform: translateY(0);
-      }
+        &:hover {
+          background: var(--highlight-color-hover, var(--highlight-color));
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-      svg {
-        font-size: 14px;
+        &:active {
+          transform: translateY(0);
+        }
+
+        svg {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -378,6 +380,11 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
+    .jira-icon-title {
+      font-size: 1.2rem;
+      filter: hue-rotate(200deg);
+    }
   }
 
   .imported-tasks-list {
@@ -412,6 +419,14 @@
         font-size: 0.75rem;
         font-weight: 600;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .jira-icon-small {
+          font-size: 0.7rem;
+          filter: brightness(1.2);
+        }
       }
 
       .task-title {
@@ -452,16 +467,25 @@
         &.meta-type {
           background: rgba(33, 150, 243, 0.1);
           color: #2196f3;
+          display: flex;
+          align-items: center;
+          gap: 4px;
         }
 
         &.meta-priority {
           background: rgba(255, 152, 0, 0.1);
           color: #ff9800;
+          display: flex;
+          align-items: center;
+          gap: 4px;
         }
 
         &.meta-points {
           background: rgba(76, 175, 80, 0.1);
           color: #4caf50;
+          display: flex;
+          align-items: center;
+          gap: 4px;
         }
       }
     }
@@ -504,6 +528,71 @@
 
     .task-meta {
       justify-content: flex-start;
+    }
+  }
+}
+
+// Estilos para campos separados en Task component
+.task-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+
+  .task-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .field-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .task-input,
+    .task-description {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--input-bg, var(--card-bg));
+      color: var(--text-color);
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--highlight-color);
+        box-shadow: 0 0 0 2px
+          rgba(var(--highlight-color-rgb, 59, 130, 246), 0.1);
+      }
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+    }
+
+    .task-title {
+      height: 40px;
+    }
+
+    .task-description {
+      min-height: 60px;
+      resize: vertical;
+      font-family: inherit;
+    }
+  }
+}
+
+// Responsive para campos separados
+@media (max-width: 768px) {
+  .task-fields {
+    .task-field {
+      .task-input,
+      .task-description {
+        font-size: 16px; // Evitar zoom en iOS
+      }
     }
   }
 }

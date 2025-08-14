@@ -148,14 +148,29 @@ export default function Sidebar() {
             <ul>
               {tasks.length > 0 ? (
                 tasks.map((task) => {
+                  // Usar title si existe, si no usar description
+                  const displayText = task.title || task.description;
+                  const isJiraTask = !!task.jiraKey;
+
                   return (
                     <li
                       key={task.id}
                       className={`task-item ${
                         task.id === currentTaskId ? 'active-task' : ''
-                      }`}
+                      } ${isJiraTask ? 'jira-task' : ''}`}
                     >
-                      {task.description}
+                      {isJiraTask && (
+                        <span
+                          className="jira-icon"
+                          title={t('planningVotes.room.sidebar.jiraTask')}
+                        >
+                          🔗
+                        </span>
+                      )}
+                      <span className="task-text">{displayText}</span>
+                      {isJiraTask && task.jiraKey && (
+                        <span className="jira-key-small">{task.jiraKey}</span>
+                      )}
                     </li>
                   );
                 })

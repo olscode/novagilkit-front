@@ -10,6 +10,7 @@ export interface ImportedTask {
   id: string;
   jiraKey: string;
   jiraUrl: string;
+  title: string;
   description: string;
   details: string;
   type: string;

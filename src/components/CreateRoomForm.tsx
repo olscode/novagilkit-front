@@ -16,6 +16,11 @@ import './CreateRoom.scss';
 import { JiraImportModal } from './JiraImport';
 import TaskList from './TaskListComponent/TaskList';
 
+type TaskData = {
+  title?: string;
+  description?: string;
+};
+
 function CreateRoomForm() {
   const dispatch = useAppDispatch(); // ✅ Tipado automático para dispatch
   const navigate = useNavigate();
@@ -23,11 +28,13 @@ function CreateRoomForm() {
   const { t } = useTranslation();
 
   const [username, setUsername] = useState('');
-  const [tasks, setTasks] = useState<Array<string | undefined>>([]);
+  const [tasks, setTasks] = useState<Array<string | undefined | TaskData>>([]);
   const [importedJiraTasks, setImportedJiraTasks] = useState<ImportedTask[]>(
     []
   );
   const [showImportModal, setShowImportModal] = useState(false);
+  // Usar siempre campos separados por defecto
+  const useSeparateFields = true;
 
   function createRoomId() {
     return uuidv4();
@@ -48,26 +55,51 @@ function CreateRoomForm() {
 
     // Convertir tareas manuales al formato correcto
     const manualTasks = tasks
-      .filter((task) => task && task.trim() !== '')
-      .map((task) => ({
-        id: uuidv4(),
-        title: undefined,
-        description: task || '',
-        jiraKey: undefined,
-        jiraUrl: undefined,
-        type: undefined,
-        priority: undefined,
-        originalStoryPoints: undefined,
-        voting: {
-          status: VotingStatus.NOT_STARTED,
-          votes: {},
-        },
-      }));
+      .filter((task) => {
+        if (typeof task === 'string') {
+          return task && task.trim() !== '';
+        }
+        return task && (task.title?.trim() || task.description?.trim());
+      })
+      .map((task, index) => {
+        let title: string;
+        let description: string;
+
+        if (typeof task === 'string') {
+          // Tarea simple como string
+          const taskText = task || '';
+          const isShort = taskText.length <= 50;
+          title = isShort
+            ? taskText
+            : `${t('planningVotes.tasks.taskLabel')} ${index + 1}`;
+          description = taskText;
+        } else {
+          // Tarea con campos separados
+          title =
+            task?.title || `${t('planningVotes.tasks.taskLabel')} ${index + 1}`;
+          description = task?.description || '';
+        }
+
+        return {
+          id: uuidv4(),
+          title,
+          description,
+          jiraKey: undefined,
+          jiraUrl: undefined,
+          type: undefined,
+          priority: undefined,
+          originalStoryPoints: undefined,
+          voting: {
+            status: VotingStatus.NOT_STARTED,
+            votes: {},
+          },
+        };
+      });
 
     // Convertir tareas importadas de Jira al formato correcto
     const jiraTasks = importedJiraTasks.map((task) => ({
       id: uuidv4(),
-      title: `${task.jiraKey} - ${task.description}`,
+      title: task.title, // Solo la descripción, sin el jiraKey
       description: task.details || task.description,
       jiraKey: task.jiraKey,
       jiraUrl: task.jiraUrl,
@@ -116,7 +148,9 @@ function CreateRoomForm() {
     navigate(`/planning-votes/room/${roomId}`);
   }
 
-  const onHandleChangeTaskList = (taskList: Array<string | undefined>) => {
+  const onHandleChangeTaskList = (
+    taskList: Array<string | undefined | TaskData>
+  ) => {
     setTasks(taskList);
   };
 
@@ -135,9 +169,17 @@ function CreateRoomForm() {
     setShowImportModal(false);
   };
 
+  // Verificar si hay tareas válidas (considerando ambos formatos)
+  const hasValidTasks = tasks.some((task) => {
+    if (typeof task === 'string') {
+      return task && task.trim() !== '';
+    }
+    return task && (task.title?.trim() || task.description?.trim());
+  });
+
   const isDisabled =
-    (tasks.length < 1 && importedJiraTasks.length < 1) ||
-    username.trim() === '';
+    (!hasValidTasks && importedJiraTasks.length < 1) || username.trim() === '';
+
   return (
     <div className="create-room-container">
       {' '}
@@ -179,20 +221,25 @@ function CreateRoomForm() {
           <TaskList
             taskList={tasks}
             onTaskListChange={onHandleChangeTaskList}
+            useSeparateFields={useSeparateFields}
           />
 
           {/* Tareas importadas de Jira */}
           {importedJiraTasks.length > 0 && (
             <div className="imported-tasks-section">
               <h4 className="imported-tasks-title">
-                📋 {t('planningVotes.createRoom.tasks.importedFromJira')} (
+                <span className="jira-icon-title">�</span>
+                {t('planningVotes.createRoom.tasks.importedFromJira')} (
                 {importedJiraTasks.length})
               </h4>
               <div className="imported-tasks-list">
                 {importedJiraTasks.map((task, index) => (
                   <div key={task.id || index} className="imported-task-item">
                     <div className="imported-task-header">
-                      <span className="jira-key-badge">{task.jiraKey}</span>
+                      <span className="jira-key-badge">
+                        <span className="jira-icon-small">🔗</span>
+                        {task.jiraKey}
+                      </span>
                       <span className="task-title">{task.description}</span>
                       <button
                         type="button"
@@ -212,17 +259,17 @@ function CreateRoomForm() {
                     <div className="task-meta">
                       {task.type && (
                         <span className="meta-badge meta-type">
-                          {task.type}
+                          📋 {task.type}
                         </span>
                       )}
                       {task.priority && (
                         <span className="meta-badge meta-priority">
-                          {task.priority}
+                          🔥 {task.priority}
                         </span>
                       )}
                       {task.originalStoryPoints && (
                         <span className="meta-badge meta-points">
-                          {task.originalStoryPoints} SP
+                          ⭐ {task.originalStoryPoints} SP
                         </span>
                       )}
                     </div>

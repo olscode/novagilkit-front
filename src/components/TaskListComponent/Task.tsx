@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+type TaskData = {
+  title?: string;
+  description?: string;
+};
+
 type TaskProps = {
-  taskValue: string | undefined;
-  onTaskChange?: (task: string | undefined) => void;
+  taskValue: string | undefined | TaskData;
+  onTaskChange?: (task: string | undefined | TaskData) => void;
   onTaskDelete?: () => void;
   index: number;
   isJiraTask?: boolean; // Nuevo prop para identificar si es de Jira
+  separateFields?: boolean; // Nuevo prop para usar campos separados
 };
 
 export function Task({
@@ -15,21 +21,55 @@ export function Task({
   onTaskDelete,
   index,
   isJiraTask = false,
+  separateFields = false,
 }: TaskProps) {
   const { t } = useTranslation();
-  const [task, setTask] = useState<string | undefined>(taskValue);
+
+  // Estado para manejar tanto string simple como objeto con title/description
+  const [task, setTask] = useState<string | TaskData>(() => {
+    if (separateFields) {
+      // Si taskValue es string, convertir a objeto
+      if (typeof taskValue === 'string') {
+        return { title: taskValue, description: '' };
+      }
+      // Si es objeto, usar tal como está
+      return (taskValue as TaskData) || { title: '', description: '' };
+    }
+    // Modo simple (string)
+    return typeof taskValue === 'string'
+      ? taskValue
+      : taskValue?.description || '';
+  });
 
   const onChangeTask = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = event.target.value;
-    setTask(newValue);
-    if (onTaskChange) {
-      onTaskChange(newValue);
+    if (!separateFields) {
+      const newValue = event.target.value;
+      setTask(newValue);
+      if (onTaskChange) {
+        onTaskChange(newValue);
+      }
+    }
+  };
+
+  const onChangeTitleOrDescription = (
+    field: 'title' | 'description',
+    value: string
+  ) => {
+    if (separateFields) {
+      const currentTask = task as TaskData;
+      const newTask = { ...currentTask, [field]: value };
+      setTask(newTask);
+      if (onTaskChange) {
+        onTaskChange(newTask);
+      }
     }
   };
 
   // Detectar si parece ser una tarea de Jira por el formato
+  const taskText =
+    typeof task === 'string' ? task : task.title || task.description || '';
   const looksLikeJiraTask =
-    taskValue?.includes(' - ') && taskValue?.match(/^[A-Z]+-\d+/);
+    taskText?.includes(' - ') && taskText?.match(/^[A-Z]+-\d+/);
   const isFromJira = isJiraTask || looksLikeJiraTask;
 
   return (
@@ -80,14 +120,55 @@ export function Task({
             </svg>
           </button>
         )}
-      </div>{' '}
-      <textarea
-        id={`task-${index}`}
-        className="task-textarea"
-        placeholder={t('planningVotes.tasks.taskPlaceholder')}
-        onChange={onChangeTask}
-        value={task || ''}
-      />
+      </div>
+
+      {separateFields ? (
+        // Campos separados para título y descripción
+        <div className="task-fields">
+          <div className="task-field">
+            <label htmlFor={`task-title-${index}`} className="field-label">
+              {t('planningVotes.tasks.titleLabel')}
+            </label>
+            <input
+              id={`task-title-${index}`}
+              type="text"
+              className="task-input task-title"
+              placeholder={t('planningVotes.tasks.titlePlaceholder')}
+              value={(task as TaskData).title || ''}
+              onChange={(e) =>
+                onChangeTitleOrDescription('title', e.target.value)
+              }
+            />
+          </div>
+          <div className="task-field">
+            <label
+              htmlFor={`task-description-${index}`}
+              className="field-label"
+            >
+              {t('planningVotes.tasks.descriptionLabel')}
+            </label>
+            <textarea
+              id={`task-description-${index}`}
+              className="task-textarea task-description"
+              placeholder={t('planningVotes.tasks.descriptionPlaceholder')}
+              value={(task as TaskData).description || ''}
+              onChange={(e) =>
+                onChangeTitleOrDescription('description', e.target.value)
+              }
+              rows={3}
+            />
+          </div>
+        </div>
+      ) : (
+        // Campo único tradicional
+        <textarea
+          id={`task-${index}`}
+          className="task-textarea"
+          placeholder={t('planningVotes.tasks.taskPlaceholder')}
+          onChange={onChangeTask}
+          value={(task as string) || ''}
+        />
+      )}
     </div>
   );
 }

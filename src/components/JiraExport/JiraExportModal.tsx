@@ -25,7 +25,10 @@ import './JiraExportModal.scss';
 
 interface TaskStats {
   id: string;
+  title?: string; // Título de la tarea
   description: string;
+  jiraKey?: string; // Si existe, la tarea ya fue exportada
+  jiraUrl?: string; // URL de Jira si existe
   votes: Record<string, number>;
   average: number;
   median: number;
@@ -73,6 +76,7 @@ interface ExportConfig {
 interface CreateResult {
   success: boolean;
   taskId: string;
+  taskTitle?: string;
   taskDescription: string;
   jiraKey?: string;
   jiraUrl?: string;
@@ -381,14 +385,47 @@ export const JiraExportModal: React.FC<JiraExportModalProps> = ({
     setStep('creating');
 
     try {
+      const { existingTasks, newTasks } = separateTasks();
+
       const exportData = {
         projectKey: exportConfig.projectKey,
         epicKey: exportConfig.epicKey || undefined,
         createNewEpic: exportConfig.createNewEpic,
         newEpicSummary: exportConfig.newEpicSummary || undefined,
+        // Separar las tareas por tipo de operación
+        tasksToCreate: newTasks.map((task) => ({
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          average: task.average,
+          median: task.median,
+          consensus: task.consensus,
+          min: task.min,
+          max: task.max,
+          count: task.count,
+          votes: task.votes,
+        })),
+        tasksToUpdate: existingTasks.map((task) => ({
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          jiraKey: task.jiraKey,
+          jiraUrl: task.jiraUrl,
+          average: task.average,
+          median: task.median,
+          consensus: task.consensus,
+          min: task.min,
+          max: task.max,
+          count: task.count,
+          votes: task.votes,
+        })),
+        // Mantener backward compatibility
         tasks: tasks.map((task) => ({
           id: task.id,
+          title: task.title,
           description: task.description,
+          jiraKey: task.jiraKey,
+          jiraUrl: task.jiraUrl,
           average: task.average,
           median: task.median,
           consensus: task.consensus,
@@ -442,6 +479,13 @@ export const JiraExportModal: React.FC<JiraExportModalProps> = ({
 
   const dismissError = () => {
     setError(null);
+  };
+
+  // Separar tareas en dos grupos: nuevas vs. existentes
+  const separateTasks = () => {
+    const existingTasks = tasks.filter((task) => task.jiraKey || task.jiraUrl);
+    const newTasks = tasks.filter((task) => !task.jiraKey && !task.jiraUrl);
+    return { existingTasks, newTasks };
   };
 
   // Renderizar el modal basado en el step actual
@@ -541,142 +585,171 @@ export const JiraExportModal: React.FC<JiraExportModalProps> = ({
     </div>
   );
 
-  const renderSelectStep = () => (
-    <div className="jira-export-step">
-      <div className="step-header">
-        <div className="step-icon">
-          <FaProjectDiagram />
-        </div>
-        <h3>{t('jiraExport.select.title')}</h3>
-        <p>{t('jiraExport.select.description')}</p>
-      </div>
+  const renderSelectStep = () => {
+    const { existingTasks, newTasks } = separateTasks();
+    const onlyUpdating = newTasks.length === 0 && existingTasks.length > 0;
 
-      <div className="step-content">
-        <div className="form-group">
-          <label>{t('jiraExport.select.project')}</label>
-          <Dropdown
-            options={projects.map(
-              (project): DropdownOption => ({
-                value: project.key,
-                label: project.name,
-                description: `${t('common.key')}: ${project.key}`,
-              })
-            )}
-            value={exportConfig.projectKey}
-            onChange={handleProjectSelect}
-            placeholder={t('jiraExport.select.selectProject')}
-            disabled={loading}
-            searchable
-            size="medium"
-          />
+    return (
+      <div className="jira-export-step">
+        <div className="step-header">
+          <div className="step-icon">
+            <FaProjectDiagram />
+          </div>
+          <h3>{t('jiraExport.select.title')}</h3>
+          <p>
+            {onlyUpdating
+              ? 'Solo actualizaremos tareas existentes, no necesitas seleccionar una épica.'
+              : t('jiraExport.select.description')}
+          </p>
         </div>
 
-        {exportConfig.projectKey && (
-          <div className="epic-selection">
-            <div className="form-group">
-              <label>{t('jiraExport.select.epic')}</label>
-              <div className="radio-group">
-                <div className="radio-option">
-                  <input
-                    type="radio"
-                    id="create-new-epic"
-                    checked={exportConfig.createNewEpic}
-                    onChange={() =>
-                      setExportConfig((prev) => ({
-                        ...prev,
-                        createNewEpic: true,
-                        epicKey: '',
-                      }))
-                    }
-                  />
-                  <span>{t('jiraExport.select.createNewEpic')}</span>
-                </div>
-                {epics.length > 0 && (
+        <div className="step-content">
+          <div className="form-group">
+            <label>{t('jiraExport.select.project')}</label>
+            <Dropdown
+              options={projects.map(
+                (project): DropdownOption => ({
+                  value: project.key,
+                  label: project.name,
+                  description: `${t('common.key')}: ${project.key}`,
+                })
+              )}
+              value={exportConfig.projectKey}
+              onChange={handleProjectSelect}
+              placeholder={t('jiraExport.select.selectProject')}
+              disabled={loading}
+              searchable
+              size="medium"
+            />
+          </div>
+
+          {/* Solo mostrar selección de épica si hay tareas nuevas para crear */}
+          {exportConfig.projectKey && !onlyUpdating && (
+            <div className="epic-selection">
+              <div className="form-group">
+                <label>{t('jiraExport.select.epic')}</label>
+                <div className="radio-group">
                   <div className="radio-option">
                     <input
                       type="radio"
-                      id="use-existing-epic"
-                      checked={!exportConfig.createNewEpic}
+                      id="create-new-epic"
+                      checked={exportConfig.createNewEpic}
                       onChange={() =>
                         setExportConfig((prev) => ({
                           ...prev,
-                          createNewEpic: false,
+                          createNewEpic: true,
+                          epicKey: '',
                         }))
                       }
                     />
-                    <span>{t('jiraExport.select.existingEpic')}</span>
+                    <span>{t('jiraExport.select.createNewEpic')}</span>
                   </div>
-                )}
-              </div>
-            </div>
-
-            {exportConfig.createNewEpic ? (
-              <div className="form-group">
-                <label>{t('jiraExport.createEpic.summary')}</label>
-                <input
-                  type="text"
-                  value={exportConfig.newEpicSummary}
-                  onChange={(e) =>
-                    setExportConfig((prev) => ({
-                      ...prev,
-                      newEpicSummary: e.target.value,
-                    }))
-                  }
-                  placeholder={t('jiraExport.createEpic.summaryPlaceholder')}
-                />
-              </div>
-            ) : (
-              <div className="form-group">
-                <label>{t('jiraExport.select.epic')}</label>
-                <Dropdown
-                  options={epics.map(
-                    (epic): DropdownOption => ({
-                      value: epic.key,
-                      label:
-                        epic.summary ||
-                        `${t('jiraExport.select.epic')} ${epic.key}`,
-                      description: `${t('common.key')}: ${epic.key}`,
-                    })
+                  {epics.length > 0 && (
+                    <div className="radio-option">
+                      <input
+                        type="radio"
+                        id="use-existing-epic"
+                        checked={!exportConfig.createNewEpic}
+                        onChange={() =>
+                          setExportConfig((prev) => ({
+                            ...prev,
+                            createNewEpic: false,
+                          }))
+                        }
+                      />
+                      <span>{t('jiraExport.select.existingEpic')}</span>
+                    </div>
                   )}
-                  value={exportConfig.epicKey}
-                  onChange={(value) =>
-                    setExportConfig((prev) => ({
-                      ...prev,
-                      epicKey: value,
-                    }))
-                  }
-                  placeholder={t('jiraExport.select.selectEpic')}
-                  disabled={loading}
-                  searchable
-                  clearable
-                  size="medium"
-                />
+                </div>
               </div>
-            )}
-          </div>
-        )}
 
-        <div className="step-actions">
-          <button className="btn-secondary" onClick={() => setStep('auth')}>
-            {t('jiraExport.actions.back')}
-          </button>
-          <button
-            className="btn-primary"
-            onClick={() => setStep('preview')}
-            disabled={
-              !exportConfig.projectKey ||
-              (!exportConfig.createNewEpic && !exportConfig.epicKey) ||
-              (exportConfig.createNewEpic &&
-                !exportConfig.newEpicSummary.trim())
-            }
-          >
-            <FaFlag />
-            {t('jiraExport.actions.continue')}
-          </button>
+              {exportConfig.createNewEpic ? (
+                <div className="form-group">
+                  <label>{t('jiraExport.createEpic.summary')}</label>
+                  <input
+                    type="text"
+                    value={exportConfig.newEpicSummary}
+                    onChange={(e) =>
+                      setExportConfig((prev) => ({
+                        ...prev,
+                        newEpicSummary: e.target.value,
+                      }))
+                    }
+                    placeholder={t('jiraExport.createEpic.summaryPlaceholder')}
+                  />
+                </div>
+              ) : (
+                <div className="form-group">
+                  <label>{t('jiraExport.select.epic')}</label>
+                  <Dropdown
+                    options={epics.map(
+                      (epic): DropdownOption => ({
+                        value: epic.key,
+                        label:
+                          epic.summary ||
+                          `${t('jiraExport.select.epic')} ${epic.key}`,
+                        description: `${t('common.key')}: ${epic.key}`,
+                      })
+                    )}
+                    value={exportConfig.epicKey}
+                    onChange={(value) =>
+                      setExportConfig((prev) => ({
+                        ...prev,
+                        epicKey: value,
+                      }))
+                    }
+                    placeholder={t('jiraExport.select.selectEpic')}
+                    disabled={loading}
+                    searchable
+                    clearable
+                    size="medium"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Información sobre las tareas a procesar */}
+          {exportConfig.projectKey && (
+            <div className="task-summary-info">
+              {existingTasks.length > 0 && (
+                <div className="info-item">
+                  <FaExternalLinkAlt />
+                  <span>{existingTasks.length} tareas serán actualizadas</span>
+                </div>
+              )}
+              {newTasks.length > 0 && (
+                <div className="info-item">
+                  <FaPlus />
+                  <span>{newTasks.length} tareas nuevas serán creadas</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="step-actions">
+            <button className="btn-secondary" onClick={() => setStep('auth')}>
+              {t('jiraExport.actions.back')}
+            </button>
+            <button
+              className="btn-primary"
+              onClick={() => setStep('preview')}
+              disabled={
+                !exportConfig.projectKey ||
+                (!onlyUpdating &&
+                  ((!exportConfig.createNewEpic && !exportConfig.epicKey) ||
+                    (exportConfig.createNewEpic &&
+                      !exportConfig.newEpicSummary.trim())))
+              }
+            >
+              <FaFlag />
+              {t('jiraExport.actions.continue')}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderCreateEpicStep = () => (
     <div className="jira-export-step">
@@ -722,90 +795,168 @@ export const JiraExportModal: React.FC<JiraExportModalProps> = ({
     </div>
   );
 
-  const renderPreviewStep = () => (
-    <div className="jira-export-step">
-      <div className="step-header">
-        <div className="step-icon">
-          <FaChartLine />
-        </div>
-        <h3>{t('jiraExport.preview.title')}</h3>
-        <p>{t('jiraExport.preview.description')}</p>
-      </div>
+  const renderPreviewStep = () => {
+    const { existingTasks, newTasks } = separateTasks();
 
-      <div className="step-content">
-        <div className="export-summary">
-          <div className="summary-item">
-            <strong>{t('jiraExport.preview.project')}:</strong>{' '}
-            {projects.find((p) => p.key === exportConfig.projectKey)?.name} (
-            {exportConfig.projectKey})
+    return (
+      <div className="jira-export-step">
+        <div className="step-header">
+          <div className="step-icon">
+            <FaChartLine />
           </div>
-          {exportConfig.createNewEpic ? (
-            <div className="summary-item">
-              <strong>{t('jiraExport.preview.epic')}:</strong>{' '}
-              {exportConfig.newEpicSummary}
-              <span className="new-epic-badge">
-                <FaPlus />
-                {t('jiraExport.preview.newEpic')}
-              </span>
-            </div>
-          ) : (
-            <div className="summary-item">
-              <strong>{t('jiraExport.preview.epic')}:</strong>{' '}
-              {epics.find((e) => e.key === exportConfig.epicKey)?.summary} (
-              {exportConfig.epicKey})
-            </div>
-          )}
-          <div className="summary-item">
-            <strong>{t('jiraExport.preview.tasksCount')}:</strong>{' '}
-            {tasks.length}
-          </div>
+          <h3>{t('jiraExport.preview.title')}</h3>
+          <p>{t('jiraExport.preview.description')}</p>
         </div>
 
-        <div className="tasks-preview">
-          <h4>{t('jiraExport.preview.tasksToCreate')}</h4>
-          <div className="tasks-list">
-            {tasks.map((task, index) => (
-              <div key={task.id} className="task-preview-item">
-                <div className="task-number">{index + 1}</div>
-                <div className="task-content">
-                  <div className="task-title">{task.description}</div>
-                  <div className="task-stats">
-                    <div className="stat">
-                      <FaChartLine />
-                      {task.average.toFixed(1)} {t('jiraExport.preview.points')}{' '}
-                      ({t('common.average')})
-                    </div>
-                    <div className="stat">
-                      <FaTasks />
-                      {task.count} {t('jiraExport.preview.votes')}
-                    </div>
-                    <div className="stat">
-                      <FaCheckCircle />
-                      {task.consensus}% {t('jiraExport.preview.consensus')}
+        <div className="step-content">
+          <div className="export-summary">
+            <div className="summary-item">
+              <strong>{t('jiraExport.preview.project')}:</strong>{' '}
+              {projects.find((p) => p.key === exportConfig.projectKey)?.name} (
+              {exportConfig.projectKey})
+            </div>
+            {exportConfig.createNewEpic ? (
+              <div className="summary-item">
+                <strong>{t('jiraExport.preview.epic')}:</strong>{' '}
+                {exportConfig.newEpicSummary}
+                <span className="new-epic-badge">
+                  <FaPlus />
+                  {t('jiraExport.preview.newEpic')}
+                </span>
+              </div>
+            ) : (
+              <div className="summary-item">
+                <strong>{t('jiraExport.preview.epic')}:</strong>{' '}
+                {epics.find((e) => e.key === exportConfig.epicKey)?.summary} (
+                {exportConfig.epicKey})
+              </div>
+            )}
+            <div className="summary-item">
+              <strong>{t('jiraExport.preview.totalTasks')}:</strong>{' '}
+              {tasks.length}
+              {existingTasks.length > 0 && (
+                <span className="task-breakdown">
+                  ({newTasks.length} nuevas, {existingTasks.length} a
+                  actualizar)
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Tareas nuevas para crear */}
+          {newTasks.length > 0 && (
+            <div className="tasks-preview">
+              <h4>
+                <FaPlus className="section-icon" />
+                Tareas nuevas para crear ({newTasks.length})
+              </h4>
+              <div className="tasks-list">
+                {newTasks.map((task, index) => (
+                  <div key={task.id} className="task-preview-item new-task">
+                    <div className="task-number">{index + 1}</div>
+                    <div className="task-content">
+                      <div className="task-title">
+                        {task.title || task.description}
+                      </div>
+                      <div className="task-stats">
+                        <div className="stat">
+                          <FaChartLine />
+                          {task.average.toFixed(1)}{' '}
+                          {t('jiraExport.preview.points')} (
+                          {t('common.average')})
+                        </div>
+                        <div className="stat">
+                          <FaTasks />
+                          {task.count} {t('jiraExport.preview.votes')}
+                        </div>
+                        <div className="stat">
+                          <FaCheckCircle />
+                          {task.consensus}% {t('jiraExport.preview.consensus')}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+          )}
+
+          {/* Tareas existentes para actualizar */}
+          {existingTasks.length > 0 && (
+            <div className="tasks-preview">
+              <h4>
+                <FaExternalLinkAlt className="section-icon" />
+                Tareas existentes para actualizar ({existingTasks.length})
+              </h4>
+              <div className="tasks-list">
+                {existingTasks.map((task, index) => (
+                  <div
+                    key={task.id}
+                    className="task-preview-item existing-task"
+                  >
+                    <div className="task-number">{index + 1}</div>
+                    <div className="task-content">
+                      <div className="task-title">
+                        <span className="jira-key-badge">{task.jiraKey}</span>
+                        {task.title || task.description}
+                      </div>
+                      <div className="task-stats">
+                        <div className="stat">
+                          <FaChartLine />
+                          {task.average.toFixed(1)}{' '}
+                          {t('jiraExport.preview.points')} (
+                          {t('common.average')})
+                        </div>
+                        <div className="stat">
+                          <FaTasks />
+                          {task.count} {t('jiraExport.preview.votes')}
+                        </div>
+                        <div className="stat">
+                          <FaCheckCircle />
+                          {task.consensus}% {t('jiraExport.preview.consensus')}
+                        </div>
+                        {task.jiraUrl && (
+                          <div className="stat">
+                            <a
+                              href={task.jiraUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="jira-link-preview"
+                            >
+                              <FaExternalLinkAlt />
+                              Ver en Jira
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="step-actions">
+            <button className="btn-secondary" onClick={() => setStep('select')}>
+              {t('jiraExport.actions.back')}
+            </button>
+            <button
+              className="btn-primary"
+              onClick={handleExport}
+              disabled={loading}
+            >
+              {loading ? <FaSpinner className="fa-spin" /> : <SiJira />}
+              {existingTasks.length > 0 && newTasks.length > 0
+                ? 'Crear y actualizar tareas'
+                : existingTasks.length > 0
+                  ? 'Actualizar tareas'
+                  : 'Crear tareas'}
+            </button>
           </div>
         </div>
-
-        <div className="step-actions">
-          <button className="btn-secondary" onClick={() => setStep('select')}>
-            {t('jiraExport.actions.back')}
-          </button>
-          <button
-            className="btn-primary"
-            onClick={handleExport}
-            disabled={loading}
-          >
-            {loading ? <FaSpinner className="fa-spin" /> : <SiJira />}
-            {t('jiraExport.preview.createTasks')}
-          </button>
-        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderCreatingStep = () => (
     <div className="jira-export-step">
@@ -890,7 +1041,9 @@ export const JiraExportModal: React.FC<JiraExportModalProps> = ({
                   )}
                 </div>
                 <div className="result-content">
-                  <div className="result-title">{result.taskDescription}</div>
+                  <div className="result-title">
+                    {result.taskTitle || result.taskDescription}
+                  </div>
                   {result.success ? (
                     <div className="result-details">
                       <span className="jira-key">{result.jiraKey}</span>

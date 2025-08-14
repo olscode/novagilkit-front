@@ -239,7 +239,7 @@ export const selectNumUsersInRoom = () =>
     (room) => (room ? room.users.length : 0)
   );
 
-// Selector para obtener la descripción de la tarea actual
+// Selector para obtener el título de la tarea actual (antes era descripción)
 export const selectCurrentTaskDescription = () =>
   createSelector(
     (state: State) => state.room,
@@ -249,7 +249,8 @@ export const selectCurrentTaskDescription = () =>
       const currentTask = room.tasks.find(
         (task) => task.id === room.currentTaskId
       );
-      return currentTask ? currentTask.description : '';
+      // Usar title si existe, si no usar description como fallback
+      return currentTask ? currentTask.title || currentTask.description : '';
     }
   );
 

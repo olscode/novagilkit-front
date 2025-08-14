@@ -29,7 +29,10 @@ type ViewMode = 'grid' | 'list';
 
 interface TaskStats {
   id: string;
+  title?: string; // Título de la tarea
   description: string;
+  jiraKey?: string; // Si existe, la tarea ya fue exportada
+  jiraUrl?: string; // URL de Jira si existe
   votes: Record<string, number>;
   average: number;
   median: number;
@@ -243,7 +246,10 @@ export default function ResumeVotes() {
 
       return {
         id: task.id,
+        title: task.title,
         description: task.description,
+        jiraKey: task.jiraKey,
+        jiraUrl: task.jiraUrl,
         votes: task.voting.votes || {},
         average,
         median,
@@ -395,12 +401,17 @@ export default function ResumeVotes() {
     <div key={task.id} className={`task-card ${viewMode}`}>
       <div className="task-header">
         <div className="task-number">#{index + 1}</div>
+        {task.jiraKey && (
+          <div className="jira-indicator">
+            <span className="jira-key">JIRA: {task.jiraKey}</span>
+          </div>
+        )}
         <div className={`consensus-badge ${getConsensusColor(task.consensus)}`}>
           {task.consensus}% {t('resumeVotes.taskStats.consensus')}
         </div>
       </div>
 
-      <div className="task-description">{task.description}</div>
+      <div className="task-description">{task.title || task.description}</div>
 
       <div className="task-stats">
         <div className="stat-row">

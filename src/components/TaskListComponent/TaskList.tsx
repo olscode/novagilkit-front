@@ -2,17 +2,25 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Task } from './Task';
 
+type TaskData = {
+  title?: string;
+  description?: string;
+};
+
 type TaskListProps = {
-  taskList: Array<string | undefined>;
-  onTaskListChange?: (taskList: Array<string | undefined>) => void;
+  taskList: Array<string | undefined | TaskData>;
+  onTaskListChange?: (taskList: Array<string | undefined | TaskData>) => void;
+  useSeparateFields?: boolean; // Nuevo prop para activar campos separados
 };
 
 export default function TaskList({
   taskList,
   onTaskListChange,
+  useSeparateFields = false,
 }: TaskListProps) {
   const { t } = useTranslation();
-  const [tasks, setTasks] = useState<Array<string | undefined>>(taskList);
+  const [tasks, setTasks] =
+    useState<Array<string | undefined | TaskData>>(taskList);
 
   // Sincronizar el estado interno cuando cambian las props
   useEffect(() => {
@@ -20,13 +28,18 @@ export default function TaskList({
   }, [taskList]);
 
   const onAddTask = () => {
-    const newTasks = [...tasks, ''];
+    const newTask = useSeparateFields ? { title: '', description: '' } : '';
+    const newTasks = [...tasks, newTask];
     setTasks(newTasks);
     if (onTaskListChange) {
       onTaskListChange(newTasks);
     }
   };
-  const handleTaskChange = (index: number, newTask: string | undefined) => {
+
+  const handleTaskChange = (
+    index: number,
+    newTask: string | undefined | TaskData
+  ) => {
     const newTasks = tasks.map((task, i) => (i === index ? newTask : task));
     setTasks(newTasks);
     if (onTaskListChange) {
@@ -41,6 +54,7 @@ export default function TaskList({
       onTaskListChange(newTasks);
     }
   };
+
   return (
     <div className="task-list-container">
       <h2>{t('planningVotes.tasks.title')}</h2>
@@ -55,8 +69,12 @@ export default function TaskList({
         <div className="tasks-wrapper">
           {tasks.map((task, index) => {
             // Detectar si es una tarea de Jira
+            const taskText =
+              typeof task === 'string'
+                ? task
+                : task?.title || task?.description || '';
             const isJiraTask = Boolean(
-              task?.includes(' - ') && task?.match(/^[A-Z]+-\d+/)
+              taskText?.includes(' - ') && taskText?.match(/^[A-Z]+-\d+/)
             );
 
             return (
@@ -67,6 +85,7 @@ export default function TaskList({
                 onTaskChange={(newTask) => handleTaskChange(index, newTask)}
                 onTaskDelete={() => handleTaskDelete(index)}
                 isJiraTask={isJiraTask}
+                separateFields={useSeparateFields}
               />
             );
           })}

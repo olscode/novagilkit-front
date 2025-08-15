@@ -10,13 +10,11 @@ type TaskData = {
 type TaskListProps = {
   taskList: Array<string | undefined | TaskData>;
   onTaskListChange?: (taskList: Array<string | undefined | TaskData>) => void;
-  useSeparateFields?: boolean; // Nuevo prop para activar campos separados
 };
 
 export default function TaskList({
   taskList,
   onTaskListChange,
-  useSeparateFields = false,
 }: TaskListProps) {
   const { t } = useTranslation();
   const [tasks, setTasks] =
@@ -28,7 +26,7 @@ export default function TaskList({
   }, [taskList]);
 
   const onAddTask = () => {
-    const newTask = useSeparateFields ? { title: '', description: '' } : '';
+    const newTask = { title: '', description: '' }; // Siempre usar campos separados
     const newTasks = [...tasks, newTask];
     setTasks(newTasks);
     if (onTaskListChange) {
@@ -85,7 +83,6 @@ export default function TaskList({
                 onTaskChange={(newTask) => handleTaskChange(index, newTask)}
                 onTaskDelete={() => handleTaskDelete(index)}
                 isJiraTask={isJiraTask}
-                separateFields={useSeparateFields}
               />
             );
           })}

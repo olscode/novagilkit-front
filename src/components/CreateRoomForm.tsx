@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaDownload } from 'react-icons/fa';
+import { SiJira } from 'react-icons/si';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 import { useSocket } from '../hooks/useSocket';
@@ -33,8 +34,6 @@ function CreateRoomForm() {
     []
   );
   const [showImportModal, setShowImportModal] = useState(false);
-  // Usar siempre campos separados por defecto
-  const useSeparateFields = true;
 
   function createRoomId() {
     return uuidv4();
@@ -174,7 +173,8 @@ function CreateRoomForm() {
     if (typeof task === 'string') {
       return task && task.trim() !== '';
     }
-    return task && (task.title?.trim() || task.description?.trim());
+    // Para tareas con campos separados, requiere TANTO título COMO descripción
+    return task && task.title?.trim() && task.description?.trim();
   });
 
   const isDisabled =
@@ -221,14 +221,13 @@ function CreateRoomForm() {
           <TaskList
             taskList={tasks}
             onTaskListChange={onHandleChangeTaskList}
-            useSeparateFields={useSeparateFields}
           />
 
           {/* Tareas importadas de Jira */}
           {importedJiraTasks.length > 0 && (
             <div className="imported-tasks-section">
               <h4 className="imported-tasks-title">
-                <span className="jira-icon-title">�</span>
+                <SiJira className="jira-icon-title" />
                 {t('planningVotes.createRoom.tasks.importedFromJira')} (
                 {importedJiraTasks.length})
               </h4>
@@ -237,7 +236,7 @@ function CreateRoomForm() {
                   <div key={task.id || index} className="imported-task-item">
                     <div className="imported-task-header">
                       <span className="jira-key-badge">
-                        <span className="jira-icon-small">🔗</span>
+                        <SiJira className="jira-icon-small" />
                         {task.jiraKey}
                       </span>
                       <span className="task-title">{task.description}</span>
